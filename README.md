@@ -4,23 +4,41 @@ This repository contains files for setting up the [Windows Terminal](https://git
 
 Additionally, some Bash and Git dotfiles are supplied (`.bash_profile`, `.bashrc`, `.bash_prompt`, …) based on [Okeanos/dotfiles](https://github.com/Okeanos/dotfiles) (originally forked from [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles)).
 
-## KeePass as SSH Agent
-The Bash configuration enables using [KeePass](https://keepass.info) together with the [KeeAgent](https://lechnology.com/software/keeagent/) plugin as an SSH agent to manage SSH keys on Windows.
+## KeePassXC as SSH Agent
+The Windows Environment Variable settings and enabled OpenSSH client enable using [KeePassXC](https://keepassxc.org) as an SSH agent to manage SSH keys on Windows within the Git Bash.
+
+## Environment:
+
+Set the following `User Environment Variables`
+
+- `HOME` : `%UserProfile%`
+- `GIT_SSH` : `%SystemRoot%\System32\OpenSSH\ssh.exe`
+
+And enable the OpenSSH Agent via the Services management interface by setting the `OpenSSH Authentication Agent` to `automatic` and starting it.
 
 ## Installation
 Follow the installation instructions for:
 
 - [Windows Terminal](https://github.com/microsoft/terminal)
 - [Git Bash](https://git-scm.com)
-- [KeePass](https://keepass.info)
-- [KeeAgent](https://lechnology.com/software/keeagent/)
+- [KeePassXC](https://keepass.info)
 
-Afterwards:
+For KeePassXC the SSH support has to be enabled in the KeePassXC settings along with the option to use OpenSSH instead of Pageant. In addition to that individual SSH keys within the KeePass vault have to be enabled and/or loaded manually into the SSH agent.
 
-Set the following `User Environment Variables`
+## Git Bash specifics
+With Git Bash the bundled OpenSSH binaries will be used by default and not talk to the now enabled Windows OpenSSH agent. So, once the Windows OpenSSH agent is enabled can safely delete the Git bundled OpenSSH binaries as described [here](https://github.com/git-for-windows/git/issues/1556#issuecomment-373146268) to make it use the Windows once instead:
 
-- `HOME` : `C:\Users\<YOUR ACCOUNT>`
-- `SSH_AUTH_SOCK` : `C:\Users\<YOUR ACCOUNT>\.ssh\tmp\cyglockfile`
+```
+%ProgramFiles%\usr\bin\ssh.exe
+%ProgramFiles%\usr\bin\ssh-add.exe
+%ProgramFiles%\usr\bin\ssh-agent.exe
+%ProgramFiles%\usr\bin\ssh-copy-id
+%ProgramFiles%\usr\bin\sshd.exe
+%ProgramFiles%\usr\bin\ssh-keygen.exe
+%ProgramFiles%\usr\bin\ssh-keyscan.exe
+%ProgramFiles%\usr\bin\ssh-pageant.exe
+```
+
 - Place the `.git*` files into your home directory
 - Place the `.bash*` files into your home directory
 - Place the `.ssh/config.d` folder into `C:\Users\<YOUR ACCOUNT>\.ssh\config.d` along with its contents
