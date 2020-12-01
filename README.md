@@ -28,7 +28,7 @@ For KeePassXC the SSH support has to be enabled in the KeePassXC settings along 
 ## Git Bash specifics
 With Git Bash the bundled OpenSSH binaries will be used by default and not talk to the now enabled Windows OpenSSH agent. So, once the Windows OpenSSH agent is enabled, you can safely delete the Git bundled OpenSSH binaries as described [here](https://github.com/git-for-windows/git/issues/1556#issuecomment-373146268) to make it use the Windows ones instead.
 
-Do not delete `%ProgramFiles%\usr\bin\ssh-copy-id`, though, as there is no Windows supplied alternative.
+Do not delete `%ProgramFiles%\Git\usr\bin\ssh-copy-id`, though, as there is no Windows supplied alternative.
 
 ```
 %ProgramFiles%\Git\usr\bin\ssh-add.exe
@@ -42,9 +42,9 @@ Do not delete `%ProgramFiles%\usr\bin\ssh-copy-id`, though, as there is no Windo
 
 - Place the `.git*` files into your home directory
 - Place the `.bash*` files into your home directory
-- Place the `.ssh/config.d` folder into `C:\Users\<YOUR ACCOUNT>\.ssh\config.d` along with its contents
+- Place the `.ssh/config.d` folder into `%UserProfile%\.ssh\config.d` along with its contents
 
-Create a new file called `90-user` and place it into `C:\Users\<YOUR ACCOUNT>\.ssh\config.d\90-user` with the following contents:
+Create a new file called `90-user` and place it into `%UserProfile%\.ssh\config.d\90-user` with the following contents:
 
 ```
 Host *
