@@ -5,13 +5,13 @@ This repository contains files for setting up the [Windows Terminal](https://git
 Additionally, some Bash and Git dotfiles are supplied (`.bash_profile`, `.bashrc`, `.bash_prompt`, …) based on [Okeanos/dotfiles](https://github.com/Okeanos/dotfiles) (originally forked from [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles)).
 
 ## KeePassXC as SSH Agent
-The Windows Environment Variable settings and enabled OpenSSH client enable using [KeePassXC](https://keepassxc.org) as an SSH agent to manage SSH keys on Windows within the Git Bash.
+The Windows Environment Variable settings and enabled OpenSSH client make using [KeePassXC](https://keepassxc.org) as an SSH agent to manage SSH keys on Windows within the Git Bash possible.
 
 ## Environment:
 
 Set the following `User Environment Variables`
 
-- `HOME` : `%UserProfile%`
+- `HOME` : `%UserProfile%` (this will prevent Git Bash supplied tools from arbitrarily deciding on their own where `~/` is)
 - `GIT_SSH` : `%SystemRoot%\System32\OpenSSH\ssh.exe`
 
 And enable the OpenSSH Agent via the Services management interface by setting the `OpenSSH Authentication Agent` to `automatic` and starting it.
@@ -26,13 +26,14 @@ Follow the installation instructions for:
 For KeePassXC the SSH support has to be enabled in the KeePassXC settings along with the option to use OpenSSH instead of Pageant. In addition to that individual SSH keys within the KeePass vault have to be enabled and/or loaded manually into the SSH agent.
 
 ## Git Bash specifics
-With Git Bash the bundled OpenSSH binaries will be used by default and not talk to the now enabled Windows OpenSSH agent. So, once the Windows OpenSSH agent is enabled can safely delete the Git bundled OpenSSH binaries as described [here](https://github.com/git-for-windows/git/issues/1556#issuecomment-373146268) to make it use the Windows once instead:
+With Git Bash the bundled OpenSSH binaries will be used by default and not talk to the now enabled Windows OpenSSH agent. So, once the Windows OpenSSH agent is enabled, you can safely delete the Git bundled OpenSSH binaries as described [here](https://github.com/git-for-windows/git/issues/1556#issuecomment-373146268) to make it use the Windows ones instead.
+
+Do not delete `%ProgramFiles%\usr\bin\ssh-copy-id`, though, as there is no Windows supplied alternative.
 
 ```
 %ProgramFiles%\usr\bin\ssh.exe
 %ProgramFiles%\usr\bin\ssh-add.exe
 %ProgramFiles%\usr\bin\ssh-agent.exe
-%ProgramFiles%\usr\bin\ssh-copy-id
 %ProgramFiles%\usr\bin\sshd.exe
 %ProgramFiles%\usr\bin\ssh-keygen.exe
 %ProgramFiles%\usr\bin\ssh-keyscan.exe
