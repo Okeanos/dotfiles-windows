@@ -31,13 +31,13 @@ With Git Bash the bundled OpenSSH binaries will be used by default and not talk 
 Do not delete `%ProgramFiles%\usr\bin\ssh-copy-id`, though, as there is no Windows supplied alternative.
 
 ```
-%ProgramFiles%\usr\bin\ssh.exe
-%ProgramFiles%\usr\bin\ssh-add.exe
-%ProgramFiles%\usr\bin\ssh-agent.exe
-%ProgramFiles%\usr\bin\sshd.exe
-%ProgramFiles%\usr\bin\ssh-keygen.exe
-%ProgramFiles%\usr\bin\ssh-keyscan.exe
-%ProgramFiles%\usr\bin\ssh-pageant.exe
+%ProgramFiles%\Git\usr\bin\ssh-add.exe
+%ProgramFiles%\Git\usr\bin\ssh-agent.exe
+%ProgramFiles%\Git\usr\bin\ssh-keygen.exe
+%ProgramFiles%\Git\usr\bin\ssh-keyscan.exe
+%ProgramFiles%\Git\usr\bin\ssh-pageant.exe
+%ProgramFiles%\Git\usr\bin\ssh.exe
+%ProgramFiles%\Git\usr\bin\sshd.exe
 ```
 
 - Place the `.git*` files into your home directory
