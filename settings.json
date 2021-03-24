@@ -32,7 +32,7 @@
 			{ // https://stackoverflow.com/a/57369284/2920585
 				"guid": "{00000000-0000-0000-ba54-000000000002}",
 				"name": "Bash",
-				"commandline": "\"%PROGRAMFILES%\\git\\usr\\bin\\bash.exe\" -i -l",
+				"commandline": "\"%PROGRAMFILES%\\git\\bin\\bash.exe\" -i -l",
 				"icon": "%PROGRAMFILES%\\git\\mingw64\\share\\git\\git-for-windows.ico",
 				"colorScheme": "Solarized Light",
 				"antialiasingMode": "grayscale",
