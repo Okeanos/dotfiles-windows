@@ -5,7 +5,7 @@ Host localhost 127.0.0.1
 Host *
 	UseKeychain yes
 	AddKeysToAgent yes
-	IdentitiesOnly yes
+	IdentitiesOnly no
 	ServerAliveInterval 30
 	ServerAliveCountMax 10000
 	PermitLocalCommand yes
