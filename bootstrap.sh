@@ -5,19 +5,18 @@ cd "$(dirname "${BASH_SOURCE[0]:-$0}")" || exit;
 git pull --autostash --rebase;
 
 function doIt() {
-	cp "stow/curl/." "${HOME}/";
-	cp "stow/git/." "${HOME}/";
+	cp -r "stow/curl/." "${HOME}/";
+	cp -r "stow/git/." "${HOME}/";
 	mkdir -p "${HOME}/.m2";
-	cp "stow/maven/." "${HOME}/";
-	cp "stow/misc/." "${HOME}/";
-	cp "stow/shell/." "${HOME}/";
+	cp -r "stow/maven/." "${HOME}/";
+	cp -r "stow/misc/." "${HOME}/";
+	cp -r "stow/shell/." "${HOME}/";
 	mkdir -p "${HOME}/.ssh/.config.d";
-	cp "stow/ssh/." "${HOME}/";
-	cp "stow/vim/." "${HOME}/";
+	cp -r "stow/ssh/." "${HOME}/";
+	cp -r "stow/vim/." "${HOME}/";
 
-	for filename in "${HOME}/dot-*"; do
-		dotfile=$(echo -n "${filename}" | tr -s 'dot-' '.')
-		mv -f "${HOME}/${filename}" "${HOME}/${dotfile}"
+	for filename in "${HOME}/dot-"*; do
+		mv -f "${filename}" "${filename/dot-/\.}"
 	done
 	# load new config
 	# shellcheck disable=SC1090
