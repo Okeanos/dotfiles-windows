@@ -146,10 +146,10 @@ PS1+="\[${brcyan}\] at ";
 PS1+="\[${hostStyle}\]\h"; # host
 PS1+="\[${brcyan}\] in ";
 PS1+="\[${green}\]\w"; # working directory full path
-PS1+="\$(prompt_git \"\[${brcyan}\] on \[${violet}\]\" \"\[${blue}\]\")"; # Git repository details
+#PS1+="\$(prompt_git \"\[${brcyan}\] on \[${violet}\]\" \"\[${blue}\]\")"; # Git repository details
 PS1+="\[${brcyan}\] at ";
 PS1+="\[${orange}\]\D{%F %T}";
-PS1+="\$(prompt_k8s \"\[${brcyan}\] using\")";
+#PS1+="\$(prompt_k8s \"\[${brcyan}\] using\")";
 PS1+="\n";
 PS1+="\[${brcyan}\]\$ \[${reset}\]"; # `$` (and reset color)
 export PS1;
