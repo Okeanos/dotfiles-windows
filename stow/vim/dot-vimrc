@@ -31,6 +31,9 @@ if exists("&undodir")
 	set undodir=~/.vim/undo
 endif
 
+" Add guides for word wrapping
+set colorcolumn=80,120
+
 " Don’t create backups when editing files in certain directories
 set backupskip=/tmp/*,/private/tmp/*
 
