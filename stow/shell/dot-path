@@ -1,3 +1,2 @@
-# verify necessary path adjustments against the caveats from brew (accessible from 'brew info $(brew list)')
-export PATH="/usr/local/opt/curl/bin:/usr/local/opt/grep/libexec/gnubin:/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-export MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"
+export PATH="/c/Windows/System32/OpenSSH:$PATH"
+export MANPATH="$MANPATH"

@@ -30,7 +30,7 @@ Within KeePassXC the SSH support has to be enabled in the KeePassXC settings alo
 
 ### The bootstrap script
 
-The bootstrapper script will pull in the latest version and symlink the files to your home folder using [gnu-stow](https://www.gnu.org/software/stow/).
+The bootstrapper script will pull in the latest version and copy the files to your home folder.
 
 ```bash
 cd ~/Projects/dotfiles && ./bootstrap.sh
@@ -39,7 +39,6 @@ cd ~/Projects/dotfiles && ./bootstrap.sh
 To update, `cd` into your local `dotfiles` repository and then run:
 
 ```bash
-git pull --rebase --autostash
 ./bootstrap.sh
 ```
 
