@@ -41,5 +41,3 @@ export LESS_TERMCAP_us="${green}"; #start underline
 GPG_TTY=$(tty);
 export GPG_TTY
 
-# Hide the “default interactive shell is now zsh” warning on macOS.
-export BASH_SILENCE_DEPRECATION_WARNING=1;
