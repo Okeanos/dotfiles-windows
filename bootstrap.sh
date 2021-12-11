@@ -30,6 +30,11 @@ function initStarship() {
 	unzip "${starship_zip}" -d "${HOME}/bin"
 }
 
+function initPowerShell() {
+	mkdir -p "${HOME}/Documents/PowerShell"
+	cp -rf "stow/powershell/." "${HOME}/Documents/PowerShell/"
+}
+
 function doIt() {
 	cp -r "stow/curl/." "${HOME}/";
 	cp -r "stow/git/." "${HOME}/";
@@ -64,6 +69,7 @@ function setGitUser() {
 
 if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
 	initBasics;
+	initPowerShell;
 	doIt;
 else
 	if ! command -v jq &> /dev/null;
@@ -102,6 +108,7 @@ else
 	echo "";
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 		doIt;
+		initPowerShell;
 	fi;
 fi;
 unset doIt;
