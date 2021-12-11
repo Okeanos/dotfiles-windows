@@ -14,6 +14,7 @@ function initBasics() {
 }
 
 function initJq() {
+	mkdir -p "${HOME}/bin";
 	release=$(curl -sSL -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/stedolan/jq/releases/latest);
 	curl -sSL "$(echo "${release}" | grep -oP '"browser_download_url":\s+"\K(https://github.com/stedolan/jq/releases/download/jq-[0-9\.]+/jq-win64\.exe)')" -o "${HOME}/bin/jq.exe"
 }
@@ -67,7 +68,7 @@ if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
 else
 	if ! command -v jq &> /dev/null;
 	then
-		read -rp "These dotfiles require jq (https://stedolan.github.io/jq/), download and install automatically?" -n 1;
+		read -rp "These dotfiles require jq (https://stedolan.github.io/jq/), download and install automatically? (y/n) " -n 1;
 		echo ""
 		if [[ $REPLY =~ ^[Yy]$ ]]; then
 			initJq;
@@ -83,7 +84,7 @@ else
 
 	if ! command -v starship &> /dev/null;
 	then
-		read -rp "These dotfiles require starship (https://starship.rs), download and install automatically?" -n 1;
+		read -rp "These dotfiles require starship (https://starship.rs), download and install automatically? (y/n) " -n 1;
 		echo ""
 		if [[ $REPLY =~ ^[Yy]$ ]]; then
 			initStarship;
