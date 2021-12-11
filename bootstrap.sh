@@ -53,7 +53,7 @@ if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
 	initStarship;
 	doIt;
 else
-	if ! starship;
+	if ! command -v starship &> /dev/null;
 	then
 		read -rp "These dotfiles require starship (https://starship.rs), download and install automatically?" -n 1;
 		echo ""
@@ -62,7 +62,7 @@ else
 		fi;
 	fi
 
-	if ! starship;
+	if ! command -v starship &> /dev/null;
 	then
 		echo "starship (https://starship.rs) not found on \$PATH - aborting"
 		exit 1
