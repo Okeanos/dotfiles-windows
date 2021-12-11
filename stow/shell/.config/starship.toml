@@ -1,0 +1,43 @@
+# See https://github.com/altercation/solarized#the-values for color values
+format = """
+$username$hostname$directory$git_branch$git_status$time$kubernetes$line_break\
+$character
+"""
+
+[character]
+error_symbol = "\\$"
+success_symbol = "\\$"
+
+[directory]
+style = "green"
+truncate_to_repo = false
+truncation_length = 10
+truncation_symbol = "…/"
+
+[git_branch]
+symbol = ""
+
+[git_status]
+deleted = "x"
+style = "blue"
+
+[hostname]
+ssh_only = false
+style = "yellow"
+
+[kubernetes]
+disabled = false
+format = "using [$symbol$context/$namespace]$(style)"
+style = "green"
+symbol = ""
+
+[time]
+disabled = false
+style = "bold red"
+time_format = "%F %T"
+
+[username]
+format = "[$user]($style) at "
+show_always = true
+style_root = "red"
+style_user = "bold red"

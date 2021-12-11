@@ -1,2 +1,2 @@
-export PATH="/c/Windows/System32/OpenSSH:$PATH"
+export PATH="/c/Windows/System32/OpenSSH:$HOME/bin:$PATH"
 export MANPATH="$MANPATH"
