@@ -108,7 +108,14 @@ else
 	echo "";
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 		doIt;
+	fi;
+
+	read -rp "Add starship (https://starship.rs) to PowerShell as well? (y/n) " -n 1;
+	echo "";
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
 		initPowerShell;
+		echo "Add the following to your Windows User Path: '%UserProfile%\bin'"
+		echo "In PowerShell run the following to allow starship to work: 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser'"
 	fi;
 fi;
 unset doIt;
