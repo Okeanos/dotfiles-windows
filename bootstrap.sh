@@ -9,8 +9,8 @@ function initStarship() {
 	starship_zip="/tmp/starship.zip";
 	starship_sha="${starship_zip}.sha256";
 	release=$(curl -sSL -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/starship/starship/releases/latest);
-	curl -sSL $(echo "${release}" | jq -cr '.assets | map(select(.name == "starship-x86_64-pc-windows-msvc.zip")) | .[].browser_download_url') -o "${starship_zip}"
-	curl -sSL $(echo "${release}" | jq -cr '.assets | map(select(.name == "starship-x86_64-pc-windows-msvc.zip.sha256")) | .[].browser_download_url') -o "${starship_sha}"
+	curl -sSL "$(echo "${release}" | jq -cr '.assets | map(select(.name == "starship-x86_64-pc-windows-msvc.zip")) | .[].browser_download_url')" -o "${starship_zip}"
+	curl -sSL "$(echo "${release}" | jq -cr '.assets | map(select(.name == "starship-x86_64-pc-windows-msvc.zip.sha256")) | .[].browser_download_url')" -o "${starship_sha}"
 
 	printf "%s %s" "$(cat ${starship_sha})" "${starship_zip}" | sha256sum --check
 	unzip "${starship_zip}" -d "${HOME}/bin"
