@@ -32,7 +32,7 @@ function initStarship() {
 
 function initPowerShell() {
 	mkdir -p "${HOME}/Documents/PowerShell"
-	cp -rf "stow/powershell/." "${HOME}/Documents/PowerShell/"
+	cp -rf "stow/powershell/." "${HOME}/Documents/WindowsPowerShell/"
 }
 
 function doIt() {
