@@ -156,12 +156,12 @@ function o() {
 # `less` with options to preserve color and line numbers, unless the output is
 # small enough for one screen.
 function tre() {
-	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
+	tree -aC -I '.git|node_modules' --dirsfirst "$@" | less -FRNX;
 }
 
 # `git-sync` is a wrapper function around `find`, `xargs` that will
 # asynchrounously call git pull --rebase --autostash on any repository one level
-# down from the specified path .
+# down from the specified path.
 function git-sync {
 	if [[ -z $1 ]]; then
 		echo "Please specify a path to sync"
@@ -170,6 +170,9 @@ function git-sync {
 	find "${1}" -maxdepth 2 -mindepth 2 -type d -name '.git' -print0 | xargs -P 8 -0 -I % bash -c 'git -C %/.. pull --rebase --autostash --quiet || echo "Failed updating: %"'
 }
 
+# `git-fetch` is a wrapper function around `find`, `xargs` that will
+# asynchrounously call --all --prune --prune-tags --quiet on any repository one level
+# down from the specified path.
 function git-fetch {
 	if [[ -z $1 ]]; then
 		echo "Please specify a path to sync"
