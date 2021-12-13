@@ -25,7 +25,7 @@ style = "yellow"
 
 [kubernetes]
 disabled = false
-format = "using [$symbol$context/$namespace]$(style)"
+format = "using [$symbol$context/$namespace]($style)"
 style = "green"
 symbol = ""
 
