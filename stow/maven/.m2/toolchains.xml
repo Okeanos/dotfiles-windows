@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <toolchains xmlns="http://maven.apache.org/TOOLCHAINS/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/TOOLCHAINS/1.1.0 http://maven.apache.org/xsd/toolchains-1.1.0.xsd">
-		<!-- <toolchain>
-				<type>jdk</type>
-				<provides>
-						<version>8</version>
-						<vendor>Adoptium</vendor>
-				</provides>
-				<configuration>
-						<jdkHome>C:\Program Files\Eclipse Adoptium\jdk-8-hotspot</jdkHome>
-				</configuration>
-		</toolchain> -->
-		<!-- <toolchain>
-				<type>jdk</type>
-				<provides>
-						<version>11</version>
-						<vendor>Adoptium</vendor>
-				</provides>
-				<configuration>
-						<jdkHome>C:\Program Files\Eclipse Adoptium\jdk-11-hotspot</jdkHome>
-				</configuration>
-		</toolchain> -->
 	<!-- <toolchain>
-			<type>jdk</type>
-			<provides>
-					<version>16</version>
-					<vendor>AdoptOpenJDK</vendor>
-			</provides>
-			<configuration>
-					<jdkHome>C:\Program Files\Eclipse Adoptium\jdk-16-hotspot</jdkHome>
-			</configuration>
+		<type>jdk</type>
+		<provides>
+			<version>8</version>
+			<vendor>Adoptium</vendor>
+		</provides>
+		<configuration>
+			<jdkHome>C:\Program Files\Eclipse Adoptium\jdk-8-hotspot</jdkHome>
+		</configuration>
 	</toolchain> -->
-		<toolchain>
-				<type>jdk</type>
-				<provides>
-						<version>17</version>
-						<vendor>Adoptium</vendor>
-				</provides>
-				<configuration>
-						<jdkHome>C:\Program Files\Eclipse Adoptium\jdk-17-hotspot</jdkHome>
-				</configuration>
-		</toolchain>
+	<!-- <toolchain>
+		<type>jdk</type>
+		<provides>
+			<version>11</version>
+			<vendor>Adoptium</vendor>
+		</provides>
+		<configuration>
+			<jdkHome>C:\Program Files\Eclipse Adoptium\jdk-11-hotspot</jdkHome>
+		</configuration>
+	</toolchain> -->
+	<!-- <toolchain>
+		<type>jdk</type>
+		<provides>
+			<version>16</version>
+			<vendor>AdoptOpenJDK</vendor>
+		</provides>
+		<configuration>
+			<jdkHome>C:\Program Files\Eclipse Adoptium\jdk-16-hotspot</jdkHome>
+		</configuration>
+	</toolchain> -->
+	<toolchain>
+		<type>jdk</type>
+		<provides>
+			<version>17</version>
+			<vendor>Adoptium</vendor>
+		</provides>
+		<configuration>
+			<jdkHome>C:\Program Files\Eclipse Adoptium\jdk-17-hotspot</jdkHome>
+		</configuration>
+	</toolchain>
 </toolchains>
