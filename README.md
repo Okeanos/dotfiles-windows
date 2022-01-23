@@ -22,24 +22,26 @@ Follow the installation instructions for:
   - [Chrome/Chromium Extension](https://chrome.google.com/webstore/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk)
   - [Firefox Extension](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/)
 
+Once you installed all of this and configured the software to your liking you can now clone the repository wherever you want (I like to keep it in `%UserProfile%/Workspace/dotfiles`). Afterwards you can run the bootstrapper from your Git Bash as described below.
+
 ### KeePassXC as SSH Agent
 The Windows enabled OpenSSH client makes using [KeePassXC](https://keepassxc.org) as an SSH agent to manage SSH keys on Windows within the Git Bash possible.
 Enable the OpenSSH Agent via the Windows Services management interface by setting the `OpenSSH Authentication Agent` to `automatic` and starting it.
 
 Within KeePassXC the SSH support has to be enabled in the KeePassXC settings along with the option to use OpenSSH instead of Pageant.
 
-### The bootstrap script
+### The bootstrap script (`bootstrap.sh`)
 
-The bootstrapper script will pull in the latest version and copy the files to your home folder.
+The bootstrapper script will pull in the latest version and copy the files to your home folder. Run it from your Git Bash.
 
 ```bash
-cd ~/Projects/dotfiles && ./bootstrap.sh
+cd ~/Workspace/dotfiles && ./bootstrap.sh
 ```
 
-To update, `cd` into your local `dotfiles` repository and then run:
+To update, `cd` into your local `dotfiles` repository and then run bootstrapper again:
 
 ```bash
-./bootstrap.sh
+cd ~/Workspace/dotfiles && ./bootstrap.sh
 ```
 
 #### Java Installation
@@ -48,7 +50,7 @@ The [Maven Toolchains](https://maven.apache.org/guides/mini/guide-using-toolchai
 
 `C:\Program Files\Eclipse Adoptium\jdk-17.0.1.12-hotspot` becomes `C:\Program Files\Eclipse Adoptium\jdk-17-hotspot`
 
-This has to be done manually.
+This has to be done manually; see [adoptium/installer#422](https://github.com/adoptium/installer/issues/422) for details.
 
 ## Modifying the `$PATH`
 
