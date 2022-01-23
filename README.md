@@ -81,6 +81,16 @@ git config --global user.email "$GIT_AUTHOR_EMAIL"
 
 You could also use `~/.extra` to override settings, functions and aliases from my dotfiles repository. It’s probably better to [fork this repository](https://github.com/Okeanos/dotfiles/fork) instead, though.
 
+## Unlinking / Uninstalling
+
+If you want to unlink particular dotfiles (e.g. for `vim`) you'll have to manually delete the files from your `%UserProfile%` directory because there is no [`stow`](https://www.gnu.org/software/stow/) for Windows 😕.
+
+Carefully go through your home directory and remove any of the dotfiles (compare them to the contents of `~/Workspace/dotfiles/stow/**`) you no longer want to use. You can always re-apply them by running:
+
+```bash
+cd ~/Workspace/dotfiles && ./bootstrap.sh
+```
+
 ## Original Author
 
 | [![twitter/mathias](http://gravatar.com/avatar/24e08a9ea84deb17ae121074d0f17125?s=70)](http://twitter.com/mathias "Follow @mathias on Twitter") |
