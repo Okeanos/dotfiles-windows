@@ -73,10 +73,14 @@ function setGitUser() {
 		read -rp "Sign with SSH: " -n 1;
 		echo "";
 		if [[ $REPLY =~ ^[Yy]$ ]]; then
+			touch "${HOME}/.ssh/allowed_signers";
 			signWithSSH="
 [gpg]
 
-	format = ssh";
+	format = ssh
+
+[gpg \"ssh\"]
+	allowedSignersFile = ~/.ssh/allowed_signers";
 		fi
 		read -rp "Enter your GPG or SSH Signing Key ID: " signingKey;
 		echo "
