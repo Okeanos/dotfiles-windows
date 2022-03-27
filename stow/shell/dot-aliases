@@ -66,9 +66,9 @@ alias c="tr -d '\n' | pbcopy"
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
 # URL-encode strings
-alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
+alias urlencode='python3 -c "from urllib.parse import quote_plus; import sys; print(quote_plus(sys.argv[1]));"'
 # URL-decode strings
-alias urldecode='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1]);"'
+alias urldecode='python3 -c "from urllib.parse import unquote_plus; import sys; print(unquote_plus(sys.argv[1]));"'
 
 # Merge PDF files, preserving hyperlinks
 # Usage: `mergepdf input{1,2,3}.pdf`
