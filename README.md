@@ -6,29 +6,64 @@
 
 Set the following `User Environment Variables` in Windows:
 
-- `HOME` : `%UserProfile%` (this will prevent Git Bash supplied tools from arbitrarily deciding on their own where `~/`, i.e. `${HOME}` is)
+- `HOME` : `%UserProfile%` (this will prevent Git Bash supplied tools from arbitrarily deciding on their own where `~`, i.e. `${HOME}` is)
 
 Follow the installation instructions for:
 
 - [Windows Terminal](https://github.com/microsoft/terminal)
 - [Git Bash](https://git-scm.com)
-  - **Select Components**
-    - Uncheck the box for the Windows Explorer Integration
-    - Check the box for the Windows Terminal Fragment
-  - When prompted, select externally supplied SSH
-  - When prompted use the Windows Secure Channel library instead of the bundled certficates
-	- When prompted select "checkout as-is, commit as-is"
-- [KeePassXC](https://keepass.info)
-  - [Chrome/Chromium Extension](https://chrome.google.com/webstore/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk)
-  - [Firefox Extension](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/)
+	- **Select Components**
+		- Uncheck the box for the Windows Explorer Integration
+		- Check the box for the Windows Terminal Fragment
+	- When prompted use the Windows Secure Channel library instead of the bundled certficates (allows using the Windows certificate store for system-wide same behavior when it comes to self-signed certificates)
+	- When prompted select "checkout as-is, commit as-is" (less magic and tools can be correctly configured to use Unix style line endings nowadays)
+- A KeePass, either:
+	- [KeePass](https://keepass.info)
+		- [KeeAgent](https://github.com/dlech/KeeAgent) for SSH support
+	- [KeePassXC](https://keepass.info) (built in SSH, different from KeeAgent)
+		- [Chrome/Chromium Extension](https://chrome.google.com/webstore/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk)
+		- [Firefox Extension](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/)
 
 Once you installed all of this and configured the software to your liking you can now clone the repository wherever you want (I like to keep it in `%UserProfile%/Workspace/dotfiles`). Afterwards you can run the bootstrapper from your Git Bash as described below.
 
-### KeePassXC as SSH Agent
-The Windows enabled OpenSSH client makes using [KeePassXC](https://keepassxc.org) as an SSH agent to manage SSH keys on Windows within the Git Bash possible.
-Enable the OpenSSH Agent via the Windows Services management interface by setting the `OpenSSH Authentication Agent` to `automatic` and starting it.
+### KeePass with KeeAgent or KeePassXC
+
+There are two options here. One relies on Windows OpenSSH fully and the other is a little more flexible but experimental and has other drawbacks such as no official browser support.
+
+#### KeePass with KeeAgent as SSH Agent
+
+1. Install KeePass and the KeeAgent plugin.
+1. In KeePass > Tools > Options configure the KeeAgent plugin:
+	- Enable agent for Windows OpenSSH (experimental)
+	- Create a Cygwin compatible socket file with the path `%UserProfile%\.ssh\cygwin.socket`
+	- Create a msysGit compatible socket file with the path `%UserProfile%\.ssh\msysgit.socket`
+1. In `%UserProfile%/.exports` toggle the `SSH_AUTH_SOCK` variable (Cygwin should be fine)
+1. Optionally, remove the `/c/Windows/System32/OpenSSH`-prefix from `%UserProfile%/.path` to use Windows OpenSSH in PowerShell and Git Bash bundled OpenSSH in Git Bash.
+
+KeeAgent is incompatible with the Windows OpenSSH _agent_ because it supplies its own SSH agent. However, KeeAgent is able to talk to both Windows OpenSSH and the Git Bash bundled OpenSSH version after configuring the `SSH_AUTH_SOCK`.
+
+#### KeePassXC as SSH Agent
+
+Windows ships its own OpenSSH binaries starting with Windows 10. See the [official documentation](https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement#user-key-generation) for more details.
+
+The Windows OpenSSH client makes using [KeePassXC](https://keepassxc.org) to manage SSH keys on Windows within the Git Bash possible.
+Enable the OpenSSH Agent via the Windows Services management interface by setting the `OpenSSH Authentication Agent` to `automatic` and starting it or alternatively via a PowerShell prompt with administrative permissions:
+
+```powershell
+# By default the ssh-agent service is disabled. Allow it to be manually started for the next step to work.
+# Make sure you're running as an Administrator.
+Get-Service ssh-agent | Set-Service -StartupType Automatic
+
+# Start the service
+Start-Service ssh-agent
+
+# This should return a status of Running
+Get-Service ssh-agent
+```
 
 Within KeePassXC the SSH support has to be enabled in the KeePassXC settings along with the option to use OpenSSH instead of Pageant.
+
+For this to work in Git Bash as expected as well, the `$PATH` has to be prefixed with the Windows OpenSSH binaries or else Git Bash will prefer its bundled OpenSSH version that is incapable of talking to the Windows OpenSSH agent. These dotfiles supply a `$PATH` already containing the correct path modifications (see `%UserProfile%/.path`).
 
 ### The bootstrap script (`bootstrap.sh`)
 
@@ -53,6 +88,11 @@ The [Maven Toolchains](https://maven.apache.org/guides/mini/guide-using-toolchai
 This has to be done manually; see [adoptium/installer#422](https://github.com/adoptium/installer/issues/422) for details.
 
 ## Modifying the `$PATH`
+
+Please note that the standard dotfiles already modify your Git Bash path in two ways:
+
+- They add `/c/Windows/System32/OpenSSH` to force all programs to use the Windows supplied version of OpenSSH (to make it compatible with KeePassXC by default)
+- The add `$HOME/bin` as a place where you can put binaries such as [`jq`](https://github.com/stedolan/jq) to make them easily accessible
 
 If `~/.path` exists, it will be sourced along with the other files, before any feature testing (such as [detecting which version of `ls` is being used](https://github.com/mathiasbynens/dotfiles/blob/aff769fd75225d8f2e481185a71d5e05b76002dc/.aliases#L21-L26)) takes place.
 
