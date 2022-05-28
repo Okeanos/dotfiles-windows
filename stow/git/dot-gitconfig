@@ -189,6 +189,20 @@
 
 	path = .gituser
 
+# Use the following if you need multiple user configs
+# [includeIf "gitdir:~/Workspace/personal/"]
+#	path = .gituser-personal
+# [includeIf "gitdir:~/Workspace/professional/"]
+#	path = .gituser-professional
+
+# .gituser-* look like the following and contain regular git config commands:
+# [user]
+#	email = user.name@example.org
+#	name = User Name
+# See:
+# - https://gist.github.com/bgauduch/06a8c4ec2fec8fef6354afe94358c89e
+# - https://git-scm.com/docs/git-config#_conditional_includes
+
 [init]
 
 	defaultBranch = main
