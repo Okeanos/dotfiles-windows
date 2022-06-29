@@ -4,66 +4,39 @@
 
 ## Installation
 
+**Warning:** If you want to give these dotfiles a try, you should first fork this repository, review the code, and remove things you don’t want or need. Don’t blindly use my settings unless you know what that entails. Use at your own risk!
+
+### Getting Started:
+
+Before cloning this repository make sure to do some things as preliminary setup first:
+
 Set the following `User Environment Variables` in Windows:
 
 - `HOME` : `%UserProfile%` (this will prevent Git Bash supplied tools from arbitrarily deciding on their own where `~`, i.e. `${HOME}` is)
 
-Follow the installation instructions for:
+Follow the installation instructions for the following software and take note of the caveats below:
 
 - [Windows Terminal](https://github.com/microsoft/terminal)
 - [Git Bash](https://git-scm.com)
 	- **Select Components**
-		- Uncheck the box for the Windows Explorer Integration
+		- Uncheck the box for the Windows Explorer Integration (it doesn't work with Windows Terminal integration)
 		- Check the box for the Windows Terminal Fragment
 	- When prompted use the Windows Secure Channel library instead of the bundled certficates (allows using the Windows certificate store for system-wide same behavior when it comes to self-signed certificates)
 	- When prompted select "checkout as-is, commit as-is" (less magic and tools can be correctly configured to use Unix style line endings nowadays)
-- A KeePass, either:
+- A password manager, either:
 	- [KeePass](https://keepass.info)
-		- [KeeAgent](https://github.com/dlech/KeeAgent) for SSH support
-	- [KeePassXC](https://keepass.info) (built in SSH, different from KeeAgent)
+		- [KeeAgent](https://github.com/dlech/KeeAgent) for SSH support (supports Windows native OpenSSH & Git Bash bundled OpenSSH in parallel)
+	- [KeePassXC](https://keepass.info) (built in SSH Agent Support, different from KeeAgent; only supports Windows native OpenSSH)
 		- [Chrome/Chromium Extension](https://chrome.google.com/webstore/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk)
 		- [Firefox Extension](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/)
+	- [1Password]()
+		- [SSH Agent Setup](https://developer.1password.com/docs/ssh/agent/)
 
 Once you installed all of this and configured the software to your liking you can now clone the repository wherever you want (I like to keep it in `%UserProfile%/Workspace/dotfiles`). Afterwards you can run the bootstrapper from your Git Bash as described below.
 
-### KeePass with KeeAgent or KeePassXC
+### SSH Setup
 
-There are two options here. One relies on Windows OpenSSH fully and the other is a little more flexible but experimental and has other drawbacks such as no official browser support.
-
-#### KeePass with KeeAgent as SSH Agent
-
-1. Install KeePass and the KeeAgent plugin.
-1. In KeePass > Tools > Options configure the KeeAgent plugin:
-	- Enable agent for Windows OpenSSH (experimental)
-	- Create a Cygwin compatible socket file with the path `%UserProfile%\.ssh\cygwin.socket`
-	- Create a msysGit compatible socket file with the path `%UserProfile%\.ssh\msysgit.socket`
-1. In `%UserProfile%/.exports` toggle the `SSH_AUTH_SOCK` variable (Cygwin should be fine)
-1. Optionally, remove the `/c/Windows/System32/OpenSSH`-prefix from `%UserProfile%/.path` to use Windows OpenSSH in PowerShell and Git Bash bundled OpenSSH in Git Bash.
-
-KeeAgent is incompatible with the Windows OpenSSH _agent_ because it supplies its own SSH agent. However, KeeAgent is able to talk to both Windows OpenSSH and the Git Bash bundled OpenSSH version after configuring the `SSH_AUTH_SOCK`.
-
-#### KeePassXC as SSH Agent
-
-Windows ships its own OpenSSH binaries starting with Windows 10. See the [official documentation](https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement#user-key-generation) for more details.
-
-The Windows OpenSSH client makes using [KeePassXC](https://keepassxc.org) to manage SSH keys on Windows within the Git Bash possible.
-Enable the OpenSSH Agent via the Windows Services management interface by setting the `OpenSSH Authentication Agent` to `automatic` and starting it or alternatively via a PowerShell prompt with administrative permissions:
-
-```powershell
-# By default the ssh-agent service is disabled. Allow it to be manually started for the next step to work.
-# Make sure you're running as an Administrator.
-Get-Service ssh-agent | Set-Service -StartupType Automatic
-
-# Start the service
-Start-Service ssh-agent
-
-# This should return a status of Running
-Get-Service ssh-agent
-```
-
-Within KeePassXC the SSH support has to be enabled in the KeePassXC settings along with the option to use OpenSSH instead of Pageant.
-
-For this to work in Git Bash as expected as well, the `$PATH` has to be prefixed with the Windows OpenSSH binaries or else Git Bash will prefer its bundled OpenSSH version that is incapable of talking to the Windows OpenSSH agent. These dotfiles supply a `$PATH` already containing the correct path modifications (see `%UserProfile%/.path`).
+Please read [SSH Setup](./ssh-setup.md) for details and options.
 
 ### The bootstrap script (`bootstrap.sh`)
 
