@@ -14,6 +14,27 @@ Set the following `User Environment Variables` in Windows:
 
 - `HOME` : `%UserProfile%` (this will prevent Git Bash supplied tools from arbitrarily deciding on their own where `~`, i.e. `${HOME}` is)
 
+Once that is done:
+
+1. Manually download [`winget.ps1`](https://raw.githubusercontent.com/Okeanos/dotfiles-windows/main/winget.ps1) and all other `winget_*` files into the same location
+1. Update the `winget.ps1` to only install software you actually want
+1. Go through the `winget_*` files and modify them as necessary because they will be used to source the installation options for e.g. Git to allow unattended installation.
+1. Execute `winget.ps1` from your PowerShell (may need elevated permissions)
+1. You can now clone the repository wherever you want (I like to keep it in `%UserProfile%\Workspace\dotfiles`)
+1. You can now `bootstrap.sh` your system
+
+#### Installing Software (`winget.ps1`)
+
+When setting up a new PC, you need to install some common [Windows Packages](https://github.com/microsoft/winget-cli) (after making sure that `winget` is installed, of course) for this repository to work as expected:
+
+```powershell
+.\winget.ps1
+```
+
+Some of the functionality of these dotfiles depends on packages installed by `winget.ps1`. If you don’t plan to use `winget`, you should look carefully through the `winget.ps1` and related config files and manually install any particularly important tools. Good examples of these are Windows Terminal and Git Bash.
+
+##### Manual Installation Caveats
+
 Follow the installation instructions for the following software and take note of the caveats below:
 
 - [Windows Terminal](https://github.com/microsoft/terminal)
@@ -34,7 +55,7 @@ Follow the installation instructions for the following software and take note of
 
 Once you installed all of this and configured the software to your liking you can now clone the repository wherever you want (I like to keep it in `%UserProfile%/Workspace/dotfiles`). Afterwards you can run the bootstrapper from your Git Bash as described below.
 
-### SSH Setup
+#### SSH Setup
 
 Please read [SSH Setup](./ssh-setup.md) for details and options.
 
