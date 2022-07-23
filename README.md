@@ -81,6 +81,14 @@ The [Maven Toolchains](https://maven.apache.org/guides/mini/guide-using-toolchai
 
 This has to be done manually; see [adoptium/installer#422](https://github.com/adoptium/installer/issues/422) for details.
 
+#### Sensible Windows defaults (`windows.ps1`)
+
+When setting up a new PC, you may want to set some sensible Windows defaults. Please note that you really ought to read the contents of the following script very, very carefully because it changes a large number of system settings. You can apply it by invoking it like this:
+
+```powershell
+cd $HOME\Workspace\dotfiles && .\windows.ps1
+```
+
 ## Modifying the `$PATH`
 
 Please note that the standard dotfiles already modify your Git Bash path in two ways:
@@ -146,4 +154,5 @@ cd ~/Workspace/dotfiles && ./bootstrap.sh
 * [Kevin Suttle](http://kevinsuttle.com/) and his [dotfiles repository](https://github.com/kevinSuttle/dotfiles) and [macOS-Defaults project](https://github.com/kevinSuttle/macOS-Defaults), which aims to provide better documentation for [`~/.macos`](https://mths.be/macos)
 * [Haralan Dobrev](https://hkdobrev.com/)
 * [Marcel Bischoff](https://herrbischoff.com) and his [Awesome macOS Command Line](https://git.herrbischoff.com/awesome-macos-command-line/about/)
+* [Tim Schneider](https://github.com/timschneiderxyz) and his [dotfiles](https://github.com/timschneiderxyz/dotfiles)
 * Anyone who [contributed a patch](https://github.com/mathiasbynens/dotfiles/contributors) or [made a helpful suggestion](https://github.com/mathiasbynens/dotfiles/issues)
