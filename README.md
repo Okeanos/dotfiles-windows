@@ -31,7 +31,7 @@ When setting up a new PC, you need to install some common [Windows Packages](htt
 .\winget.ps1
 ```
 
-Some of the functionality of these dotfiles depends on packages installed by `winget.ps1`. If you don’t plan to use `winget`, you should look carefully through the `winget.ps1` and related config files and manually install any particularly important tools. Good examples of these are Windows Terminal and Git Bash.
+Some of the functionality of these dotfiles depends on packages installed by `winget.ps1`. If you don’t plan to use `winget`, you should look carefully through the `winget.ps1` and related config files and manually install any particularly important tools manually. Good examples of these are Windows Terminal and Git Bash.
 
 ##### Manual Installation Caveats
 
