@@ -3,7 +3,7 @@
 # https://github.com/microsoft/winget-pkgs
 
 # TODO improve/simplify winget invocations
-winget install --id Git.Git --override "/VERYSILENT /NOCANCEL /LOADINF=$pwd\winget_git.ini"
+winget install --id Git.Git --override "/VERYSILENT /NOCANCEL /LOADINF=$PSScriptRoot\winget_git.ini"
 winget install --id Google.Chrome --override "/quiet"
 # https://docs.docker.com/desktop/windows/install/#install-from-the-command-line
 winget install --id Docker.DockerDesktop
