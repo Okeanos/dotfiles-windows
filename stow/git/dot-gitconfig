@@ -100,7 +100,7 @@
 	untrackedCache = true
 
 	# Don't manipulate line endings automatically (CRLF to LF conversion or vice versa).
-	autocrlf = false
+	autocrlf = input
 
 [color]
 
