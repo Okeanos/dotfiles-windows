@@ -161,7 +161,7 @@ foreach ($capability in @(
     "App.StepsRecorder~~~~0.0.1.0"
     "MathRecognizer"
   )) {
-  Remove-WindowsCapability -Online –Name $capability | Out-Null
+  Remove-WindowsCapability -Online -Name $capability | Out-Null
 }
 
 Write-Host -NoNewline "Done. Note that some of these changes require a logout/restart to take effect."
