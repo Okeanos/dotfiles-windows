@@ -72,6 +72,9 @@ Follow the installation instructions for the following software and take note of
 		- [Firefox Extension](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/)
 	- [1Password]()
 		- [SSH Agent Setup](https://developer.1password.com/docs/ssh/agent/)
+- An advanced text editor (lightweight IDE), such as – make sure that [EditorConfig](https://editorconfig.org) support is installed and enabled:
+  - [Microsoft Visual Studio Code](https://code.visualstudio.com) (or [VSCodium](https://vscodium.com))
+  - [NotePad++](https://notepad-plus-plus.org)
 
 Once you installed all of this and configured the software to your liking you can now clone the repository wherever you want (I like to keep it in `%UserProfile%/Workspace/dotfiles`). Afterwards you can run the bootstrapper from your Git Bash as described below.
 
