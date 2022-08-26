@@ -37,7 +37,3 @@ foreach ($package in @(
 ) {
 	winget install --id $package
 }
-
-# TODO Should be Ubuntu-22.04; not listed on Windows 10
-wsl --install -d Ubuntu-20.04
-

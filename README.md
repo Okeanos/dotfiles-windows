@@ -33,10 +33,30 @@ When setting up a new PC, you need to install some common [Windows Packages](htt
 
 Some of the functionality of these dotfiles depends on packages installed by `winget.ps1`. If you don’t plan to use `winget`, you should look carefully through the `winget.ps1` and related config files and manually install any particularly important tools manually. Good examples of these are Windows Terminal and Git Bash.
 
+##### Docker & Windows Subsystem for Linux (WSL 2)
+
+You have to manually install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install) (WSL 2) because it requires a restart of the system and some manual invervention. Additionally, you'll may have to tell Docker to actually use WSL 2 as a backend yourself in the Docker settings.
+
+**Note**: Enabling WSL 2 means that software such as [VirtualBox](https://www.virtualbox.org) or [VMWare Workstation](https://www.vmware.com/products/workstation-pro.html) no longer works as expected. Windows only allows a single hypervisor at a time and WSL 2 is Hyper-V based and prevents running VirtualBox/VMWare Workstation. Workarounds for [VirtualBox](https://www.virtualbox.org/manual/UserManual.html#hyperv-support) and [VMWare](https://blogs.vmware.com/workstation/2020/05/vmware-workstation-now-supports-hyper-v-mode.html) exist, however, suffer from [extreme](https://communities.vmware.com/t5/VMware-Workstation-Pro/Huge-performance-drop-after-upgrading-to-VMware-Workstation-Pro/td-p/2888831) [performance](https://communities.vmware.com/t5/VMware-Workstation-Player/Huge-performance-drop-of-VMWare-Player-guest-running-on-Windows/td-p/2808460) [penalties](https://www.virtualbox.org/manual/UserManual.html#hyperv-support).
+
+Installing WSL 2:
+
+```powershell
+wsl --install
+```
+
+If you want a custom WSL 2 instance (different from the Docker backend) check the available distributions and install one:
+
+```powershell
+wsl --list --online
+wsl --install --distribution Ubuntu-20.04
+```
+
 ##### Manual Installation Caveats
 
 Follow the installation instructions for the following software and take note of the caveats below:
 
+- [Windows Subsystem for Linux (WSL 2)](https://docs.microsoft.com/en-us/windows/wsl/install)
 - [Windows Terminal](https://github.com/microsoft/terminal)
 - [Git Bash](https://git-scm.com)
 	- **Select Components**
