@@ -10,3 +10,6 @@ trim_trailing_whitespace = true
 [*.{yaml, yml}]
 indent_style = space
 tab_width = 2
+
+[*.{ini, ps1}]
+end_of_line = crlf
