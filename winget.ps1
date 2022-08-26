@@ -11,29 +11,28 @@ winget install --id Docker.DockerDesktop
 winget install --id Mozilla.Firefox --override "OPTIONAL_EXTENSIONS=false /quiet"
 winget install --id Microsoft.VisualStudioCode --override "--silent"
 
-
 foreach ($package in @(
-	#AgileBits.1Password
 	7zip.7zip
 	Adobe.Acrobat.Reader.64-bit
-	Golang.Go
-	EclipseAdoptium.Temurin.17
-	#Stedolan.Jq
-	#DominikReichl.KeePass
-	KeePassXCTeam.KeePassXC
+	#AgileBits.1Password
 	#ahmetb.kubectx
 	#ahmetb.kubens
-	#kubernetes-cli
-	#johanhaleby.kubetail
 	#Apache.Maven
-	OpenJS.NodeJS
-	#Notepad++.Notepad++
 	Atlassian.Sourcetree
-	Starship.Starship
+	#DominikReichl.KeePass
+	EclipseAdoptium.Temurin.17
+	Golang.Go
 	Jetbrains.Toolbox
+	#johanhaleby.kubetail
+	KeePassXCTeam.KeePassXC
+	Kubernetes.kubectl
 	Microsoft.WindowsTerminal
+	MikeFarah.yq
+	#Notepad++.Notepad++
+	OpenJS.NodeJS
+	Starship.Starship
+	stedolan.jq
 	Yarn.Yarn
-	#Mikefarah.Yq
 	)
 ) {
 	winget install --id $package
