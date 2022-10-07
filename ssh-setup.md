@@ -2,8 +2,7 @@
 
 There are multiple, incompatible competing options for useful/working Windows SSH setups.
 
-Windows Subsystem for Linux is not covered here and depending on the version you prefer (WSL1 or WSL2) you may run into various different problems with the options described below. You may want to take a look at [wsl-agent-bridge]
-(https://github.com/reynoldsbd/wsl-agent-bridge) and [wsl-ssh-pageant](https://github.com/benpye/wsl-ssh-pageant) or [Sharing SSH keys between Windows and WSL 2](https://devblogs.microsoft.com/commandline/sharing-ssh-keys-between-windows-and-wsl-2/).
+Windows Subsystem for Linux is not covered here and depending on the version you prefer (WSL1 or WSL2) you may run into various different problems with the options described below. You may want to take a look at [wsl-agent-bridge](https://github.com/reynoldsbd/wsl-agent-bridge) and [wsl-ssh-pageant](https://github.com/benpye/wsl-ssh-pageant) or [Sharing SSH keys between Windows and WSL 2](https://devblogs.microsoft.com/commandline/sharing-ssh-keys-between-windows-and-wsl-2/).
 ## KeePass with KeeAgent or KeePassXC
 
 There are two options for FOSS based solutions around the [KeePass](https://keepass.info) password manager family available. One relies on Windows native OpenSSH fully (with its own caveats) and the other is a little more flexible but experimental and has other drawbacks such as no official browser support via the password manager.
