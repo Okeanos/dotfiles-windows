@@ -32,6 +32,10 @@ Function DoIt {
 
 	UnlinkFiles "$($PSScriptRoot)\stow\powershell\" "$($ENV:UserProfile)\Documents\WindowsPowerShell\"
 
+	UnlinkFiles "$($PSScriptRoot)\stow\shell\.config\" "$($ENV:UserProfile)\.config\"
+
+	UnlinkFiles "$($PSScriptRoot)\stow\ssh\.ssh\config.d\" "$($ENV:UserProfile)\.ssh\config.d\"
+
 	UnlinkFiles "$($PSScriptRoot)\stow\vim\.vim\colors\" "$($ENV:UserProfile)\.vim\colors\"
 	UnlinkFiles "$($PSScriptRoot)\stow\vim\.vim\syntax\" "$($ENV:UserProfile)\.vim\syntax\"
 }
