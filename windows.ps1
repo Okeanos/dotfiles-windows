@@ -1,4 +1,4 @@
-#Requires -RunAsAdministrator
+﻿#Requires -RunAsAdministrator
 
 Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force
 
