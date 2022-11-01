@@ -8,20 +8,17 @@
 
 ### Getting Started:
 
-Before cloning this repository make sure to do some things as preliminary setup first:
-
-Set the following `User Environment Variables` in Windows:
-
-- `HOME` : `%UserProfile%` (this will prevent Git Bash supplied tools from arbitrarily deciding on their own where `~`, i.e. `${HOME}` is)
-
-Once that is done:
-
 1. Manually download [`winget.ps1`](https://raw.githubusercontent.com/Okeanos/dotfiles-windows/main/winget.ps1) and all other `winget_*` files into the same location
 1. Update the `winget.ps1` to only install software you actually want
 1. Go through the `winget_*` files and modify them as necessary because they will be used to source the installation options for e.g. Git to allow unattended installation.
 1. Execute `winget.ps1` from your PowerShell (may need elevated permissions)
 1. You can now clone the repository wherever you want (I like to keep it in `%UserProfile%\Workspace\dotfiles`)
 1. You can now `bootstrap.ps1` your system
+1. **Optionally** and **after a careful review** you can now run `windows.ps1`
+
+If you decide not to run the `windows.ps1` script please make sure to set the following `User Environment Variables` in Windows:
+
+- `HOME` : `%UserProfile%` (this will prevent Git Bash supplied tools from arbitrarily deciding on their own where `~`, i.e. `${HOME}` is)
 
 #### Installing Software (`winget.ps1`)
 
