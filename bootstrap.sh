@@ -44,7 +44,7 @@ function setGitUser() {
 	echo "";
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 		signWithSSH="";
-		read -rp "Sign with SSH: " -n 1;
+		read -rp "Sign with SSH? (y/n) " -n 1;
 		echo "";
 		if [[ $REPLY =~ ^[Yy]$ ]]; then
 			touch "${HOME}/.ssh/allowed_signers";
