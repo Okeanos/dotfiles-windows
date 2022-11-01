@@ -21,7 +21,7 @@ Once that is done:
 1. Go through the `winget_*` files and modify them as necessary because they will be used to source the installation options for e.g. Git to allow unattended installation.
 1. Execute `winget.ps1` from your PowerShell (may need elevated permissions)
 1. You can now clone the repository wherever you want (I like to keep it in `%UserProfile%\Workspace\dotfiles`)
-1. You can now `bootstrap.sh` your system
+1. You can now `bootstrap.ps1` your system
 
 #### Installing Software (`winget.ps1`)
 
@@ -82,18 +82,18 @@ Once you installed all of this and configured the software to your liking you ca
 
 Please read [SSH Setup](./ssh-setup.md) for details and options.
 
-### The bootstrap script (`bootstrap.sh`)
+### The bootstrap script (`bootstrap.ps1`)
 
-The bootstrapper script will pull in the latest version and copy the files to your home folder. Run it from your Git Bash.
+The bootstrapper script will pull in the latest version and copy the files to your home folder. Run it from your Powershell.
 
-```bash
-cd ~/Workspace/dotfiles && ./bootstrap.sh
+```powershell
+cd "$($ENV:UserProfile)\Workspace\dotfiles" ; .\bootstrap.ps1
 ```
 
 To update, `cd` into your local `dotfiles` repository and then run bootstrapper again:
 
-```bash
-cd ~/Workspace/dotfiles && ./bootstrap.sh
+```powershell
+cd "$($ENV:UserProfile)\Workspace\dotfiles" ; .\bootstrap.ps1
 ```
 
 #### Java Installation
@@ -109,7 +109,7 @@ This has to be done manually; see [adoptium/installer#422](https://github.com/ad
 When setting up a new PC, you may want to set some sensible Windows defaults. Please note that you really ought to read the contents of the following script very, very carefully because it changes a large number of system settings. You can apply it by invoking it like this:
 
 ```powershell
-cd $HOME\Workspace\dotfiles && .\windows.ps1
+cd "$($ENV:UserProfile)\Workspace\dotfiles" ; .\windows.ps1
 ```
 
 ## Modifying the `$PATH`
@@ -148,13 +148,13 @@ You could also use `~/.extra` to override settings, functions and aliases from m
 
 ## Unlinking / Uninstalling
 
-If you want to unlink particular dotfiles (e.g. for `vim`) you'll have to manually delete the files from your `%UserProfile%` directory because there is no [`stow`](https://www.gnu.org/software/stow/) for Windows 😕.
+If you want to unlink (uninstall) all dotfiles managed by this repository you can use the `unlink.sh` script. This operation is non-destructive and will only remove the symlinks from your `%UserProfile%` directory. Any customizations, e.g. `.extra` or `.gituser`, that were created by you will stay in `%UserProfile%`. You can restore the dotfiles again by running `bootstrap.ps1`.
 
-Carefully go through your home directory and remove any of the dotfiles (compare them to the contents of `~/Workspace/dotfiles/stow/**`) you no longer want to use. You can always re-apply them by running:
-
-```bash
-cd ~/Workspace/dotfiles && ./bootstrap.sh
+```powershell
+cd "$($ENV:UserProfile)\Workspace\dotfiles" ; .\unlink.sh
 ```
+
+If you want to unlink particular dotfiles (e.g. for `vim`) you'll have to manually delete the files from your `%UserProfile%` directory because there is no [`stow`](https://www.gnu.org/software/stow/) for Windows 😕.
 
 ## Original Author
 
