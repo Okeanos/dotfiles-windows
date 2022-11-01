@@ -68,6 +68,18 @@ A long-time favorite and previous de facto solution on Windows for enabling SSH 
 
 [BitWarden](https://bitwarden.com) is a freemium solution similar to 1Password but [does not](https://community.bitwarden.com/t/implement-ssh-agent-protocol/833) offer SSH Agent integration at this time (2022-10-08) on its own. There are some workarounds for that such as [Bitwarden SSH Agent](https://github.com/joaojacome/bitwarden-ssh-agent), though.
 
+## Windows OpenSSH in WSL and WSL 2
+
+There some options for this that may or may not work based on arcane invocations of shell scripts, explore on your own. You may run into weird issues, though because generally OpenSSH and OpenSSH Agent versions have to match and the WSL (1 and 2) OpenSSH binaries are updated and maintained separately from Windows.
+
+### npiperelay for WLS 2
+
+Using [jstarks/npiperelay](https://github.com/jstarks/npiperelay) you can forward the Windows OpenSSH agent into e.g. WSL 2. In particular [PR#12](https://github.com/jstarks/npiperelay/pull/12) may be of interest.
+
+### WSL SSH Agent for WSL 1
+
+Using [rupor-github/wsl-ssh-agent](https://github.com/rupor-github/wsl-ssh-agent) you can forward the Windows OpenSSH into WSL 1.
+
 ## None of the above
 
 Really? Well, that works, too. Whatever floats your boat: Manual (or semi-manual) setup it is.
