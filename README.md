@@ -148,7 +148,7 @@ You could also use `~/.extra` to override settings, functions and aliases from m
 If you want to unlink (uninstall) all dotfiles managed by this repository you can use the `unlink.sh` script. This operation is non-destructive and will only remove the symlinks from your `%UserProfile%` directory. Any customizations, e.g. `.extra` or `.gituser`, that were created by you will stay in `%UserProfile%`. You can restore the dotfiles again by running `bootstrap.ps1`.
 
 ```powershell
-cd "$($ENV:UserProfile)\Workspace\dotfiles" ; .\unlink.sh
+cd "$($ENV:UserProfile)\Workspace\dotfiles" ; .\unlink.ps1
 ```
 
 If you want to unlink particular dotfiles (e.g. for `vim`) you'll have to manually delete the files from your `%UserProfile%` directory because there is no [`stow`](https://www.gnu.org/software/stow/) for Windows 😕.
