@@ -30,3 +30,7 @@ export LC_ALL='en_US.UTF-8';
 # Override the SSH Auth Socket for KeePass + KeeAgent compatibility with either of these; Cygwin usually works
 #export SSH_AUTH_SOCK=~/.ssh/cygwin.socket;
 #export SSH_AUTH_SOCK=~/.ssh/msysgit.socket;
+
+# See https://github.com/git-for-windows/git/discussions/4071 for details
+# TL;DR: This will allow Git Bash to remember the history within Windows Terminal and Visual Studio Code
+export PROMPT_COMMAND="history -a"
