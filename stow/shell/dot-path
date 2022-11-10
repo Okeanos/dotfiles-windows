@@ -1,2 +1,4 @@
-export PATH="/c/Windows/System32/OpenSSH:$HOME/bin:$PATH"
+# verify necessary path adjustments based on additional tools you want to install e.g. in $HOME/bin or something and whether overriding the OpenSSH binary is actually wanted (see ssh-setup.md for details)
+export PATH="/c/Windows/System32/OpenSSH:$PATH"
+
 export MANPATH="$MANPATH"

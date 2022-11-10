@@ -94,3 +94,6 @@ alias reload="exec ${SHELL} -l"
 
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
+
+# Print each MANPATH entry on a separate line
+alias manpath='echo -e ${MANPATH//:/\\n}'
