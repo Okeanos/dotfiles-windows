@@ -39,6 +39,7 @@ function DoIt {
 	LinkFiles "$($PSScriptRoot)\stow\shell\" "$($ENV:UserProfile)\"
 	LinkFiles "$($PSScriptRoot)\stow\shell\.config\" "$($ENV:UserProfile)\.config\"
 	New-Item -Path "$($ENV:UserProfile)\.ssh\config.d" -ItemType Directory -Force | Out-Null
+	LinkFiles "$($PSScriptRoot)\stow\ssh\.ssh\" "$($ENV:UserProfile)\.ssh\"
 	LinkFiles "$($PSScriptRoot)\stow\ssh\.ssh\config.d\" "$($ENV:UserProfile)\.ssh\config.d\"
 	New-Item -Path "$($ENV:UserProfile)\.vim\backups","$($ENV:UserProfile)\.vim\colors","$($ENV:UserProfile)\.vim\swaps","$($ENV:UserProfile)\.vim\syntax","$($ENV:UserProfile)\.vim\undo" -ItemType Directory -Force | Out-Null
 	LinkFiles "$($PSScriptRoot)\stow\vim\" "$($ENV:UserProfile)\"
