@@ -23,11 +23,13 @@ for option in autocd globstar; do
 done;
 
 # Add tab completion for many Bash commands
-if [ -f /usr/share/bash-completion/bash_completion ]; then
-	source /usr/share/bash-completion/bash_completion;
-elif [ -f /etc/bash_completion ]; then
-	source /etc/bash_completion;
-fi;
+# Requires some form of https://github.com/scop/bash-completion
+# git clone https://github.com/scop/bash-completion.git --single-branch and then source bash-completion/bash_completion kinda works (but not well)
+#if [ -f /usr/share/bash-completion/bash_completion ]; then
+#	source /usr/share/bash-completion/bash_completion;
+#elif [ -f /etc/bash_completion ]; then
+#	source /etc/bash_completion;
+#fi;
 
 # Enable tab completion for `g` by marking it as an alias for `git`
 if type __git_complete &> /dev/null; then
