@@ -88,9 +88,9 @@ $signWithSSH
 }
 
 if ($Force) {
-    DoIt
-    InitPowershell
-    Write-Host "In PowerShell run the following to allow starship to work: 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser'"
+	DoIt
+	InitPowershell
+	Write-Host "In PowerShell run the following to allow starship to work: 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser'"
 } else {
 	$reply = Read-Host 'This may overwrite existing files in your home directory. Are you sure? (y/n)'
 	if ($reply -match "[yY]") {
