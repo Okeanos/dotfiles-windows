@@ -24,6 +24,7 @@ foreach ($package in @(
 	#"johanhaleby.kubetail"
 	"KeePassXCTeam.KeePassXC"
 	"Kubernetes.kubectl"
+	"Microsoft.PowerToys"
 	"Microsoft.WindowsTerminal"
 	"MikeFarah.yq"
 	"OpenJS.NodeJS"
