@@ -1,13 +1,18 @@
 ﻿#Requires -RunAsAdministrator
 
+###############################################################################
+# Base Environmenrt                                                           #
+###############################################################################
+
+# Variables
+[Environment]::SetEnvironmentVariable("HOME", "%UserProfile%", 'User')
+
+# Set Execution Policy for Scripts
 Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force
 
 ###############################################################################
 # General UI/UX                                                               #
 ###############################################################################
-
-# Variables
-[Environment]::SetEnvironmentVariable("HOME", "%UserProfile%", 'User')
 
 # Disable Wallpaper Compression
 New-ItemProperty "HKCU:\Control Panel\Desktop" -Name JPEGImportQuality -Value 0x00000064 | Out-Null
