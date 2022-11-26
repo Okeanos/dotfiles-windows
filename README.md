@@ -159,3 +159,4 @@ If you want to unlink particular dotfiles (e.g. for `vim`) you'll have to manual
 
 * [Mathias Bynens](https://mathiasbynens.be) and whose [dotfiles](https://github.com/mathiasbynens/dotfiles) these are largely derived from
 * [Tim Schneider](https://github.com/timschneiderxyz) and his [dotfiles](https://github.com/timschneiderxyz/dotfiles) and [fyWin](https://github.com/timschneiderxyz/fyWin) scripts
+* [Rohan Cragg](https://rohancragg.co.uk) and his [Bash Shell on Windows](https://rohancragg.co.uk/misc/git-bash/) guide

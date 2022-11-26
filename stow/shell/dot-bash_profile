@@ -25,7 +25,11 @@ done;
 # Add tab completion for many Bash commands
 # Requires some form of https://github.com/scop/bash-completion
 # git clone https://github.com/scop/bash-completion.git --single-branch and then source bash-completion/bash_completion kinda works (but not well)
-#if [ -f /usr/share/bash-completion/bash_completion ]; then
+if [ -d "$HOME/bash_completions.d" ]; then
+	for c in "$HOME/bash_completions.d/"*; do
+		source "${c}";
+	done
+fi
 #	source /usr/share/bash-completion/bash_completion;
 #elif [ -f /etc/bash_completion ]; then
 #	source /etc/bash_completion;
