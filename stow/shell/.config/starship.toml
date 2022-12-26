@@ -2,6 +2,8 @@
 format = """$username$hostname$directory$git_branch$git_status$time$kubernetes$line_break\
 $character"""
 
+command_timeout = 1000
+
 [character]
 error_symbol = "\\$"
 success_symbol = "\\$"
