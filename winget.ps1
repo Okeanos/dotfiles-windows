@@ -20,7 +20,7 @@ Copy-Item "$PSScriptRoot\winget_settings.json" -Destination "$($ENV:LocalAppData
 # https://github.com/adoptium/installer/tree/master/wix#deploy-via-active-directory-gpo
 # https://github.com/adoptium/installer/issues/422
 # Requires `--location` support via `InstallerSwitches.InstallLocation: INSTALLDIR="<INSTALLPATH>"` in the manifest
-# winget install --id "EclipseAdoptium.Temurin.17.JDK" --silent --location "C:\Program Files\Eclipse Adoptium\temurin-17.jdk"
+winget install --id "EclipseAdoptium.Temurin.17.JDK" --silent --location "C:\Program Files\Eclipse Adoptium\temurin-17.jdk"
 # https://github.com/git-for-windows/git/wiki/Silent-or-Unattended-Installation
 winget install --id "Git.Git" --silent --override "/VERYSILENT /NOCANCEL /LOADINF=$PSScriptRoot\winget_git.ini"
 winget install --id "Google.Chrome" --silent --override "/quiet"
