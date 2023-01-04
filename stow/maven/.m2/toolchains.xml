@@ -8,7 +8,7 @@
 			<vendor>Adoptium</vendor>
 		</provides>
 		<configuration>
-			<jdkHome>C:\Program Files\Eclipse Adoptium\jdk-8-hotspot</jdkHome>
+			<jdkHome>C:\Program Files\Eclipse Adoptium\temurin-8.jdk</jdkHome>
 		</configuration>
 	</toolchain> -->
 	<!-- <toolchain>
@@ -18,7 +18,7 @@
 			<vendor>Adoptium</vendor>
 		</provides>
 		<configuration>
-			<jdkHome>C:\Program Files\Eclipse Adoptium\jdk-11-hotspot</jdkHome>
+			<jdkHome>C:\Program Files\Eclipse Adoptium\temurin-11.jdk</jdkHome>
 		</configuration>
 	</toolchain> -->
 	<!-- <toolchain>
@@ -28,7 +28,7 @@
 			<vendor>AdoptOpenJDK</vendor>
 		</provides>
 		<configuration>
-			<jdkHome>C:\Program Files\Eclipse Adoptium\jdk-16-hotspot</jdkHome>
+			<jdkHome>C:\Program Files\Eclipse Adoptium\temurin-16.jdk</jdkHome>
 		</configuration>
 	</toolchain> -->
 	<toolchain>
@@ -38,7 +38,7 @@
 			<vendor>Adoptium</vendor>
 		</provides>
 		<configuration>
-			<jdkHome>C:\Program Files\Eclipse Adoptium\jdk-17-hotspot</jdkHome>
+			<jdkHome>C:\Program Files\Eclipse Adoptium\temurin-17.jdk</jdkHome>
 		</configuration>
 	</toolchain>
 </toolchains>

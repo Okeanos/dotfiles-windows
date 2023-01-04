@@ -1,0 +1,12 @@
+{
+	"$schema": "https://aka.ms/winget-settings.schema.json",
+
+	// For documentation on these settings, see: https://aka.ms/winget-settings
+	"installBehavior": {
+		"preferences": {
+			"scope": "machine",
+			"locale": [ "en-US" ],
+			"architectures": [ "x64", "x86" ]
+		}
+	}
+}

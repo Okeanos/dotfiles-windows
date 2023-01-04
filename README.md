@@ -99,7 +99,7 @@ cd "$($ENV:UserProfile)\Workspace\dotfiles" ; .\bootstrap.ps1
 
 The [Maven Toolchains](https://maven.apache.org/guides/mini/guide-using-toolchains.html) file assumes that the [Adoptium](https://adoptium.net) Java versions are used. Additionally, the target folder has to be modified during the installation to remove any patch and minor version information, i.e.:
 
-`C:\Program Files\Eclipse Adoptium\jdk-17.0.1.12-hotspot` becomes `C:\Program Files\Eclipse Adoptium\jdk-17-hotspot`
+`C:\Program Files\Eclipse Adoptium\jdk-17.0.1.12-hotspot` becomes `C:\Program Files\Eclipse Adoptium\temurin-17.jdk`
 
 This has to be done manually; see [adoptium/installer#422](https://github.com/adoptium/installer/issues/422) for details.
 
