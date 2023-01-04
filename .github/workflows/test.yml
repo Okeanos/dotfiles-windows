@@ -11,4 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: bewuethr/shellcheck-action@v2
-
+      - name: PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          Invoke-ScriptAnalyzer -Path .\ -Settings PSGallery -Recurse
