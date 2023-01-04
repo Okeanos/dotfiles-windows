@@ -1,8 +1,10 @@
 ﻿#Requires -RunAsAdministrator
 
 ###############################################################################
-# Base Environmenrt                                                           #
+# Base Environment                                                           #
 ###############################################################################
+
+Write-Host "Base Environment"
 
 # Variables
 [Environment]::SetEnvironmentVariable("HOME", "%UserProfile%", 'User')
@@ -13,6 +15,8 @@ Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force
 ###############################################################################
 # General UI/UX                                                               #
 ###############################################################################
+
+Write-Host "General UI/UX"
 
 # Disable Wallpaper Compression
 New-ItemProperty "HKCU:\Control Panel\Desktop" -Name JPEGImportQuality -Value 0x00000064 | Out-Null
@@ -25,8 +29,10 @@ New-ItemProperty "HKCU:\Control Panel\Desktop" -Name JPEGImportQuality -Value 0x
 #Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name AppsUseLightTheme -Value 0
 
 ##############################################################################
-# Security                                                                   #
+# Security & Privacy                                                         #
 ##############################################################################
+
+Write-Host "Security & Privacy"
 
 # Advertising ID for Apps
 Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" -Name Enabled -Value 0
@@ -80,12 +86,16 @@ Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\CapabilityAcce
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
 ###############################################################################
 
+#Write-Host "Trackpad, mouse, keyboard, Bluetooth accessories, and input"
+
 #Set-ItemProperty "HKCU:\Control Panel\Mouse" -Name MouseSpeed -Value 0
 #Set-ItemProperty "HKCU:\Control Panel\Mouse" -Name MouseSensitivity -Value 12
 
 ###############################################################################
 # Screen                                                                      #
 ###############################################################################
+
+#Write-Host "Screen"
 
 # Disable fast startup
 #Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Power" -Name HiberbootEnabled -Value 0
@@ -98,6 +108,8 @@ Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\CapabilityAcce
 # Explorer                                                                    #
 ###############################################################################
 
+#Write-Host "Explorer"
+
 #Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer" -Name ShowFrequent -Value 0
 #Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name LaunchTo -Value 1
 #Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name HideFileExt -Value 0
@@ -107,6 +119,8 @@ Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\CapabilityAcce
 ###############################################################################
 # Start Menu and Taskbar                                                      #
 ###############################################################################
+
+#Write-Host "Start Menu and Taskbar"
 
 # Start Menu
 #Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name Start_TrackDocs -Value 0
@@ -121,52 +135,65 @@ Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\CapabilityAcce
 # Remove standard applications                                                #
 ###############################################################################
 
+Write-Host "Remove standard applications:"
+
+Write-Host " - Apps"
+
 # Apps
 foreach ($app in @(
-    "Microsoft.OneDrive"
-  )) {
-  winget uninstall $app
+	"Microsoft.OneDrive"
+)) {
+		winget uninstall $app
 }
+
+Write-Host " - Packages"
 
 # Packages
+# List currently installed ones with: Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -Like "*Microsoft.*" }
 foreach ($package in @(
-    "*Microsoft.BingNews*"
-    "*Microsoft.BingWeather*"
-    "*Microsoft.GamingApp*"
-    "*Microsoft.Getstarted*"
-    "*Microsoft.MicrosoftOfficeHub*"
-    "*Microsoft.MicrosoftSolitaireCollection*"
-    "*Microsoft.MicrosoftStickyNotes*"
-    "*Microsoft.OneDriveSync*"
-    "*Microsoft.PowerAutomateDesktop*"
-    "*Microsoft.Todos*"
-    "*microsoft.windowscommunicationsapps*"
-    "*Microsoft.WindowsFeedbackHub*"
-    "*Microsoft.WindowsSoundRecorder*"
-    "*Microsoft.Xbox.TCUI*"
-    "*Microsoft.ZuneMusic*"
-    "*Microsoft.ZuneVideo*"
-    "*MicrosoftTeams*"
-
-    "*MicrosoftWindows.Client.WebExperience*"
-    "*Microsoft.GetHelp*"
-  )) {
-  Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -Like $package } | ForEach-Object { Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName } | Out-Null
-  Get-AppxPackage -AllUsers $package | Remove-AppxPackage
+	"*Microsoft.BingNews*"
+	"*Microsoft.BingWeather*"
+	"*Microsoft.GamingApp*"
+	"*Microsoft.GetHelp*"
+	"*Microsoft.Getstarted*"
+	"*Microsoft.MicrosoftOfficeHub*"
+	"*Microsoft.MicrosoftSolitaireCollection*"
+	"*Microsoft.MicrosoftStickyNotes*"
+	"*Microsoft.MixedReality.Portal*"
+	"*Microsoft.Office.OneNote*"
+	"*Microsoft.OneDriveSync*"
+	"*Microsoft.PowerAutomateDesktop*"
+	"*Microsoft.SkypeApp*"
+	"*Microsoft.Todos*"
+	"*microsoft.windowscommunicationsapps*"
+	"*Microsoft.WindowsFeedbackHub*"
+	"*Microsoft.WindowsMaps*"
+	"*Microsoft.WindowsSoundRecorder*"
+	"*Microsoft.Xbox.TCUI*"
+	"*Microsoft.XboxApp*"
+	"*Microsoft.ZuneMusic*"
+	"*Microsoft.ZuneVideo*"
+	"*MicrosoftTeams*"
+	"*MicrosoftWindows.Client.WebExperience*"
+)) {
+		Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -Like $package } | ForEach-Object { Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName } | Out-Null
+		Get-AppxPackage -AllUsers $package | Remove-AppxPackage
 }
 
+Write-Host " - Capabilities"
+
 # Capabilities
+# List currently installed ones with: Get-WindowsCapability -Online | Where-Object { $_.State -Like "Installed" }
 foreach ($capability in @(
-    "Microsoft.Windows.PowerShell.ISE"
-    "Microsoft.Windows.WordPad"
-    "Microsoft.Windows.Notepad.System"
-    "Browser.InternetExplorer"
-    "Media.WindowsMediaPlayer~~~~0.0.12.0"
-    "App.Support.QuickAssist~~~~0.0.1.0"
-    "App.StepsRecorder~~~~0.0.1.0"
-    "MathRecognizer"
-  )) {
-  Remove-WindowsCapability -Online -Name $capability | Out-Null
+	"App.StepsRecorder~~~~0.0.1.0"
+	"App.Support.QuickAssist~~~~0.0.1.0"
+	"Browser.InternetExplorer"
+	"MathRecognizer~~~~0.0.1.0"
+	"Media.WindowsMediaPlayer~~~~0.0.12.0"
+	"Microsoft.Windows.PowerShell.ISE~~~~0.0.1.0"
+	"Microsoft.Windows.WordPad~~~~0.0.1.0"
+)) {
+		Remove-WindowsCapability -Online -Name $capability | Out-Null
 }
 
 Write-Host -NoNewline "Done. Note that some of these changes require a logout/restart to take effect."
