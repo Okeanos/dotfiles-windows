@@ -2,7 +2,7 @@
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
 for file in ~/.{path,exports,aliases,functions,extra}; do
-	[[ -r "${file}" ]] && [[ -f "$file" ]] && source "${file}";
+	[[ -r "${file}" ]] && [[ -f "${file}" ]] && source "${file}";
 done;
 unset file;
 
@@ -19,14 +19,14 @@ shopt -s cdspell;
 # * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
 # * Recursive globbing, e.g. `echo **/*.txt`
 for option in autocd globstar; do
-	shopt -s "$option" 2> /dev/null;
+	shopt -s "${option}" 2> /dev/null;
 done;
 
 # Add tab completion for many Bash commands
 # Requires some form of https://github.com/scop/bash-completion
 # git clone https://github.com/scop/bash-completion.git --single-branch and then source bash-completion/bash_completion kinda works (but not well)
-if [[ -d "$HOME/bash_completions.d" ]]; then
-	for c in "$HOME/bash_completions.d/"*; do
+if [[ -d "${HOME}/bash_completions.d" ]]; then
+	for c in "${HOME}/bash_completions.d/"*; do
 		source "${c}";
 	done
 fi
@@ -41,7 +41,7 @@ if type __git_complete &> /dev/null; then
 fi;
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
-[[ -r "$HOME/.ssh/config" ]] && [[ -f "$HOME/.ssh/config" ]] && complete -o "default" -o "nospace" -W "$(grep -r "^Host " "$HOME/.ssh" | cut -d " " -f2- | tr ' ' '\n' | grep -v "[!?*]" | sort | uniq)" scp sftp ssh;
+[[ -r "${HOME}/.ssh/config" ]] && [[ -f "${HOME}/.ssh/config" ]] && complete -o "default" -o "nospace" -W "$(grep -r "^Host " "${HOME}/.ssh" | cut -d " " -f2- | tr ' ' '\n' | grep -v "[!?*]" | sort | uniq)" scp sftp ssh;
 
 # Launch Starship as prompt: https://starship.rs/
 eval "$(starship init bash)"
