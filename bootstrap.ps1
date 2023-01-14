@@ -24,14 +24,6 @@ Function LinkFiles {
 	}
 }
 
-Function GetBashCompletions {
-	New-Item -Path "$($ENV:UserProfile)\bash_completions.d" -ItemType directory | Out-Null
-	# Docker
-	Invoke-WebRequest https://raw.githubusercontent.com/docker/cli/master/contrib/completion/bash/docker.bash -OutFile "$($ENV:UserProfile)\bash_completions.d\docker-completions.bash"
-	# Git Completions
-	Invoke-WebRequest https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -OutFile "$($ENV:UserProfile)\bash_completions.d\git-completions.bash"
-}
-
 Function initPowershell {
 	New-Item -ItemType Directory -Path "$($ENV:UserProfile)\Documents\WindowsPowerShell" -Force | Out-Null
 	LinkFiles "$($PSScriptRoot)\stow\powershell\" "$($ENV:UserProfile)\Documents\WindowsPowerShell\"
@@ -54,7 +46,6 @@ function DoIt {
 	LinkFiles "$($PSScriptRoot)\stow\vim\.vim\colors\" "$($ENV:UserProfile)\.vim\colors\"
 	LinkFiles "$($PSScriptRoot)\stow\vim\.vim\syntax\" "$($ENV:UserProfile)\.vim\syntax\"
 
-	GetBashCompletions
 }
 
 Function SetGitUser {
