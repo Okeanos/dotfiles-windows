@@ -29,7 +29,7 @@ function targz() {
 
 	echo "Compressing .tar ($((size / 1000)) kB) using \`${cmd}\`…";
 	"${cmd}" -v "${tmpFile}" || return 1;
-	[ -f "${tmpFile}" ] && rm "${tmpFile}";
+	[[ -f "${tmpFile}" ]] && rm "${tmpFile}";
 
 	zippedSize=$(
 		stat -f"%z" "${tmpFile}.gz" 2> /dev/null; # macOS `stat`
@@ -95,7 +95,7 @@ function digga() {
 # Show all the names (CNs and SANs) listed in the SSL certificate
 # for a given domain
 function getcertnames() {
-	if [ -z "${1}" ]; then
+	if [[ -z "${1}" ]]; then
 		echo "ERROR: No domain specified.";
 		return 1;
 	fi;
@@ -142,7 +142,7 @@ fi
 # `o` with no arguments opens the current directory, otherwise opens the given
 # location
 function o() {
-	if [ $# -eq 0 ]; then
+	if [[ $# -eq 0 ]]; then
 		open .;
 	else
 		open "$@";
