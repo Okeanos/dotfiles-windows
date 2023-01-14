@@ -42,6 +42,8 @@ foreach ($package in @(
 	"Atlassian.Sourcetree"
 	"Docker.DockerDesktop"
 	"GoLang.Go.1"
+	#"hadolint.hadolint"
+	"IrfanSkiljan.IrfanView"
 	"Jetbrains.Toolbox"
 	#"johanhaleby.kubetail"
 	"KeePassXCTeam.KeePassXC"
@@ -51,6 +53,7 @@ foreach ($package in @(
 	"OpenJS.NodeJS"
 	"Starship.Starship"
 	"stedolan.jq"
+	#"wagoodman.dive"
 	"Yarn.Yarn"
 )) {
 	winget install --id $package --silent
