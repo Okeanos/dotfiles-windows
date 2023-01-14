@@ -66,7 +66,7 @@ Function SetGitUser {
 
 	name = $username
 	email = $email
-"@ | Out-File -FilePath "$($ENV:UserProfile)\.gituser"
+"@ | Out-File -Encoding "utf8NoBOM" -FilePath "$($ENV:UserProfile)\.gituser"
 
 	$reply = Read-Host 'Use GPG Commit Signing? (y/n)'
 	if ($reply -match "[yY]") {
