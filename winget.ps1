@@ -41,7 +41,7 @@ foreach ($package in @(
 	#"Apache.Maven"
 	"Atlassian.Sourcetree"
 	"Docker.DockerDesktop"
-	"GoLang.Go.1"
+	"GoLang.Go.1.19"
 	#"hadolint.hadolint"
 	"IrfanSkiljan.IrfanView"
 	"Jetbrains.Toolbox"
