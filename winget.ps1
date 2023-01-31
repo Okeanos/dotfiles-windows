@@ -46,7 +46,7 @@ foreach ($package in @(
 	"GoLang.Go.1.19"
 	#"hadolint.hadolint"
 	"IrfanSkiljan.IrfanView"
-	"Jetbrains.Toolbox"
+	"JetBrains.Toolbox"
 	#"johanhaleby.kubetail"
 	"KeePassXCTeam.KeePassXC"
 	"Kubernetes.kubectl"
