@@ -8,7 +8,9 @@ If(!(Test-Path -PathType Container "$($ENV:LocalAppData)\Packages\Microsoft.Desk
 	New-Item -Path "$($ENV:LocalAppData)\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState" -ItemType directory | Out-Null
 }
 
-Copy-Item "$PSScriptRoot\winget_settings.json" -Destination "$($ENV:LocalAppData)\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\settings.json"
+If(!(Test-Path -PathType Leaf "$($ENV:LocalAppData)\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\settings.json")) {
+	Copy-Item "$PSScriptRoot\winget_settings.json" -Destination "$($ENV:LocalAppData)\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\settings.json"
+}
 
 # To find out how to fully automate installation of Inno Setup based installers (e.g. Git, VSCode)
 # run it once with the /SAVEINF=path_to_save parameter; you can then use that output as shown below
