@@ -42,7 +42,6 @@ foreach ($package in @(
 	#"ahmetb.kubens"
 	#"Apache.Maven"
 	"Atlassian.Sourcetree"
-	"cURL.cURL"
 	"Docker.DockerDesktop"
 	"GoLang.Go.1.19"
 	#"hadolint.hadolint"
