@@ -20,7 +20,7 @@ If you want a custom WSL 2 instance (different from the Docker backend) check th
 
 ```powershell
 wsl --list --online
-wsl --install --distribution Ubuntu-20.04
+wsl --install --distribution Ubuntu-22.04
 ```
 
 ### Getting Started
