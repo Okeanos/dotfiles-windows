@@ -28,7 +28,7 @@ if type __git_complete &> /dev/null; then
 fi;
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
-[[ -r "${HOME}/.ssh/config" ]] && [[ -f "${HOME}/.ssh/config" ]] && complete -o "default" -o "nospace" -W "$(grep -r "^Host " "${HOME}/.ssh" | cut -d " " -f2- | tr ' ' '\n' | grep -v "[!?*]" | sort | uniq)" scp sftp ssh;
+[[ -r "${HOME}/.ssh/config" ]] && [[ -f "${HOME}/.ssh/config" ]] && complete -o "default" -o "nospace" -W "$(grep -R "^Host " "${HOME}/.ssh" | cut -d " " -f2- | tr ' ' '\n' | grep -v "[!?*]" | sort | uniq)" scp sftp ssh;
 
 # Launch Starship as prompt: https://starship.rs/
 eval "$(starship init bash)"
