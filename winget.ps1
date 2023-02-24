@@ -38,13 +38,13 @@ winget install --id "Microsoft.VisualStudioCode" --silent --override "/VERYSILEN
 foreach ($package in @(
 	"7zip.7zip"
 	"Adobe.Acrobat.Reader.64-bit"
-	#"ahmetb.kubectx"
-	#"ahmetb.kubens"
+	"ahmetb.kubectx"
+	"ahmetb.kubens"
 	#"Apache.Maven"
 	"Atlassian.Sourcetree"
 	"Docker.DockerDesktop"
 	"GoLang.Go.1.19"
-	#"hadolint.hadolint"
+	"hadolint.hadolint"
 	"IrfanSkiljan.IrfanView"
 	"JetBrains.Toolbox"
 	#"johanhaleby.kubetail"
@@ -55,7 +55,7 @@ foreach ($package in @(
 	"OpenJS.NodeJS"
 	"Starship.Starship"
 	"stedolan.jq"
-	#"wagoodman.dive"
+	"wagoodman.dive"
 	"Yarn.Yarn"
 )) {
 	winget install --id $package --silent
