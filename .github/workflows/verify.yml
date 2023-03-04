@@ -1,0 +1,28 @@
+name: Test
+
+# yamllint disable-line rule:truthy
+on: [ push, pull_request ]
+
+permissions:
+  contents: read
+
+jobs:
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '1.20'
+      - name: Run EditorConfig Checker
+        run: |
+          go run github.com/editorconfig-checker/editorconfig-checker/cmd/editorconfig-checker@2.7.0 --exclude .git
+      - uses: bewuethr/shellcheck-action@v2
+      - name: Run yamllint
+        run: |
+          pip install yamllint
+          yamllint .
+      - name: PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          Invoke-ScriptAnalyzer -Path .\ -Settings PSGallery -Recurse
