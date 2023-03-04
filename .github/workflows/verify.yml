@@ -1,4 +1,4 @@
-name: Test
+name: Verify
 
 # yamllint disable-line rule:truthy
 on: [ push, pull_request ]
