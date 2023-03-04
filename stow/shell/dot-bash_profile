@@ -1,34 +1,39 @@
+#!/usr/bin/env bash
+# the shebang statement above is only here to allow linting this file
+
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
 for file in ~/.{path,exports,aliases,functions,extra}; do
-	[[ -r "${file}" ]] && [[ -f "${file}" ]] && source "${file}";
-done;
-unset file;
+	[[ -r "${file}" ]] && [[ -f "${file}" ]] && source "${file}"
+done
+unset file
 
 # Case-insensitive globbing (used in pathname expansion)
-shopt -s nocaseglob;
+shopt -s nocaseglob
 
 # Append to the Bash history file, rather than overwriting it
-shopt -s histappend;
+shopt -s histappend
 
 # Autocorrect typos in path names when using `cd`
-shopt -s cdspell;
+shopt -s cdspell
 
 # Enable some Bash 4 features when possible:
 # * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
 # * Recursive globbing, e.g. `echo **/*.txt`
 for option in autocd globstar; do
-	shopt -s "${option}" 2> /dev/null;
-done;
+	shopt -s "${option}" 2>/dev/null
+done
 
 # Enable tab completion for `g` by marking it as an alias for `git`
-if type __git_complete &> /dev/null; then
+if type __git_complete &>/dev/null; then
 	__git_complete g __git_main
-fi;
+fi
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
-[[ -r "${HOME}/.ssh/config" ]] && [[ -f "${HOME}/.ssh/config" ]] && complete -o "default" -o "nospace" -W "$(grep -R "^Host " "${HOME}/.ssh" | cut -d " " -f2- | tr ' ' '\n' | grep -v "[!?*]" | sort | uniq)" scp sftp ssh;
+[[ -r "${HOME}/.ssh/config" ]] && [[ -f "${HOME}/.ssh/config" ]] &&
+	complete -o "default" -o "nospace" -W "$(grep -R "^Host " "${HOME}/.ssh" |
+		cut -d " " -f2- | tr ' ' '\n' | grep -v "[!?*]" | sort | uniq)" scp sftp ssh
 
 # Launch Starship as prompt: https://starship.rs/
 eval "$(starship init bash)"

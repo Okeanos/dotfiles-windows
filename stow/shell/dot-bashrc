@@ -1,1 +1,4 @@
-[[ -n "${PS1}" ]] && source ~/.bash_profile;
+#!/usr/bin/env bash
+# the shebang statement above is only here to allow linting this file
+
+[[ -n "${PS1}" ]] && source ~/.bash_profile

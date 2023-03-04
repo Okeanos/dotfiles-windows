@@ -145,9 +145,10 @@ Write-Host " - Apps"
 
 # Apps
 foreach ($app in @(
-	"Microsoft.OneDrive"
-)) {
-		winget uninstall $app
+"Microsoft.OneDrive"
+))
+{
+	winget uninstall $app
 }
 
 Write-Host " - Packages"
@@ -155,33 +156,34 @@ Write-Host " - Packages"
 # Packages
 # List currently installed ones with: Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -Like "*Microsoft.*" }
 foreach ($package in @(
-	"*Microsoft.BingNews*"
-	"*Microsoft.BingWeather*"
-	"*Microsoft.GamingApp*"
-	"*Microsoft.GetHelp*"
-	"*Microsoft.Getstarted*"
-	"*Microsoft.MicrosoftOfficeHub*"
-	"*Microsoft.MicrosoftSolitaireCollection*"
-	"*Microsoft.MicrosoftStickyNotes*"
-	"*Microsoft.MixedReality.Portal*"
-	"*Microsoft.Office.OneNote*"
-	"*Microsoft.OneDriveSync*"
-	"*Microsoft.PowerAutomateDesktop*"
-	"*Microsoft.SkypeApp*"
-	"*Microsoft.Todos*"
-	"*microsoft.windowscommunicationsapps*"
-	"*Microsoft.WindowsFeedbackHub*"
-	"*Microsoft.WindowsMaps*"
-	"*Microsoft.WindowsSoundRecorder*"
-	"*Microsoft.Xbox.TCUI*"
-	"*Microsoft.XboxApp*"
-	"*Microsoft.ZuneMusic*"
-	"*Microsoft.ZuneVideo*"
-	"*MicrosoftTeams*"
-	"*MicrosoftWindows.Client.WebExperience*"
-)) {
-		Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -Like $package } | ForEach-Object { Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName } | Out-Null
-		Get-AppxPackage -AllUsers $package | Remove-AppxPackage
+"*Microsoft.BingNews*"
+"*Microsoft.BingWeather*"
+"*Microsoft.GamingApp*"
+"*Microsoft.GetHelp*"
+"*Microsoft.Getstarted*"
+"*Microsoft.MicrosoftOfficeHub*"
+"*Microsoft.MicrosoftSolitaireCollection*"
+"*Microsoft.MicrosoftStickyNotes*"
+"*Microsoft.MixedReality.Portal*"
+"*Microsoft.Office.OneNote*"
+"*Microsoft.OneDriveSync*"
+"*Microsoft.PowerAutomateDesktop*"
+"*Microsoft.SkypeApp*"
+"*Microsoft.Todos*"
+"*microsoft.windowscommunicationsapps*"
+"*Microsoft.WindowsFeedbackHub*"
+"*Microsoft.WindowsMaps*"
+"*Microsoft.WindowsSoundRecorder*"
+"*Microsoft.Xbox.TCUI*"
+"*Microsoft.XboxApp*"
+"*Microsoft.ZuneMusic*"
+"*Microsoft.ZuneVideo*"
+"*MicrosoftTeams*"
+"*MicrosoftWindows.Client.WebExperience*"
+))
+{
+	Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -Like $package } | ForEach-Object { Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName } | Out-Null
+	Get-AppxPackage -AllUsers $package | Remove-AppxPackage
 }
 
 Write-Host " - Capabilities"
@@ -189,15 +191,16 @@ Write-Host " - Capabilities"
 # Capabilities
 # List currently installed ones with: Get-WindowsCapability -Online | Where-Object { $_.State -Like "Installed" }
 foreach ($capability in @(
-	"App.StepsRecorder~~~~0.0.1.0"
-	"App.Support.QuickAssist~~~~0.0.1.0"
-	"Browser.InternetExplorer"
-	"MathRecognizer~~~~0.0.1.0"
-	"Media.WindowsMediaPlayer~~~~0.0.12.0"
-	"Microsoft.Windows.PowerShell.ISE~~~~0.0.1.0"
-	"Microsoft.Windows.WordPad~~~~0.0.1.0"
-)) {
-		Remove-WindowsCapability -Online -Name $capability | Out-Null
+"App.StepsRecorder~~~~0.0.1.0"
+"App.Support.QuickAssist~~~~0.0.1.0"
+"Browser.InternetExplorer"
+"MathRecognizer~~~~0.0.1.0"
+"Media.WindowsMediaPlayer~~~~0.0.12.0"
+"Microsoft.Windows.PowerShell.ISE~~~~0.0.1.0"
+"Microsoft.Windows.WordPad~~~~0.0.1.0"
+))
+{
+	Remove-WindowsCapability -Online -Name $capability | Out-Null
 }
 
 Write-Host -NoNewline "Done. Note that some of these changes require a logout/restart to take effect."

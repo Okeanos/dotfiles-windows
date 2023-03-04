@@ -4,12 +4,14 @@
 
 # https://learn.microsoft.com/en-us/windows/package-manager/winget/settings#use-the-winget-settings-command
 # Make sure that desired settings for winget are in place
-If(!(Test-Path -PathType Container "$($ENV:LocalAppData)\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState")) {
-	New-Item -Path "$($ENV:LocalAppData)\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState" -ItemType directory | Out-Null
+If (!(Test-Path -PathType Container "$( $ENV:LocalAppData )\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState"))
+{
+	New-Item -Path "$( $ENV:LocalAppData )\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState" -ItemType directory | Out-Null
 }
 
-If(!(Test-Path -PathType Leaf "$($ENV:LocalAppData)\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\settings.json")) {
-	Copy-Item "$PSScriptRoot\winget_settings.json" -Destination "$($ENV:LocalAppData)\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\settings.json"
+If (!(Test-Path -PathType Leaf "$( $ENV:LocalAppData )\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\settings.json"))
+{
+	Copy-Item "$PSScriptRoot\winget_settings.jsonc" -Destination "$( $ENV:LocalAppData )\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\settings.json"
 }
 
 # To find out how to fully automate installation of Inno Setup based installers (e.g. Git, VSCode)
@@ -36,39 +38,41 @@ winget install --id "Microsoft.VisualStudioCode" --silent --override "/VERYSILEN
 # Fully automated and simple installation invocations
 
 foreach ($package in @(
-	"7zip.7zip"
-	"Adobe.Acrobat.Reader.64-bit"
-	"ahmetb.kubectx"
-	"ahmetb.kubens"
-	#"Apache.Maven"
-	"Atlassian.Sourcetree"
-	"Docker.DockerDesktop"
-	"GoLang.Go.1.19"
-	"hadolint.hadolint"
-	"IrfanSkiljan.IrfanView"
-	"JetBrains.Toolbox"
-	#"johanhaleby.kubetail"
-	"KeePassXCTeam.KeePassXC"
-	"Kubernetes.kubectl"
-	"Microsoft.WindowsTerminal"
-	"MikeFarah.yq"
-	"OpenJS.NodeJS"
-	"Starship.Starship"
-	"stedolan.jq"
-	"wagoodman.dive"
-	"Yarn.Yarn"
-)) {
+"7zip.7zip"
+"Adobe.Acrobat.Reader.64-bit"
+"ahmetb.kubectx"
+"ahmetb.kubens"
+#"Apache.Maven"
+"Atlassian.Sourcetree"
+"Docker.DockerDesktop"
+"GoLang.Go.1.19"
+"hadolint.hadolint"
+"IrfanSkiljan.IrfanView"
+"JetBrains.Toolbox"
+#"johanhaleby.kubetail"
+"KeePassXCTeam.KeePassXC"
+"Kubernetes.kubectl"
+"Microsoft.WindowsTerminal"
+"MikeFarah.yq"
+"OpenJS.NodeJS"
+"Starship.Starship"
+"stedolan.jq"
+"wagoodman.dive"
+"Yarn.Yarn"
+))
+{
 	winget install --id $package --silent
 }
 
 # MS Store Apps
 foreach ($app in @(
-	"9PMMSR1CGPWG" # HEIF Image Extensions
-	"9N5TDP8VCMHS" # Web Media Extensions
-	"9PG2DK419DRG" # Webp Image Extensions
-	"9N4D0MSMP0PT" # VP9 Video Extensions
-	"9N95Q1ZZPMH4" # MPEG-2 Video Extension
-	"9MVZQVXJBQ9V" # AV1 Video Extension
-)) {
+"9PMMSR1CGPWG" # HEIF Image Extensions
+"9N5TDP8VCMHS" # Web Media Extensions
+"9PG2DK419DRG" # Webp Image Extensions
+"9N4D0MSMP0PT" # VP9 Video Extensions
+"9N95Q1ZZPMH4" # MPEG-2 Video Extension
+"9MVZQVXJBQ9V" # AV1 Video Extension
+))
+{
 	winget install --id $app --silent --source msstore --accept-package-agreements --accept-source-agreements
 }
