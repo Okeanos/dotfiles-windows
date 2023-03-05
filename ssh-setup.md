@@ -18,6 +18,7 @@ experimental and has other drawbacks such as no official browser support via the
 own SSH agent. However, [KeeAgent](https://github.com/dlech/KeeAgent) is able to talk to both Windows OpenSSH and the
 Git Bash bundled OpenSSH version after configuring the `SSH_AUTH_SOCK`.
 
+<!-- markdownlint-disable MD007 MD029 -->
 1. Install [KeePass](https://keepass.info) and the [KeeAgent](https://github.com/dlech/KeeAgent) plugin.
 2. In KeePass > Tools > Options configure the KeeAgent plugin:
 
@@ -27,6 +28,7 @@ Git Bash bundled OpenSSH version after configuring the `SSH_AUTH_SOCK`.
 
 3. In `%UserProfile%/.exports` toggle the `SSH_AUTH_SOCK` variable (Cygwin should be fine), i.e.
    add `export SSH_AUTH_SOCK=~/.ssh/cygwin.socket` to your `%UserProfile%\.bashrc` or `%UserProfile%\.bash_profile` file
+<!-- markdownlint-enable MD007 MD029 -->
 
 Optionally, remove the `/c/Windows/System32/OpenSSH`-prefix from `%UserProfile%/.path` to use Windows OpenSSH in
 PowerShell and Git Bash bundled OpenSSH in Git Bash.
@@ -34,7 +36,7 @@ PowerShell and Git Bash bundled OpenSSH in Git Bash.
 ### KeePassXC as SSH Agent
 
 Windows ships its own OpenSSH binaries starting with Windows 10. See the
-[official documentation](https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement#user-key-generation)  <!-- editorconfig-checker-disable-line -->
+[official documentation](https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement#user-key-generation) <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->
 for more details.
 
 For this to work in Git Bash as expected as well, the `$PATH` has to be prefixed with the Windows OpenSSH binaries or
