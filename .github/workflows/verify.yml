@@ -17,11 +17,12 @@ jobs:
       - name: Run EditorConfig Checker
         run: |
           go run github.com/editorconfig-checker/editorconfig-checker/cmd/editorconfig-checker@2.7.0 --exclude .git
-      - uses: bewuethr/shellcheck-action@v2
       - name: Run yamllint
         run: |
           pip install yamllint
           yamllint .
+      - uses: bewuethr/shellcheck-action@v2
+      - uses: DavidAnson/markdownlint-cli2-action@v9
       - name: PSScriptAnalyzer
         shell: pwsh
         run: |
