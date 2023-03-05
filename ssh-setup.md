@@ -20,9 +20,11 @@ Git Bash bundled OpenSSH version after configuring the `SSH_AUTH_SOCK`.
 
 1. Install [KeePass](https://keepass.info) and the [KeeAgent](https://github.com/dlech/KeeAgent) plugin.
 2. In KeePass > Tools > Options configure the KeeAgent plugin:
+
   - Enable agent for Windows OpenSSH (experimental)
   - Create a Cygwin compatible socket file with the path `%UserProfile%\.ssh\cygwin.socket`
   - Create a msysGit compatible socket file with the path `%UserProfile%\.ssh\msysgit.socket`
+
 3. In `%UserProfile%/.exports` toggle the `SSH_AUTH_SOCK` variable (Cygwin should be fine), i.e.
    add `export SSH_AUTH_SOCK=~/.ssh/cygwin.socket` to your `%UserProfile%\.bashrc` or `%UserProfile%\.bash_profile` file
 
@@ -120,7 +122,7 @@ and 2) OpenSSH binaries are updated and maintained separately from Windows.
 
 You may want to take a look at [wsl-agent-bridge](https://github.com/reynoldsbd/wsl-agent-bridge)
 and [wsl-ssh-pageant](https://github.com/benpye/wsl-ssh-pageant) or
-[Sharing SSH keys between Windows and WSL 2](https://devblogs.microsoft.com/commandline/sharing-ssh-keys-between-windows-and-wsl-2/). <!-- editorconfig-checker-disable-line -->
+[Sharing SSH keys between Windows and WSL 2](https://devblogs.microsoft.com/commandline/sharing-ssh-keys-between-windows-and-wsl-2/). <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->
 
 ### npiperelay for WLS 2
 
@@ -137,4 +139,4 @@ into WSL 1.
 Really? Well, that works, too. Whatever floats your boat: Manual (or semi-manual) setup it is.
 
 Please read what GitHub has to say on the matter in
-[their documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/working-with-ssh-key-passphrases#auto-launching-ssh-agent-on-git-for-windows). <!-- editorconfig-checker-disable-line -->
+[their documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/working-with-ssh-key-passphrases#auto-launching-ssh-agent-on-git-for-windows). <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->

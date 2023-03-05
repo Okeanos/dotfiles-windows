@@ -25,7 +25,7 @@ allows a single hypervisor at a time and WSL 2 is Hyper-V based and prevents run
 Workarounds for [VirtualBox](https://www.virtualbox.org/manual/UserManual.html#hyperv-support)
 and [VMWare](https://blogs.vmware.com/workstation/2020/05/vmware-workstation-now-supports-hyper-v-mode.html) exist,
 however, suffer
-from [extreme](https://communities.vmware.com/t5/VMware-Workstation-Pro/Huge-performance-drop-after-upgrading-to-VMware-Workstation-Pro/td-p/2888831) [performance](https://communities.vmware.com/t5/VMware-Workstation-Player/Huge-performance-drop-of-VMWare-Player-guest-running-on-Windows/td-p/2808460) [penalties](https://www.virtualbox.org/manual/UserManual.html#hyperv-support). <!-- editorconfig-checker-disable-line -->
+from [extreme](https://communities.vmware.com/t5/VMware-Workstation-Pro/Huge-performance-drop-after-upgrading-to-VMware-Workstation-Pro/td-p/2888831) [performance](https://communities.vmware.com/t5/VMware-Workstation-Player/Huge-performance-drop-of-VMWare-Player-guest-running-on-Windows/td-p/2808460) [penalties](https://www.virtualbox.org/manual/UserManual.html#hyperv-support). <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->
 
 If you want a custom WSL 2 instance (different from the Docker backend) check the available distributions and install
 one:
@@ -86,9 +86,9 @@ Follow the installation instructions for the following software and take note of
       OpenSSH in parallel)
   - [KeePassXC](https://keepass.info) (built in SSH Agent Support, different from KeeAgent; only supports Windows native
     OpenSSH)
-    - [Chrome/Chromium Extension](https://chrome.google.com/webstore/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk) <!-- editorconfig-checker-disable-line -->
+    - [Chrome/Chromium Extension](https://chrome.google.com/webstore/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk) <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->
     - [Firefox Extension](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/)
-  - [1Password]()
+  - [1Password](https://1password.com)
     - [SSH Agent Setup](https://developer.1password.com/docs/ssh/agent/)
 - An advanced text editor (lightweight IDE), such as – make sure that [EditorConfig](https://editorconfig.org) support
   is installed and enabled:
@@ -145,8 +145,8 @@ Please note that the standard dotfiles already modify your Git Bash path in two 
 - They add `$HOME/bin` as a place where you can put binaries such as [`jq`](https://github.com/stedolan/jq) to make them
   easily accessible
 
-If `~/.path` exists, it will be sourced along with the other files, before any feature testing (such
-as [detecting which version of `ls` is being used](https://github.com/mathiasbynens/dotfiles/blob/aff769fd75225d8f2e481185a71d5e05b76002dc/.aliases#L21-L26)) <!-- editorconfig-checker-disable-line -->
+If `~/.path` exists, it will be sourced along with the other files, before any feature testing (such as
+[detecting which version of `ls` is being used](https://github.com/mathiasbynens/dotfiles/blob/aff769fd75225d8f2e481185a71d5e05b76002dc/.aliases#L21-L26)) <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->
 takes place.
 
 Here’s an example `~/.path` file that adds `/usr/local/bin` to the `$PATH`:
@@ -196,9 +196,9 @@ Please read [SSH Setup](./ssh-setup.md) for details and options concerning SSH o
 
 ## Thanks to…
 
-* [Mathias Bynens](https://mathiasbynens.be) and whose [dotfiles](https://github.com/mathiasbynens/dotfiles) these are
+- [Mathias Bynens](https://mathiasbynens.be) and whose [dotfiles](https://github.com/mathiasbynens/dotfiles) these are
   largely derived from
-* [Tim Schneider](https://github.com/timschneiderxyz) and his [dotfiles](https://github.com/timschneiderxyz/dotfiles)
+- [Tim Schneider](https://github.com/timschneiderxyz) and his [dotfiles](https://github.com/timschneiderxyz/dotfiles)
   and [fyWin](https://github.com/timschneiderxyz/fyWin) scripts
-* [Rohan Cragg](https://rohancragg.co.uk) and his [Bash Shell on Windows](https://rohancragg.co.uk/misc/git-bash/) guide
-* [Maarten Billemont's Bash Guide](http://mywiki.wooledge.org/BashGuide)
+- [Rohan Cragg](https://rohancragg.co.uk) and his [Bash Shell on Windows](https://rohancragg.co.uk/misc/git-bash/) guide
+- [Maarten Billemont's Bash Guide](http://mywiki.wooledge.org/BashGuide)
