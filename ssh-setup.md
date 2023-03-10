@@ -27,7 +27,7 @@ Git Bash bundled OpenSSH version after configuring the `SSH_AUTH_SOCK`.
   - Create a msysGit compatible socket file with the path `%UserProfile%\.ssh\msysgit.socket`
 
 3. In `%UserProfile%/.exports` toggle the `SSH_AUTH_SOCK` variable (Cygwin should be fine), i.e.
-   add `export SSH_AUTH_SOCK=~/.ssh/cygwin.socket` to your `%UserProfile%\.bashrc` or `%UserProfile%\.bash_profile` file
+  add `export SSH_AUTH_SOCK=~/.ssh/cygwin.socket` to your `%UserProfile%\.bashrc` or `%UserProfile%\.bash_profile` file
 <!-- markdownlint-enable MD007 MD029 -->
 
 Optionally, remove the `/c/Windows/System32/OpenSSH`-prefix from `%UserProfile%/.path` to use Windows OpenSSH in

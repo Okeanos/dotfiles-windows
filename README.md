@@ -38,10 +38,10 @@ wsl --install --distribution Ubuntu-22.04
 ### Getting Started
 
 1. Manually download [`winget.ps1`](https://raw.githubusercontent.com/Okeanos/dotfiles-windows/main/winget.ps1) and all
-   other `winget_*` files into the same location
+  other `winget_*` files into the same location
 2. Update the `winget.ps1` to only install software you actually want
 3. Go through the `winget_*` files and modify them as necessary because they will be used to source the installation
-   options for e.g. Git to allow unattended installation.
+  options for e.g. Git to allow unattended installation.
 4. Execute `winget.ps1` from your PowerShell (may need elevated permissions)
 5. You can now clone the repository wherever you want (I like to keep it in `%UserProfile%\Workspace\dotfiles`)
 6. You can now `bootstrap.ps1` your system
