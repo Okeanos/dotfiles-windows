@@ -14,17 +14,17 @@ trim_trailing_whitespace = true
 
 [*.{md,vim,yaml,yml}]
 indent_style = space
-tab_width = 2
+indent_size = 2
 
 [*.md]
 max_line_length = 120
 
 [*.vim]
-tab_width = 4
+indent_size = 4
 
 [dot-vimrc]
 indent_style = space
-tab_width = 4
+indent_size = 4
 
 [*.{ini,ps1}]
 end_of_line = crlf
