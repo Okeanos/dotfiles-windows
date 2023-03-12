@@ -34,4 +34,4 @@ jobs:
           gunzip --decompress taplo.gz
           chmod +x taplo
           ./taplo fmt --check
-          ./taplo check --schema-catalog
+          ./taplo check --default-schema-catalogs
