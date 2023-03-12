@@ -32,4 +32,6 @@ jobs:
           curl --fail --silent --show-error --location --output taplo.gz \
             https://github.com/tamasfe/taplo/releases/download/0.8.0/taplo-full-linux-x86_64.gz
           gunzip --decompress taplo.gz
-          taplo fmt --check
+          chmod +x taplo
+          ./taplo fmt --check
+          ./taplo check --schema-catalog
