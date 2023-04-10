@@ -80,7 +80,10 @@ function server() {
 # Compare original and gzipped file size
 function gz() {
 	local origsize gzipsize ratio
-	origsize=$(wc -c <"${1}")
+	origsize=$(
+		stat -Lf"%z" -- "${1}" 2> /dev/null; # macOS `stat`
+		stat -Lc"%s" -- "${1}" 2> /dev/null; # GNU `stat`
+	)
 	gzipsize=$(gzip -c "${1}" | wc -c)
 	ratio=$(echo "${gzipsize} * 100 / ${origsize}" | bc -l)
 	printf "orig: %d bytes\n" "${origsize}"
