@@ -79,7 +79,7 @@ function server() {
 
 # Compare original and gzipped file size
 function gz() {
-	local origsize, gzipsize, ratio
+	local origsize gzipsize ratio
 	origsize=$(wc -c <"${1}")
 	gzipsize=$(gzip -c "${1}" | wc -c)
 	ratio=$(echo "${gzipsize} * 100 / ${origsize}" | bc -l)
@@ -100,7 +100,7 @@ function getcertnames() {
 		return 1
 	fi
 
-	local domain, tmp, certText
+	local domain tmp certText
 
 	domain="${1}"
 	echo "Testing ${domain}…"
