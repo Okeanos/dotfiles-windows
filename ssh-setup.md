@@ -1,4 +1,4 @@
-# SSH Setup on Windows
+# SSH Setup
 
 There are multiple, incompatible competing options for useful/working Windows SSH setups.
 
