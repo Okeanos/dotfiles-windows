@@ -202,3 +202,4 @@ Please read [SSH Setup](./ssh-setup.md) for details and options concerning SSH o
   and [fyWin](https://github.com/timschneiderxyz/fyWin) scripts
 - [Rohan Cragg](https://rohancragg.co.uk) and his [Bash Shell on Windows](https://rohancragg.co.uk/misc/git-bash/) guide
 - [Maarten Billemont's Bash Guide](http://mywiki.wooledge.org/BashGuide)
+- [Mateusz Łoskot](http://mateusz.loskot.net) and his [wsl-config](https://github.com/mloskot/wsl-config)
