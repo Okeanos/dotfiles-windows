@@ -16,8 +16,8 @@ install that before everything else.
 
 ### Docker & Windows Subsystem for Linux (WSL 2)
 
-You have to manually install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install) (
-WSL 2) because it requires a restart of the system and some manual intervention.
+You have to manually install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install)
+(WSL 2) because it requires a restart of the system and some manual intervention.
 
 **Note**: Enabling WSL 2 means that software such as [VirtualBox](https://www.virtualbox.org)
 or [VMWare Workstation](https://www.vmware.com/products/workstation-pro.html) no longer works as expected. Windows only
@@ -42,16 +42,19 @@ wsl --install --distribution Ubuntu-22.04
 2. Update the `winget.ps1` to only install software you actually want
 3. Go through the `winget_*` files and modify them as necessary because they will be used to source the installation
   options for e.g. Git to allow unattended installation.
-4. Execute `winget.ps1` from your PowerShell (may need elevated permissions)
+4. Execute `winget.ps1` from your PowerShell (needs elevated/administrator permissions)
 5. You can now clone the repository wherever you want (I like to keep it in `%UserProfile%\Workspace\dotfiles`)
-6. You can now `bootstrap.ps1` your system
-7. **Optionally** and **after a careful review** you can now run `windows.ps1`
+6. You can now `bootstrap.ps1` your system (needs elevated/administrator permissions)
+7. **Optionally** and **after a careful review** you can now run `windows.ps1` (needs elevated/administrator
+  permissions)
 
 If you decide not to run the `windows.ps1` script please make sure to set the following `User Environment Variables` in
 Windows:
 
-- `HOME` : `%UserProfile%` (this will prevent Git Bash supplied tools from arbitrarily deciding on their own where `~`,
-  i.e. `${HOME}` is)
+- `HOME` : `%UserProfile%`
+  - this will prevent Git Bash supplied tools from arbitrarily deciding on their own where `~`, i.e. `${HOME}` is
+- `USER` : "your username"
+  - this will prevent Git Bash supplied tools (such as SSH) from arbitrarily deciding on their own what to call you
 
 #### Installing Software (`winget.ps1`)
 
