@@ -187,6 +187,8 @@
 
 [include]
 
+	# Include customization that should separately (from the dotfiles),
+	# see https://git-scm.com/docs/git-config#_includes for details
 	path = .gituser
 
 # Use the following if you need multiple user configs
