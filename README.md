@@ -10,9 +10,9 @@ This is a Windows port of [my dotfiles](https://github.com/Okeanos/dotfiles) for
 remove things you don’t want or need. Don’t blindly use my settings unless you know what that entails. Use at your own
 risk!
 
-**Note:** [Docker](https://www.docker.com) is installed as part of the setup. Because
-it [defaults to the WSL 2 backend](https://docs.docker.com/desktop/install/windows-install/) you make sure to install
-that before everything else.
+**Warning:** [Docker Desktop](https://www.docker.com) is installed as part of the setup. Because
+it [defaults to the WSL 2 backend](https://docs.docker.com/desktop/install/windows-install/) you have to make sure to
+install that before everything else.
 
 ### Docker & Windows Subsystem for Linux (WSL 2)
 
