@@ -66,9 +66,22 @@ Some functionality of these dotfiles depends on packages installed by `winget.ps
 you should look carefully through the `winget.ps1` and related config files and manually install any particularly
 important tools manually. Good examples of these are Windows Terminal and Git Bash.
 
+##### Lightweight Editor
+
+The aforementioned `winget.ps1` includes [Visual Studio Code](https://code.visualstudio.com) ("VSCode"), i.e. the
+nonfree, proprietary Microsoft product that includes telemetry etc., as a lightweight GUI editor. Either disable
+telemetry manually if you are bothered by it (e.g. as described in
+[this gist](https://gist.github.com/hyperupcall/99e355405611be6c4e0a38b6e3e8aad0)) or switch to another editor, e.g.:
+
+- [VSCodium](https://vscodium.com)
+- [NotePad++](https://notepad-plus-plus.org)
+- [Sublime Text](https://www.sublimetext.com)
+- …
+
 ##### Manual Installation Caveats
 
-Follow the installation instructions for the following software and take note of the caveats below:
+If you do not want to run the `winget.ps1` script follow the installation instructions for the following software and
+take note of the caveats below:
 
 - [Windows Subsystem for Linux (WSL 2)](https://docs.microsoft.com/en-us/windows/wsl/install)
 - [Windows Terminal](https://github.com/microsoft/terminal)
@@ -90,10 +103,6 @@ Follow the installation instructions for the following software and take note of
     - [Firefox Extension](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/)
   - [1Password](https://1password.com)
     - [SSH Agent Setup](https://developer.1password.com/docs/ssh/agent/)
-- An advanced text editor (lightweight IDE), such as – make sure that [EditorConfig](https://editorconfig.org) support
-  is installed and enabled:
-  - [Microsoft Visual Studio Code](https://code.visualstudio.com) (or [VSCodium](https://vscodium.com))
-  - [NotePad++](https://notepad-plus-plus.org)
 
 Once you installed all of this and configured the software to your liking you can now clone the repository wherever you
 want (I like to keep it in `%UserProfile%/Workspace/dotfiles`). Afterwards you can run the bootstrapper from your

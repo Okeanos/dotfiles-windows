@@ -34,6 +34,20 @@ winget install --id "Mozilla.Firefox" --silent --override "OPTIONAL_EXTENSIONS=f
 #winget install Microsoft.PowerToys --silent
 # https://code.visualstudio.com/docs/setup/windows#_what-commandline-arguments-are-supported-by-the-windows-setup
 winget install --id "Microsoft.VisualStudioCode" --silent --override "/VERYSILENT /NOCANCEL /MERGETASKS=!runcode /LOADINF=$PSScriptRoot\winget_vscode.ini"
+# Install basic Visual Studio Code extensions
+foreach ($extension in @(
+"DotJoshJohnson.xml"
+"EditorConfig.EditorConfig"
+"ms-azuretools.vscode-docker"
+"ms-vscode.powershell"
+"redhat.vscode-yaml"
+"timonwong.shellcheck"
+"yzhang.markdown-all-in-one"
+))
+{
+	# Requires absolute path because of https://github.com/microsoft/winget-cli/issues/549
+	C:\"Program Files"\"Microsoft VS Code"\bin\code --install-extension $extension
+}
 
 # Fully automated and simple installation invocations
 
