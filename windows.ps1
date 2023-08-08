@@ -8,9 +8,9 @@ Write-Host "Base Environment"
 
 # Variables
 # Ensure that Unix tools have a consistent and predictable HOME directory; important if a network drive is used as pseudo-home
-[Environment]::SetEnvironmentVariable("HOME", "%UserProfile%", 'User')
+Set-ItemProperty "HKCU:\Environment" "HOME" "%USERPROFILE%" -Type ExpandString
 # Ensure that Unix tools have a consistent and predictable USER variable available; important for SSH for example
-[Environment]::SetEnvironmentVariable("USER", "$Env:UserName", 'User')
+Set-ItemProperty "HKCU:\Environment" "USER" "$Env:UserName"
 
 # Set Execution Policy for Scripts
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy
