@@ -33,7 +33,7 @@ Git Bash bundled OpenSSH version after configuring the `SSH_AUTH_SOCK`.
 Optionally, remove the `/c/Windows/System32/OpenSSH`-prefix from `%UserProfile%/.path` to use Windows OpenSSH in
 PowerShell and Git Bash bundled OpenSSH in Git Bash.
 
-### KeePassXC as SSH Agent
+### KeePassXC with external SSH Agent
 
 Windows ships its own OpenSSH binaries starting with Windows 10. See the
 [official documentation](https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement#user-key-generation) <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->
@@ -72,6 +72,8 @@ bordering on unusable in some instances:
   2022-10-08)
 - [Support SSH_AUTH_SOCK Unix Domain Sockets for Windows](https://github.com/PowerShell/Win32-OpenSSH/issues/1761) (
   2022-10-08)
+  - There is a [PR#674](https://github.com/PowerShell/openssh-portable/pull/674) that attempts to address this and may
+    solve the Git Bash integration woes.
 - Windows OpenSSH is a system package and not regularly updated (Windows 10 21H2 shipping OpenSSH_for_Windows_8.1p1,
   LibreSSL 3.0.2) (2022-10-08)
   - [Win32-OpenSSH update in Windows](https://github.com/PowerShell/Win32-OpenSSH/issues/1693)
@@ -85,6 +87,10 @@ subjective reasons) the SSH integration on Windows is subpar and likely going to
 open KeePassXC issue asking to
 [support MSYS2 ssh-agent sockets on Windows](https://github.com/keepassxreboot/keepassxc/issues/4681) (unresolved by
 2023-02-13) that would improve the situation.
+
+The [OmniSSHAgent](https://github.com/masahide/OmniSSHAgent) project appears to solve some of the cross provider and
+consumer issues by providing the required interfaces to interact with Git Bash provided SSH (`cygwin`/`MSYS2`) and
+Windows OpenSSH as well as the ability to provide SSH keys via KeePassXC. I haven't tested it though.
 
 ## 1Password
 
@@ -116,9 +122,13 @@ either.
 
 ## Windows OpenSSH in WSL and WSL 2
 
-Preface: I have no experience with this making Windows managed OpenSSH keys available in WSL 1 or 2.
+Preface: I have no experience with this making OpenSSH keys available in WSL 1 or 2 from Windows hosts.
 
-There some options for this that may or may not work based on arcane invocations of shell scripts, explore on your own.
+There's [OmniSSHAgent](https://github.com/masahide/OmniSSHAgent) as previously pointed out. This appears to solve many
+of the integration issues between various consumers of SSH keys and providers thereof. I haven't tested it, though.
+
+Beyond that there some additional options for this that may or may not work based on arcane invocations of shell
+scripts, explore on your own.
 You may run into weird issues, though, because generally OpenSSH and OpenSSH Agent versions have to match and the WSL (1
 and 2) OpenSSH binaries are updated and maintained separately from Windows.
 
