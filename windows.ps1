@@ -157,33 +157,33 @@ If (Test-Path -PathType Leaf "$( $ENV:LocalAppData )\Packages\Microsoft.WindowsT
 	# Add Selenized Light color scheme (based on https://github.com/jan-warchol/selenized/pull/88/files)
 	$selenized_light =@"
 {
-    "background": "#fbf3db",
-    "black": "#e9e4d0",
-    "blue": "#0072d4",
-    "brightBlack": "#cfcebe",
-    "brightBlue": "#006dce",
-    "brightCyan": "#00978a",
-    "brightGreen": "#428b00",
-    "brightPurple": "#c44392",
-    "brightRed": "#cc1729",
-    "brightWhite": "#3a4d53",
-    "brightYellow": "#a78300",
-    "cursorColor": "#3a4d53",
-    "cyan": "#009c8f",
-    "foreground": "#53676d",
-    "green": "#489100",
-    "name": "Selenized Light",
-    "purple": "#ca4898",
-    "red": "#d2212d",
-    "selectionBackground": "#cfcebe",
-    "white": "#909995",
-    "yellow": "#ad8900"
+	"background": "#fbf3db",
+	"black": "#e9e4d0",
+	"blue": "#0072d4",
+	"brightBlack": "#cfcebe",
+	"brightBlue": "#006dce",
+	"brightCyan": "#00978a",
+	"brightGreen": "#428b00",
+	"brightPurple": "#c44392",
+	"brightRed": "#cc1729",
+	"brightWhite": "#3a4d53",
+	"brightYellow": "#a78300",
+	"cursorColor": "#3a4d53",
+	"cyan": "#009c8f",
+	"foreground": "#53676d",
+	"green": "#489100",
+	"name": "Selenized Light",
+	"purple": "#ca4898",
+	"red": "#d2212d",
+	"selectionBackground": "#cfcebe",
+	"white": "#909995",
+	"yellow": "#ad8900"
 }
 "@
 	$terminal_settings.schemes += (ConvertFrom-Json -InputObject $selenized_light)
 	$default_profile =@"
 {
-    "colorScheme": "Selenized Light"
+	"colorScheme": "Selenized Light"
 }
 "@
 	$terminal_settings.profiles.defaults = (ConvertFrom-Json -InputObject $default_profile)
