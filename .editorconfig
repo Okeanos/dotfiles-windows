@@ -20,9 +20,6 @@ indent_size = 2
 max_line_length = 120
 trim_trailing_whitespace = false # Allow '  ' token for Markdown to create new lines
 
-[*.vim]
-indent_size = 4
-
 [dot-vimrc]
 indent_style = space
 indent_size = 4

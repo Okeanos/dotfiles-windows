@@ -32,12 +32,6 @@ New-ItemProperty "HKCU:\Control Panel\Desktop" -Name JPEGImportQuality -Value 0x
 #Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name SystemUsesLightTheme -Value 0
 #Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name AppsUseLightTheme -Value 0
 
-# Make Windows Terminal the default Console
-# Use {B23D10C0-E52E-411E-9D5B-C09FDF709C7D} for Console & Terminal to use the legacy Windows Console Host instead
-# Use {00000000-0000-0000-0000-000000000000} for Console & Terminal to let Windows decide on the fly instead
-Set-ItemProperty "HKCU:\Console\%%Startup" -Name DelegationConsole -Value "{2EACA947-7F5F-4CFA-BA87-8F7FBEEFBE69}"
-Set-ItemProperty "HKCU:\Console\%%Startup" -Name DelegationTerminal -Value "{E12CFF52-A866-4C77-9A90-F570A7AA2C6B}"
-
 ##############################################################################
 # Security & Privacy                                                         #
 ##############################################################################
@@ -140,6 +134,63 @@ Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\CapabilityAcce
 #Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name ShowTaskViewButton -Value 0
 #Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name TaskbarDa -Value 0
 #Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name TaskbarMn -Value 0
+
+###############################################################################
+# Windows Terminal                                                            #
+###############################################################################
+
+Write-Host "Windows Terminal"
+
+# Make Windows Terminal the default Console
+# Use {B23D10C0-E52E-411E-9D5B-C09FDF709C7D} for Console & Terminal to use the legacy Windows Console Host instead
+# Use {00000000-0000-0000-0000-000000000000} for Console & Terminal to let Windows decide on the fly instead
+Set-ItemProperty "HKCU:\Console\%%Startup" -Name DelegationConsole -Value "{2EACA947-7F5F-4CFA-BA87-8F7FBEEFBE69}"
+Set-ItemProperty "HKCU:\Console\%%Startup" -Name DelegationTerminal -Value "{E12CFF52-A866-4C77-9A90-F570A7AA2C6B}"
+
+If (Test-Path -PathType Leaf "$( $ENV:LocalAppData )\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json")
+{
+	$terminal_settings = Get-Content "$( $ENV:LocalAppData )\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" -Raw | ConvertFrom-Json
+
+	# Set the Terminal Theme to follow the system settings
+	$terminal_settings | add-member -Name "theme" -value  "system" -MemberType NoteProperty
+
+	# Add Selenized Light color scheme (based on https://github.com/jan-warchol/selenized/pull/88/files)
+	$selenized_light =@"
+{
+    "background": "#fbf3db",
+    "black": "#e9e4d0",
+    "blue": "#0072d4",
+    "brightBlack": "#cfcebe",
+    "brightBlue": "#006dce",
+    "brightCyan": "#00978a",
+    "brightGreen": "#428b00",
+    "brightPurple": "#c44392",
+    "brightRed": "#cc1729",
+    "brightWhite": "#3a4d53",
+    "brightYellow": "#a78300",
+    "cursorColor": "#3a4d53",
+    "cyan": "#009c8f",
+    "foreground": "#53676d",
+    "green": "#489100",
+    "name": "Selenized Light",
+    "purple": "#ca4898",
+    "red": "#d2212d",
+    "selectionBackground": "#cfcebe",
+    "white": "#909995",
+    "yellow": "#ad8900"
+}
+"@
+	$terminal_settings.schemes += (ConvertFrom-Json -InputObject $selenized_light)
+	$default_profile =@"
+{
+    "colorScheme": "Selenized Light"
+}
+"@
+	$terminal_settings.profiles.defaults = (ConvertFrom-Json -InputObject $default_profile)
+
+	$terminal_settings | ConvertTo-Json -Depth 100 | Out-File "$( $ENV:LocalAppData )\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" -Encoding utf8
+}
+
 
 ###############################################################################
 # Remove standard applications                                                #

@@ -1,7 +1,7 @@
 # Get editor completions based on the config schema
 "$schema" = "https://starship.rs/config-schema.json"
 
-# See https://github.com/altercation/solarized#the-values for color values
+# See https://github.com/jan-warchol/selenized for color values
 format = """$username$hostname$directory$git_branch$git_status$time$kubernetes$line_break\
 $character"""
 
