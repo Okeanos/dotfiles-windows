@@ -142,6 +142,13 @@
 	# Use `hexdump` to diff binary files.
 	textconv = hexdump -v -C
 
+[fetch]
+
+	# Prune local information no longer available on remote when --prune is specified
+	# Details on https://git-scm.com/docs/git-fetch#_pruning
+	# prune = true
+	pruneTags = true
+
 [help]
 
 	# Automatically correct and execute mistyped commands.
