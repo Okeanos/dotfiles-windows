@@ -31,6 +31,7 @@ winget install --id "Google.Chrome" --silent --override "/quiet"
 # https://support.mozilla.org/en-US/kb/deploy-firefox-msi-installers
 winget install --id "Mozilla.Firefox" --silent --override "OPTIONAL_EXTENSIONS=false /quiet"
 # PowerToys doesn't appear to have a way to define setup options and will by default launch after installation :/
+# See e.g. https://github.com/microsoft/PowerToys/issues/24000
 #winget install Microsoft.PowerToys --silent
 # https://code.visualstudio.com/docs/setup/windows#_what-commandline-arguments-are-supported-by-the-windows-setup
 winget install --id "Microsoft.VisualStudioCode" --silent --override "/VERYSILENT /NOCANCEL /MERGETASKS=!runcode /LOADINF=$PSScriptRoot\winget_vscode.ini"
@@ -59,8 +60,8 @@ foreach ($package in @(
 #"Apache.Maven"
 "Atlassian.Sourcetree"
 "Docker.DockerDesktop"
+"GitHub.cli"
 "GoLang.Go"
-"hadolint.hadolint"
 "IrfanSkiljan.IrfanView"
 "JetBrains.Toolbox"
 "jqlang.jq"
