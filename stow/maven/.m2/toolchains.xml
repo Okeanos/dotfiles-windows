@@ -21,16 +21,6 @@
 			<jdkHome>C:\Program Files\Eclipse Adoptium\temurin-11.jdk</jdkHome>
 		</configuration>
 	</toolchain> -->
-	<!-- <toolchain>
-		<type>jdk</type>
-		<provides>
-			<version>16</version>
-			<vendor>AdoptOpenJDK</vendor>
-		</provides>
-		<configuration>
-			<jdkHome>C:\Program Files\Eclipse Adoptium\temurin-16.jdk</jdkHome>
-		</configuration>
-	</toolchain> -->
 	<toolchain>
 		<type>jdk</type>
 		<provides>
@@ -39,6 +29,17 @@
 		</provides>
 		<configuration>
 			<jdkHome>C:\Program Files\Eclipse Adoptium\temurin-17.jdk</jdkHome>
+		</configuration>
+	</toolchain>
+	</toolchain>
+	<toolchain>
+		<type>jdk</type>
+		<provides>
+			<version>21</version>
+			<vendor>Adoptium</vendor>
+		</provides>
+		<configuration>
+			<jdkHome>C:\Program Files\Eclipse Adoptium\temurin-21.jdk</jdkHome>
 		</configuration>
 	</toolchain>
 </toolchains>
