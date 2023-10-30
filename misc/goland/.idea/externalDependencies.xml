@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+	<component name="ExternalDependencies">
+		<plugin id="Docker"/>
+		<plugin id="Git4Idea"/>
+		<plugin id="HtmlTools"/>
+		<plugin id="JSIntentionPowerPack"/>
+		<plugin id="JavaScript"/>
+		<plugin id="JavaScriptDebugger"/>
+		<plugin id="Refactor-X"/>
+		<plugin id="XPathView"/>
+		<plugin id="com.github.leomillon.uuidgenerator"/>
+		<plugin id="com.intellij.completion.ml.ranking"/>
+		<plugin id="com.intellij.css"/>
+		<plugin id="com.intellij.database"/>
+		<plugin id="com.intellij.diagram"/>
+		<plugin id="com.intellij.jsonpath"/>
+		<plugin id="com.intellij.microservices.ui"/>
+		<plugin id="com.intellij.plugins.watcher"/>
+		<plugin id="com.intellij.properties"/>
+		<plugin id="com.intellij.searcheverywhere.ml"/>
+		<plugin id="com.intellij.swagger"/>
+		<plugin id="com.jetbrains.performancePlugin"/>
+		<plugin id="com.jetbrains.restClient"/>
+		<plugin id="com.jetbrains.sh"/>
+		<plugin id="com.mnr.java.intellij.idea.plugin.base64helper"/>
+		<plugin id="intellij.indexing.shared"/>
+		<plugin id="intellij.webp"/>
+		<plugin id="intellij.webpack"/>
+		<plugin id="mobi.hsz.idea.gitignore"/>
+		<plugin id="name.kropp.intellij.makefile"/>
+		<plugin id="org.asciidoctor.intellij.asciidoc"/>
+		<plugin id="org.editorconfig.editorconfigjetbrains"/>
+		<plugin id="org.intellij.intelliLang"/>
+		<plugin id="org.intellij.plugins.markdown"/>
+		<plugin id="org.jetbrains.plugins.go-template"/>
+		<plugin id="org.jetbrains.plugins.sass"/>
+		<plugin id="org.jetbrains.plugins.textmate"/>
+		<plugin id="org.jetbrains.plugins.yaml"/>
+		<plugin id="org.jetbrains.security.package-checker"/>
+		<plugin id="org.toml.lang"/>
+		<plugin id="tanvd.grazi"/>
+	</component>
+</project>
