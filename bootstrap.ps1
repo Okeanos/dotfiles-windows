@@ -1,4 +1,4 @@
-#Requires -RunAsAdministrator
+﻿#Requires -RunAsAdministrator
 
 Param
 (
@@ -38,6 +38,7 @@ function DoIt
 	New-Item -Path "$( $ENV:UserProfile )\.config" -ItemType Directory -Force | Out-Null
 	New-Item -Path "$( $ENV:UserProfile )\.ssh\config.d" -ItemType Directory -Force | Out-Null
 	New-Item -Path "$( $ENV:UserProfile )\.vim\backups", "$( $ENV:UserProfile )\.vim\colors", "$( $ENV:UserProfile )\.vim\swaps", "$( $ENV:UserProfile )\.vim\syntax", "$( $ENV:UserProfile )\.vim\undo" -ItemType Directory -Force | Out-Null
+	New-Item -Path "$( $ENV:AppData )\Code\User" -ItemType Directory -Force | Out-Null
 
 	Write-Host "Linking files"
 	LinkFiles "$( $PSScriptRoot )\stow\curl\" "$( $ENV:UserProfile )\"
@@ -51,6 +52,7 @@ function DoIt
 	LinkFiles "$( $PSScriptRoot )\stow\vim\" "$( $ENV:UserProfile )\"
 	LinkFiles "$( $PSScriptRoot )\stow\vim\.vim\colors\" "$( $ENV:UserProfile )\.vim\colors\"
 	LinkFiles "$( $PSScriptRoot )\stow\vim\.vim\syntax\" "$( $ENV:UserProfile )\.vim\syntax\"
+	LinkFiles "$( $PSScriptRoot )\stow\vscode\" "$( $ENV:AppData )\Code\User\"
 }
 
 Function SetGitUser

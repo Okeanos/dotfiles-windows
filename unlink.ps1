@@ -29,7 +29,7 @@ Function UnlinkFiles
 
 Function DoIt
 {
-	Get-ChildItem -Path "$( $PSScriptRoot )\stow\" -Directory -Exclude "powershell" | ForEach-Object {
+	Get-ChildItem -Path "$( $PSScriptRoot )\stow\" -Directory -Exclude "powershell" -Exclude "vscode" | ForEach-Object {
 		Write-Host "Unlinking '$_.FullName' from '$( $ENV:UserProfile )'"
 		UnlinkFiles $_.FullName "$( $ENV:UserProfile )"
 	}
@@ -39,6 +39,8 @@ Function DoIt
 	UnlinkFiles "$( $PSScriptRoot )\stow\ssh\.ssh\config.d\" "$( $ENV:UserProfile )\.ssh\config.d\"
 	UnlinkFiles "$( $PSScriptRoot )\stow\vim\.vim\colors\" "$( $ENV:UserProfile )\.vim\colors\"
 	UnlinkFiles "$( $PSScriptRoot )\stow\vim\.vim\syntax\" "$( $ENV:UserProfile )\.vim\syntax\"
+	Write-Host "Unlinking 'vscode' from '$( $ENV:UserProfile )\Code\User'"
+	UnlinkFiles "$( $PSScriptRoot )\stow\vscode\settings.json" "$( $ENV:AppData )\Code\User\settings.json"
 }
 
 if ($Force)

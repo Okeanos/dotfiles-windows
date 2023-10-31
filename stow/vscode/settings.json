@@ -1,0 +1,36 @@
+{
+	"workbench.colorTheme": "Default Light+",
+	"workbench.editor.enablePreview": false,
+	"editor.inlineSuggest.enabled": true,
+	"editor.renderWhitespace": "all",
+	"editor.rulers": [
+		80,
+		100,
+		120,
+		140
+	],
+	"editor.wordWrap": "on",
+	"explorer.confirmDelete": false,
+	"files.trimTrailingWhitespace": true,
+	"powershell.codeFormatting.pipelineIndentationStyle": "IncreaseIndentationForFirstPipeline",
+	"redhat.telemetry.enabled": false,
+	"terminal.integrated.defaultProfile.windows": "Git Bash",
+	"terminal.integrated.profiles.windows": {
+		"PowerShell": {
+			"source": "PowerShell",
+			"icon": "terminal-powershell"
+		},
+		"Command Prompt": {
+			"path": [
+				"${env:windir}\\Sysnative\\cmd.exe",
+				"${env:windir}\\System32\\cmd.exe"
+			],
+			"args": [],
+			"icon": "terminal-cmd"
+		},
+		"Git Bash": {
+			"source": "Git Bash",
+			"icon": "terminal-bash"
+		}
+	}
+}
