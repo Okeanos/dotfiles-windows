@@ -30,6 +30,7 @@ Function UnlinkFiles
 Function DoIt
 {
 	Get-ChildItem -Path "$( $PSScriptRoot )\stow\" -Directory -Exclude "powershell" | ForEach-Object {
+		Write-Host "Unlinking '$_.FullName' from '$( $ENV:UserProfile )'"
 		UnlinkFiles $_.FullName "$( $ENV:UserProfile )"
 	}
 

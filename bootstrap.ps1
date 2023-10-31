@@ -1,4 +1,4 @@
-﻿#Requires -RunAsAdministrator
+#Requires -RunAsAdministrator
 
 Param
 (
@@ -33,18 +33,21 @@ Function initPowershell
 
 function DoIt
 {
+	Write-Host "Creating target directories"
+	New-Item -Path "$( $ENV:UserProfile )\.m2" -ItemType Directory -Force | Out-Null
+	New-Item -Path "$( $ENV:UserProfile )\.config" -ItemType Directory -Force | Out-Null
+	New-Item -Path "$( $ENV:UserProfile )\.ssh\config.d" -ItemType Directory -Force | Out-Null
+	New-Item -Path "$( $ENV:UserProfile )\.vim\backups", "$( $ENV:UserProfile )\.vim\colors", "$( $ENV:UserProfile )\.vim\swaps", "$( $ENV:UserProfile )\.vim\syntax", "$( $ENV:UserProfile )\.vim\undo" -ItemType Directory -Force | Out-Null
+
+	Write-Host "Linking files"
 	LinkFiles "$( $PSScriptRoot )\stow\curl\" "$( $ENV:UserProfile )\"
 	LinkFiles "$( $PSScriptRoot )\stow\git\" "$( $ENV:UserProfile )\"
-	New-Item -Path "$( $ENV:UserProfile )\.m2" -ItemType Directory -Force | Out-Null
 	LinkFiles "$( $PSScriptRoot )\stow\maven\.m2\" "$( $ENV:UserProfile )\.m2"
 	LinkFiles "$( $PSScriptRoot )\stow\misc\" "$( $ENV:UserProfile )\"
-	New-Item -Path "$( $ENV:UserProfile )\.config" -ItemType Directory -Force | Out-Null
 	LinkFiles "$( $PSScriptRoot )\stow\shell\" "$( $ENV:UserProfile )\"
 	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\" "$( $ENV:UserProfile )\.config\"
-	New-Item -Path "$( $ENV:UserProfile )\.ssh\config.d" -ItemType Directory -Force | Out-Null
 	LinkFiles "$( $PSScriptRoot )\stow\ssh\.ssh\" "$( $ENV:UserProfile )\.ssh\"
 	LinkFiles "$( $PSScriptRoot )\stow\ssh\.ssh\config.d\" "$( $ENV:UserProfile )\.ssh\config.d\"
-	New-Item -Path "$( $ENV:UserProfile )\.vim\backups", "$( $ENV:UserProfile )\.vim\colors", "$( $ENV:UserProfile )\.vim\swaps", "$( $ENV:UserProfile )\.vim\syntax", "$( $ENV:UserProfile )\.vim\undo" -ItemType Directory -Force | Out-Null
 	LinkFiles "$( $PSScriptRoot )\stow\vim\" "$( $ENV:UserProfile )\"
 	LinkFiles "$( $PSScriptRoot )\stow\vim\.vim\colors\" "$( $ENV:UserProfile )\.vim\colors\"
 	LinkFiles "$( $PSScriptRoot )\stow\vim\.vim\syntax\" "$( $ENV:UserProfile )\.vim\syntax\"
@@ -52,6 +55,8 @@ function DoIt
 
 Function SetGitUser
 {
+	Write-Host "Creating Git user config"
+
 	$username = Read-Host 'Enter your Git Username'
 	$email = Read-Host 'Enter your Git E-Mail address'
 
@@ -95,6 +100,7 @@ $signWithSSH
 
 if ($Force)
 {
+	Write-Host "Linking dotfiles"
 	DoIt
 	InitPowershell
 	Write-Host "In PowerShell run the following to allow starship to work: 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser'"
@@ -104,12 +110,14 @@ else
 	$reply = Read-Host 'This may overwrite existing files in your home directory. Are you sure? (y/n)'
 	if ($reply -match "[yY]")
 	{
+		Write-Host "Linking dotfiles"
 		DoIt
 	}
 
 	$reply = Read-Host 'Add starship (https://starship.rs) configuration to PowerShell as well? (y/n)'
 	if ($reply -match "[yY]")
 	{
+		Write-Host "Adding starship to Powershell"
 		InitPowershell
 		Write-Host "In PowerShell run the following to allow starship to work: 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser'"
 	}
@@ -119,3 +127,5 @@ If (!(Test-Path -PathType Leaf "$( $ENV:UserProfile )\.gituser"))
 {
 	SetGitUser
 }
+
+Write-Host "Done"
