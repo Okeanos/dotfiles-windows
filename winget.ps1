@@ -40,6 +40,7 @@ winget install --id "Microsoft.VisualStudioCode" --silent --override "/VERYSILEN
 foreach ($extension in @(
 "DotJoshJohnson.xml"
 "EditorConfig.EditorConfig"
+"ban.spellright"
 "ms-azuretools.vscode-docker"
 "ms-vscode.powershell"
 "redhat.vscode-yaml"
