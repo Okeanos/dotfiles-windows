@@ -71,6 +71,8 @@ local.properties
 !.idea/inspectionProfiles
 !.idea/icon.png
 !.idea/icon_dark.png
+!.idea/icon.svg
+!.idea/icon_dark.svg
 
 
 ### Vim template
