@@ -66,13 +66,13 @@ local.properties
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 .idea/*
-!.idea/codeStyles
 !.idea/externalDependencies.xml
-!.idea/inspectionProfiles
 !.idea/icon.png
 !.idea/icon_dark.png
 !.idea/icon.svg
 !.idea/icon_dark.svg
+
+*.iml
 
 
 ### Vim template
