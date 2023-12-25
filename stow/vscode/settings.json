@@ -32,5 +32,6 @@
 			"source": "Git Bash",
 			"icon": "terminal-bash"
 		}
-	}
+	},
+	"explorer.confirmDragAndDrop": false
 }
