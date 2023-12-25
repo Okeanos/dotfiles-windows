@@ -29,6 +29,7 @@ Function initPowershell
 {
 	New-Item -ItemType Directory -Path "$( $ENV:UserProfile )\Documents\WindowsPowerShell" -Force | Out-Null
 	LinkFiles "$( $PSScriptRoot )\stow\powershell\" "$( $ENV:UserProfile )\Documents\WindowsPowerShell\"
+	Write-Host "In PowerShell run the following to allow starship to work: 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser'"
 }
 
 function DoIt
@@ -38,7 +39,12 @@ function DoIt
 	New-Item -Path "$( $ENV:UserProfile )\.config" -ItemType Directory -Force | Out-Null
 	New-Item -Path "$( $ENV:UserProfile )\.m2" -ItemType Directory -Force | Out-Null
 	New-Item -Path "$( $ENV:UserProfile )\.ssh\config.d" -ItemType Directory -Force | Out-Null
-	New-Item -Path "$( $ENV:UserProfile )\.vim\backups", "$( $ENV:UserProfile )\.vim\colors", "$( $ENV:UserProfile )\.vim\swaps", "$( $ENV:UserProfile )\.vim\syntax", "$( $ENV:UserProfile )\.vim\undo" -ItemType Directory -Force | Out-Null
+	New-Item -Path "$( $ENV:UserProfile )\.vim\backups",
+		"$( $ENV:UserProfile )\.vim\colors",
+		"$( $ENV:UserProfile )\.vim\swaps",
+		"$( $ENV:UserProfile )\.vim\syntax",
+		"$( $ENV:UserProfile )\.vim\undo" `
+		-ItemType Directory -Force | Out-Null
 
 	Write-Host "Linking files"
 	LinkFiles "$( $PSScriptRoot )\stow\curl\" "$( $ENV:UserProfile )\"
@@ -105,7 +111,6 @@ if ($Force)
 	Write-Host "Linking dotfiles"
 	DoIt
 	InitPowershell
-	Write-Host "In PowerShell run the following to allow starship to work: 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser'"
 }
 else
 {
@@ -121,7 +126,6 @@ else
 	{
 		Write-Host "Adding starship to Powershell"
 		InitPowershell
-		Write-Host "In PowerShell run the following to allow starship to work: 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser'"
 	}
 }
 
