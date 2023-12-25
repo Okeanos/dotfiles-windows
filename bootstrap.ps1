@@ -34,11 +34,11 @@ Function initPowershell
 function DoIt
 {
 	Write-Host "Creating target directories"
-	New-Item -Path "$( $ENV:UserProfile )\.m2" -ItemType Directory -Force | Out-Null
+	New-Item -Path "$( $ENV:AppData )\Code\User" -ItemType Directory -Force | Out-Null
 	New-Item -Path "$( $ENV:UserProfile )\.config" -ItemType Directory -Force | Out-Null
+	New-Item -Path "$( $ENV:UserProfile )\.m2" -ItemType Directory -Force | Out-Null
 	New-Item -Path "$( $ENV:UserProfile )\.ssh\config.d" -ItemType Directory -Force | Out-Null
 	New-Item -Path "$( $ENV:UserProfile )\.vim\backups", "$( $ENV:UserProfile )\.vim\colors", "$( $ENV:UserProfile )\.vim\swaps", "$( $ENV:UserProfile )\.vim\syntax", "$( $ENV:UserProfile )\.vim\undo" -ItemType Directory -Force | Out-Null
-	New-Item -Path "$( $ENV:AppData )\Code\User" -ItemType Directory -Force | Out-Null
 
 	Write-Host "Linking files"
 	LinkFiles "$( $PSScriptRoot )\stow\curl\" "$( $ENV:UserProfile )\"
