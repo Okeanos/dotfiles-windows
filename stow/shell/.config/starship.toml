@@ -34,6 +34,12 @@ format = "using [$symbol$context/$namespace]($style)"
 style = "green"
 symbol = ""
 
+[[kubernetes.contexts]]
+context_pattern = ".*prod.*"
+style = "bold red"
+symbol = "🚨 "
+context_alias = "prod"
+
 [time]
 disabled = false
 style = "bold red"
