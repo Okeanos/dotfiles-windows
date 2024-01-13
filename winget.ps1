@@ -38,12 +38,16 @@ winget install --id "Mozilla.Firefox" --silent --override "OPTIONAL_EXTENSIONS=f
 winget install --id "Microsoft.VisualStudioCode" --silent --override "/VERYSILENT /NOCANCEL /MERGETASKS=!runcode /LOADINF=$PSScriptRoot\winget_vscode.ini"
 # Install basic Visual Studio Code extensions
 foreach ($extension in @(
+"asciidoctor.asciidoctor-vscode"
+"ban.spellright"
 "DotJoshJohnson.xml"
 "EditorConfig.EditorConfig"
-"ban.spellright"
+"github.vscode-github-actions"
+#"jetmartin.bats"
 "ms-azuretools.vscode-docker"
 "ms-vscode.powershell"
 "redhat.vscode-yaml"
+"tamasfe.even-better-toml"
 "timonwong.shellcheck"
 "yzhang.markdown-all-in-one"
 ))
