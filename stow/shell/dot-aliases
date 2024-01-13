@@ -6,12 +6,12 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-alias ~="cd ~" # `cd` is probably faster to type though
+alias ~="cd ${HOME}" # `cd` is probably faster to type though
 alias -- -="cd -"
 
 # Shortcuts
-alias dl="cd ~/Downloads"
-alias dt="cd ~/Desktop"
+alias dl="cd ${HOME}/Downloads"
+alias dt="cd ${HOME}/Desktop"
 alias g="git"
 
 # Detect which `ls` flavor is in use, and always use color output for `ls`
