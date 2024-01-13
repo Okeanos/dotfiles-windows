@@ -88,15 +88,15 @@
 	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
 
 	# Make `git rebase` safer on macOS.
-	# More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+	# More info: http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/
 	trustctime = false
 
 	# Prevent showing files whose names contain non-ASCII symbols as unversioned.
-	# http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
+	# More info: http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
 	precomposeUnicode = false
 
 	# Speed up commands involving untracked files such as `git status`.
-	# https://git-scm.com/docs/git-update-index#_untracked_cache
+	# More info: https://git-scm.com/docs/git-update-index#_untracked_cache
 	untrackedCache = true
 
 	# Don't manipulate line endings automatically (CRLF to LF conversion or vice versa).
@@ -129,7 +129,8 @@
 
 [commit]
 
-	# https://help.github.com/articles/signing-commits-using-gpg/
+	# Disable GPG signing by default, refer to user specific setup in e.g. `.gituser` instead
+	# More info: https://help.github.com/articles/signing-commits-using-gpg/
 	gpgSign = false
 
 [diff]
@@ -154,6 +155,10 @@
 	# Automatically correct and execute mistyped commands.
 	autoCorrect = 1
 
+[init]
+
+	defaultBranch = main
+
 [merge]
 
 	# Include summaries of merged commits in newly created merge commit messages
@@ -167,7 +172,7 @@
 
 [push]
 
-	# https://git-scm.com/docs/git-config#git-config-pushdefault
+	# More info: https://git-scm.com/docs/git-config#git-config-pushdefault
 	default = simple
 	# Make `git push` push relevant annotated tags when pushing branches out.
 	followTags = true
@@ -200,8 +205,8 @@
 
 [include]
 
-	# Include customization that should separately (from the dotfiles),
-	# see https://git-scm.com/docs/git-config#_includes for details
+	# Include customization that should separately (from the dotfiles)
+	# More info: https://git-scm.com/docs/git-config#_includes
 	path = .gituser
 
 # Use the following if you need multiple user configs
@@ -217,7 +222,3 @@
 # See:
 # - https://gist.github.com/bgauduch/06a8c4ec2fec8fef6354afe94358c89e
 # - https://git-scm.com/docs/git-config#_conditional_includes
-
-[init]
-
-	defaultBranch = main
