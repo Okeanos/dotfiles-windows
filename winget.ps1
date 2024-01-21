@@ -36,6 +36,10 @@ winget install --id "Mozilla.Firefox" --silent --override "OPTIONAL_EXTENSIONS=f
 #winget install Microsoft.PowerToys --silent
 # https://code.visualstudio.com/docs/setup/windows#_what-commandline-arguments-are-supported-by-the-windows-setup
 winget install --id "Microsoft.VisualStudioCode" --silent --override "/VERYSILENT /NOCANCEL /MERGETASKS=!runcode /LOADINF=$PSScriptRoot\winget_vscode.ini"
+# See https://confluence.atlassian.com/sourcetreekb/sourcetree-silent-installation-windows-732267345.html
+# See https://confluence.atlassian.com/sourcetreekb/sourcetree-enterprise-and-msi-installation-947848769.html
+# Cannot make installation truly silent; will pop-up same as PowerToys
+#winget install --id "Atlassian.Sourcetree" --silent
 # Install basic Visual Studio Code extensions
 foreach ($extension in @(
 "asciidoctor.asciidoctor-vscode"
@@ -65,7 +69,6 @@ foreach ($package in @(
 "ahmetb.kubectx"
 "ahmetb.kubens"
 #"Apache.Maven"
-"Atlassian.Sourcetree"
 "dandavison.delta"
 "Docker.DockerDesktop"
 #"Editorconfig-Checker.Editorconfig-Checker"
