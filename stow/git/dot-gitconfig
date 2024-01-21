@@ -102,6 +102,10 @@
 	# Don't manipulate line endings automatically (CRLF to LF conversion or vice versa).
 	autocrlf = input
 
+	# Use a different pager
+	# More info: <https://github.com/dandavison/delta>
+	pager = delta
+
 [color]
 
 	# Use colors in Git commands that are capable of colored output when
@@ -133,6 +137,22 @@
 	# More info: https://help.github.com/articles/signing-commits-using-gpg/
 	gpgSign = false
 
+[delta]
+
+	features = decorations additional-theme-settings
+	side-by-side = true
+	syntax-theme = Selenized-Light
+
+[delta "additional-theme-settings"]
+
+	# More info: https://github.com/dandavison/delta/issues/1403
+	commit-decoration-style = blue ol
+	commit-style = raw
+	file-style = omit blue
+	hunk-header-decoration-style = blue box
+	hunk-header-file-style = red
+	hunk-header-style = file line-number syntax
+
 [diff]
 
 	# Detect copies as well as renames.
@@ -158,6 +178,10 @@
 [init]
 
 	defaultBranch = main
+
+[interactive]
+
+	diffFilter = delta --color-only --features=interactive
 
 [merge]
 

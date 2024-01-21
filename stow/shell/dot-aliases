@@ -29,6 +29,9 @@ alias la="ls -hlAF"
 # List only directories
 alias lsd="ls -hlF | grep --color=never '^d'"
 
+# Replace standard cat with a more feature-rich bat (https://github.com/sharkdp/bat)
+alias cat='bat'
+
 # Always enable colored `grep` output
 # Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
 alias grep='grep --color=auto'

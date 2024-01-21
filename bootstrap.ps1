@@ -25,18 +25,27 @@ Function LinkFiles
 	}
 }
 
-Function initPowershell
+Function InitPowershell
 {
 	New-Item -ItemType Directory -Path "$( $ENV:UserProfile )\Documents\WindowsPowerShell" -Force | Out-Null
 	LinkFiles "$( $PSScriptRoot )\stow\powershell\" "$( $ENV:UserProfile )\Documents\WindowsPowerShell\"
 	Write-Host "In PowerShell run the following to allow starship to work: 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser'"
 }
 
-function DoIt
+
+function InitApps() {
+	Write-Host "Rebuild bat cache for custom theme support"
+	bat cache --build
+}
+
+Function DoIt
 {
 	Write-Host "Creating target directories"
 	New-Item -Path "$( $ENV:AppData )\Code\User" -ItemType Directory -Force | Out-Null
-	New-Item -Path "$( $ENV:UserProfile )\.config" -ItemType Directory -Force | Out-Null
+	New-Item -Path "$( $ENV:UserProfile )\.config",
+		"$( $ENV:UserProfile )\.config\bat",
+		"$( $ENV:UserProfile )\.config\bat\themes" `
+		-ItemType Directory -Force | Out-Null
 	New-Item -Path "$( $ENV:UserProfile )\.m2" -ItemType Directory -Force | Out-Null
 	New-Item -Path "$( $ENV:UserProfile )\.ssh\config.d" -ItemType Directory -Force | Out-Null
 	New-Item -Path "$( $ENV:UserProfile )\.vim\backups",
@@ -53,6 +62,8 @@ function DoIt
 	LinkFiles "$( $PSScriptRoot )\stow\misc\" "$( $ENV:UserProfile )\"
 	LinkFiles "$( $PSScriptRoot )\stow\shell\" "$( $ENV:UserProfile )\"
 	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\" "$( $ENV:UserProfile )\.config\"
+	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\bat\" "$( $ENV:UserProfile )\.bat\"
+	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\bat\themes\" "$( $ENV:UserProfile )\.bat\themes\"
 	LinkFiles "$( $PSScriptRoot )\stow\ssh\.ssh\" "$( $ENV:UserProfile )\.ssh\"
 	LinkFiles "$( $PSScriptRoot )\stow\ssh\.ssh\config.d\" "$( $ENV:UserProfile )\.ssh\config.d\"
 	LinkFiles "$( $PSScriptRoot )\stow\vim\" "$( $ENV:UserProfile )\"
@@ -111,6 +122,7 @@ if ($Force)
 	Write-Host "Linking dotfiles"
 	DoIt
 	InitPowershell
+	InitApps
 }
 else
 {
@@ -126,6 +138,7 @@ else
 	{
 		Write-Host "Adding starship to Powershell"
 		InitPowershell
+		InitApps
 	}
 }
 

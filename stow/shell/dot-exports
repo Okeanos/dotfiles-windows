@@ -27,6 +27,10 @@ export LC_ALL='en_US.UTF-8'
 # Don’t clear the screen after quitting a manual page.
 #export MANPAGER='less -X';
 
+# Use bat as pager
+# https://github.com/sharkdp/bat#man
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
 # Override the SSH Auth Socket for KeePass + KeeAgent compatibility with either of these; Cygwin usually works
 #export SSH_AUTH_SOCK=~/.ssh/cygwin.socket;
 #export SSH_AUTH_SOCK=~/.ssh/msysgit.socket;
