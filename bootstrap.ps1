@@ -21,7 +21,13 @@ Function LinkFiles
 	)
 
 	Get-ChildItem -Path "$SourceFolder" -File | ForEach-Object {
-		New-Item -ItemType SymbolicLink -Path "$TargetFolder\$( $_.Name -replace 'dot-', '.' )" -Target "$( $_.FullName )" | Out-Null
+		$TargetPath = "$TargetFolder$( $_.Name -replace 'dot-', '.' )"
+		$StowPath = "$( $_.FullName )"
+		If (!(Test-Path -PathType Leaf "$TargetPath")) {
+			New-Item -ItemType SymbolicLink -Path "$TargetPath" -Target "$StowPath" | Out-Null
+		} else {
+			Write-Warning "Cannot link to '$TargetPath' from '$StowPath' because it already exists as a file"
+		}
 	}
 }
 
@@ -59,7 +65,7 @@ Function DoIt
 	Write-Host "Linking files"
 	LinkFiles "$( $PSScriptRoot )\stow\curl\" "$( $ENV:UserProfile )\"
 	LinkFiles "$( $PSScriptRoot )\stow\git\" "$( $ENV:UserProfile )\"
-	LinkFiles "$( $PSScriptRoot )\stow\maven\.m2\" "$( $ENV:UserProfile )\.m2"
+	LinkFiles "$( $PSScriptRoot )\stow\maven\.m2\" "$( $ENV:UserProfile )\.m2\"
 	LinkFiles "$( $PSScriptRoot )\stow\misc\" "$( $ENV:UserProfile )\"
 	LinkFiles "$( $PSScriptRoot )\stow\shell\" "$( $ENV:UserProfile )\"
 	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\" "$( $ENV:UserProfile )\.config\"
