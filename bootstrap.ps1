@@ -35,7 +35,8 @@ Function InitPowershell
 
 function InitApps() {
 	Write-Host "Rebuild bat cache for custom theme support"
-	bat cache --build
+	# Requires absolute path because of https://github.com/microsoft/winget-cli/issues/549
+	C:\"Program Files"\WinGet\Links\bat.exe cache --build
 }
 
 Function DoIt
@@ -84,7 +85,7 @@ Function SetGitUser
 
 	name = $username
 	email = $email
-"@ | Out-File -Encoding "utf8NoBOM" -FilePath "$( $ENV:UserProfile )\.gituser"
+"@ | Out-File -Encoding "utf8" -FilePath "$( $ENV:UserProfile )\.gituser"
 
 	$reply = Read-Host 'Use GPG Commit Signing? (y/n)'
 	if ($reply -match "[yY]")

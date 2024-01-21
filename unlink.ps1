@@ -1,4 +1,6 @@
-﻿Param
+﻿#Requires -RunAsAdministrator
+
+Param
 (
 	[switch]
 	[alias("f")]
@@ -16,7 +18,7 @@ Function UnlinkFiles
 		[string] $TargetFolder
 	)
 
-	Get-ChildItem -Path "$SourceFolder\" -File | ForEach-Object {
+	Get-ChildItem -Path "$SourceFolder" -File | ForEach-Object {
 		$file = "$TargetFolder\$( $_.Name -replace 'dot-', '.' )"
 		if ((Test-Path -Path $file) -and ((Get-Item $file).LinkType -eq 'SymbolicLink'))
 		{
@@ -27,8 +29,8 @@ Function UnlinkFiles
 
 Function DoIt
 {
-	Get-ChildItem -Path "$( $PSScriptRoot )\stow\" -Directory -Exclude "powershell" -Exclude "vscode" | ForEach-Object {
-		Write-Host "Unlinking '$_.FullName' from '$( $ENV:UserProfile )'"
+	Get-ChildItem -Path "$( $PSScriptRoot )\stow\" -Directory -Exclude "powershell","vscode" | ForEach-Object {
+		Write-Host "Unlinking '$_' from '$( $ENV:UserProfile )'"
 		UnlinkFiles $_.FullName "$( $ENV:UserProfile )"
 	}
 
@@ -46,7 +48,7 @@ Function DoIt
 	UnlinkFiles "$( $PSScriptRoot )\stow\powershell\" "$( $ENV:UserProfile )\Documents\WindowsPowerShell\"
 
 	Write-Host "Unlinking 'vscode' from '$( $ENV:UserProfile )\Code\User'"
-	UnlinkFiles "$( $PSScriptRoot )\stow\vscode\settings.json" "$( $ENV:AppData )\Code\User\settings.json"
+	UnlinkFiles "$( $PSScriptRoot )\stow\vscode\" "$( $ENV:AppData )\Code\User\"
 }
 
 if ($Force)
