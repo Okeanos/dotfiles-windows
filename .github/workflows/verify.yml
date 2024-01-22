@@ -16,7 +16,7 @@ jobs:
           go-version: '1.21'
       - name: Run EditorConfig Checker
         run: |
-          go run github.com/editorconfig-checker/editorconfig-checker/cmd/editorconfig-checker@2.7.2 --exclude .git
+          go run github.com/editorconfig-checker/editorconfig-checker/cmd/editorconfig-checker@2.8.0 --exclude .git
       - name: Run yamllint
         run: |
           pip install yamllint
