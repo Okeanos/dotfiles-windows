@@ -1,5 +1,12 @@
-# verify necessary path adjustments based on additional tools you want to install e.g. in $HOME/bin or something and whether overriding the OpenSSH binary is actually wanted (see ssh-setup.md for details)
-export PATH="/c/Windows/System32/OpenSSH:${PATH}"
-export PATH="${HOME}/bin:${PATH}"
+#!/usr/bin/env bash
+# the shebang statement above is only here to allow linting this file
 
+# verify necessary path adjustments based on additional tools you want to install e.g. in $HOME/bin or something and whether overriding the OpenSSH binary is actually wanted (see ssh-setup.md for details)
+
+new_path=""
+
+new_path+="${HOME}/bin:"
+new_path+='/c/Windows/System32/OpenSSH:'
+
+export PATH="${new_path}${PATH}"
 export MANPATH="${MANPATH}"
