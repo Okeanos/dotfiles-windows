@@ -231,7 +231,7 @@
 
 	# Include customization that should separately (from the dotfiles)
 	# More info: https://git-scm.com/docs/git-config#_includes
-	path = .gituser
+	path = ./user
 
 # Use the following if you need multiple user configs
 # [includeIf "gitdir:~/Workspace/personal/"]

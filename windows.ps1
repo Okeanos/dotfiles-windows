@@ -112,13 +112,17 @@ Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\CapabilityAcce
 # Explorer                                                                    #
 ###############################################################################
 
-#Write-Host "Explorer"
+Write-Host "Explorer"
 
 #Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer" -Name ShowFrequent -Value 0
 #Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name LaunchTo -Value 1
 #Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name HideFileExt -Value 0
 #Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name Hidden -Value 1
 #Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name AutoCheckSelect -Value 0
+
+# Allow paths longer than 260 characters (the default MAX_PATH length)
+# https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=powershell#enable-long-paths-in-windows-10-version-1607-and-later
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
 
 ###############################################################################
 # Start Menu and Taskbar                                                      #
@@ -260,4 +264,4 @@ foreach ($capability in @(
 	Remove-WindowsCapability -Online -Name $capability | Out-Null
 }
 
-Write-Host -NoNewline "Done. Note that some of these changes require a logout/restart to take effect."
+Write-Host -NoNewline "Done. Note that some of these changes require a restart to take effect."

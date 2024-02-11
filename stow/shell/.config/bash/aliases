@@ -82,3 +82,6 @@ alias path='echo -e ${PATH//:/\\n}'
 
 # Print each MANPATH entry on a separate line
 alias manpath='echo -e ${MANPATH//:/\\n}'
+
+# Make wget XDG compatible
+alias wget='wget --hsts-file="${XDG_CACHE_HOME}/wget-hsts"'

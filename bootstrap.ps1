@@ -47,35 +47,56 @@ function InitApps() {
 
 Function DoIt
 {
-	Write-Host "Creating target directories"
-	New-Item -Path "$( $ENV:AppData )\Code\User" -ItemType Directory -Force | Out-Null
-	New-Item -Path "$( $ENV:UserProfile )\.config",
-		"$( $ENV:UserProfile )\.config\bat",
-		"$( $ENV:UserProfile )\.config\bat\themes" `
+	Write-Host "Creating expected XDG target directories"
+	New-Item -Path "$( $ENV:UserProfile )\.cache",
+		"$( $ENV:UserProfile )\.cache\bash",
+		"$( $ENV:UserProfile )\.config\vim\swap" `
 		-ItemType Directory -Force | Out-Null
-	New-Item -Path "$( $ENV:UserProfile )\.m2" -ItemType Directory -Force | Out-Null
-	New-Item -Path "$( $ENV:UserProfile )\.ssh\config.d" -ItemType Directory -Force | Out-Null
-	New-Item -Path "$( $ENV:UserProfile )\.vim\backups",
-		"$( $ENV:UserProfile )\.vim\colors",
-		"$( $ENV:UserProfile )\.vim\swaps",
-		"$( $ENV:UserProfile )\.vim\syntax",
-		"$( $ENV:UserProfile )\.vim\undo" `
+	New-Item -Path "$( $ENV:UserProfile )\.config",
+		"$( $ENV:UserProfile )\.config\bash",
+		"$( $ENV:UserProfile )\.config\bat",
+		"$( $ENV:UserProfile )\.config\bat\themes",
+		"$( $ENV:UserProfile )\.config\gh",
+		"$( $ENV:UserProfile )\.config\git",
+		"$( $ENV:UserProfile )\.config\tmux",
+		"$( $ENV:UserProfile )\.config\vim\colors",
+		"$( $ENV:UserProfile )\.config\vim\syntax" `
+		-ItemType Directory -Force | Out-Null
+	New-Item -Path "$( $ENV:UserProfile )\.local",
+		"$( $ENV:UserProfile )\.local\share",
+		"$( $ENV:UserProfile )\.local\state",`
+		-ItemType Directory -Force | Out-Null
+	New-Item -Path "$( $ENV:UserProfile )\.local\share\node",
+		"$( $ENV:UserProfile )\.local\share\vim\bundle",`
+		-ItemType Directory -Force | Out-Null
+	New-Item -Path "$( $ENV:UserProfile )\.local\state\vim",
+		"$( $ENV:UserProfile )\.local\state\vim\backup",
+		"$( $ENV:UserProfile )\.local\state\vim\undo",`
 		-ItemType Directory -Force | Out-Null
 
+	Write-Host "Creating non-XDG target directories"
+	New-Item -Path "$( $ENV:AppData )\Code\User" -ItemType Directory -Force | Out-Null
+	New-Item -Path "$( $ENV:UserProfile )\.gradle" -ItemType Directory -Force | Out-Null
+	New-Item -Path "$( $ENV:UserProfile )\.m2" -ItemType Directory -Force | Out-Null
+	New-Item -Path "$( $ENV:UserProfile )\.ssh\config.d" -ItemType Directory -Force | Out-Null
+
 	Write-Host "Linking files"
-	LinkFiles "$( $PSScriptRoot )\stow\curl\" "$( $ENV:UserProfile )\"
 	LinkFiles "$( $PSScriptRoot )\stow\git\" "$( $ENV:UserProfile )\"
 	LinkFiles "$( $PSScriptRoot )\stow\maven\.m2\" "$( $ENV:UserProfile )\.m2\"
 	LinkFiles "$( $PSScriptRoot )\stow\misc\" "$( $ENV:UserProfile )\"
 	LinkFiles "$( $PSScriptRoot )\stow\shell\" "$( $ENV:UserProfile )\"
 	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\" "$( $ENV:UserProfile )\.config\"
+	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\bash\" "$( $ENV:UserProfile )\.config\bash\"
 	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\bat\" "$( $ENV:UserProfile )\.config\bat\"
 	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\bat\themes\" "$( $ENV:UserProfile )\.config\bat\themes\"
+	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\gh\" "$( $ENV:UserProfile )\.config\gh\"
+	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\git\" "$( $ENV:UserProfile )\.config\git\"
+	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\tmux\" "$( $ENV:UserProfile )\.config\tmux\"
+	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\vim\" "$( $ENV:UserProfile )\.config\vim\"
+	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\vim\colors\" "$( $ENV:UserProfile )\.config\vim\colors\"
+	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\vim\syntax\" "$( $ENV:UserProfile )\.config\vim\syntax\"
 	LinkFiles "$( $PSScriptRoot )\stow\ssh\.ssh\" "$( $ENV:UserProfile )\.ssh\"
 	LinkFiles "$( $PSScriptRoot )\stow\ssh\.ssh\config.d\" "$( $ENV:UserProfile )\.ssh\config.d\"
-	LinkFiles "$( $PSScriptRoot )\stow\vim\" "$( $ENV:UserProfile )\"
-	LinkFiles "$( $PSScriptRoot )\stow\vim\.vim\colors\" "$( $ENV:UserProfile )\.vim\colors\"
-	LinkFiles "$( $PSScriptRoot )\stow\vim\.vim\syntax\" "$( $ENV:UserProfile )\.vim\syntax\"
 	LinkFiles "$( $PSScriptRoot )\stow\vscode\" "$( $ENV:AppData )\Code\User\"
 }
 
@@ -91,7 +112,7 @@ Function SetGitUser
 
 	name = $username
 	email = $email
-"@ | Out-File -Encoding "utf8" -FilePath "$( $ENV:UserProfile )\.gituser"
+"@ | Out-File -Encoding "utf8" -FilePath "$( $ENV:UserProfile )\.config\git\user"
 
 	$reply = Read-Host 'Use GPG Commit Signing? (y/n)'
 	if ($reply -match "[yY]")
@@ -112,7 +133,7 @@ Function SetGitUser
 "@
 		}
 		$signingKey = Read-Host 'Enter your GPG or SSH Signing Key ID'
-		Add-Content -Path "$( $ENV:UserProfile )\.gituser" -Value @"
+		Add-Content -Path "$( $ENV:UserProfile )\.config\git\user" -Value @"
 	signingkey = $signingKey
 
 [commit]
@@ -126,7 +147,6 @@ $signWithSSH
 
 if ($Force)
 {
-	Write-Host "Linking dotfiles"
 	DoIt
 	InitPowershell
 	InitApps
@@ -136,7 +156,6 @@ else
 	$reply = Read-Host 'This may overwrite existing files in your home directory. Are you sure? (y/n)'
 	if ($reply -match "[yY]")
 	{
-		Write-Host "Linking dotfiles"
 		DoIt
 	}
 
@@ -149,7 +168,7 @@ else
 	}
 }
 
-If (!(Test-Path -PathType Leaf "$( $ENV:UserProfile )\.gituser"))
+If (!(Test-Path -PathType Leaf "$( $ENV:UserProfile )\.config\git\user"))
 {
 	SetGitUser
 }
