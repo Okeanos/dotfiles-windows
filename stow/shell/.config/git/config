@@ -137,6 +137,11 @@
 	# More info: https://help.github.com/articles/signing-commits-using-gpg/
 	gpgSign = false
 
+	# Add a generic, globally configured template for the Commit Message
+	# This can either be a path relative to the current repository
+	# or an absolute path such as "~/.config/git/commit.template"
+	# template = ""
+
 [delta]
 
 	features = decorations additional-theme-settings
