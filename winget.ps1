@@ -14,6 +14,12 @@ If (!(Test-Path -PathType Leaf "$( $ENV:LocalAppData )\Packages\Microsoft.Deskto
 	Copy-Item "$PSScriptRoot\winget_settings.jsonc" -Destination "$( $ENV:LocalAppData )\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\settings.json"
 }
 
+# TODO check whether WSL is already installed, prompt for installation if it isn't and abort
+if ("Enabled" -ne (Get-WindowsOptionalFeature -FeatureName Microsoft-Windows-Subsystem-Linux -Online | Select-Object -expand "State"))
+{
+	Write-Error -Message "WSL has not been installed/enabled yet. Please run 'wsl --install' and restart your computer" -Category NotInstalled -CategoryReason "WSL has not been installed/enabled yet." -ErrorAction Stop
+}
+
 # To find out how to fully automate installation of Inno Setup based installers (e.g. Git, VSCode)
 # run it once with the /SAVEINF=path_to_save parameter; you can then use that output as shown below
 # That way the installer will automatically use YOUR preferred settings.
