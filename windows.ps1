@@ -148,6 +148,7 @@ Write-Host "Windows Terminal"
 # Make Windows Terminal the default Console
 # Use {B23D10C0-E52E-411E-9D5B-C09FDF709C7D} for Console & Terminal to use the legacy Windows Console Host instead
 # Use {00000000-0000-0000-0000-000000000000} for Console & Terminal to let Windows decide on the fly instead
+# https://github.com/microsoft/terminal/discussions/15505
 Set-ItemProperty "HKCU:\Console\%%Startup" -Name DelegationConsole -Value "{2EACA947-7F5F-4CFA-BA87-8F7FBEEFBE69}"
 Set-ItemProperty "HKCU:\Console\%%Startup" -Name DelegationTerminal -Value "{E12CFF52-A866-4C77-9A90-F570A7AA2C6B}"
 
