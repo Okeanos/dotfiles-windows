@@ -79,8 +79,10 @@
 [core]
 
 	# Use custom `.gitignore` and `.gitattributes`.
-	excludesFile = ~/.gitignore
-	attributesFile = ~/.gitattributes
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreexcludesFile
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreattributesFile
+	#excludesFile = ~/.gitignore
+	#attributesFile = ~/.gitattributes
 
 	# Treat spaces before tabs and all kinds of trailing whitespace as an error.
 	# [default] trailing-space: looks for spaces at the end of a line
