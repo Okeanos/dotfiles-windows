@@ -38,7 +38,7 @@ set binary
 set noeol
 
 " Add guides for word wrapping
-set colorcolumn=80,120
+set colorcolumn=80,100,120,140
 
 " Don’t create backups when editing files in certain directories
 set backupskip=/tmp/*,/private/tmp/*
