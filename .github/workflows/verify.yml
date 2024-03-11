@@ -11,17 +11,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
-        with:
-          go-version: '1.21'
       - name: Run EditorConfig Checker
         run: |
-          go run github.com/editorconfig-checker/editorconfig-checker/v2/cmd/editorconfig-checker@2.8.0 --exclude .git
+          curl --fail --silent --show-error --location --output ec.tar.gz \
+          https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.0.0/ec-linux-amd64.tar.gz
+          tar -xzf ec.tar.gz
+          chmod +x ./bin/ec-linux-amd64
+          ./bin/ec-linux-amd64 --exclude .git
       - name: Run yamllint
         run: |
           pip install yamllint
           yamllint .
-      - uses: bewuethr/shellcheck-action@v2
+      - uses: ludeeus/action-shellcheck@2.0.0
       - uses: DavidAnson/markdownlint-cli2-action@v15
       - name: PSScriptAnalyzer
         shell: pwsh
@@ -30,7 +31,7 @@ jobs:
       - name: Run Taplo
         run: |
           curl --fail --silent --show-error --location --output taplo.gz \
-            https://github.com/tamasfe/taplo/releases/download/0.8.1/taplo-full-linux-x86_64.gz
+            https://github.com/tamasfe/taplo/releases/download/0.9.0/taplo-full-linux-x86_64.gz
           gunzip --decompress taplo.gz
           chmod +x taplo
           ./taplo fmt --check
