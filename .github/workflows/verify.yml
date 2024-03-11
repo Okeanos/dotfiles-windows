@@ -31,7 +31,7 @@ jobs:
       - name: Run Taplo
         run: |
           curl --fail --silent --show-error --location --output taplo.gz \
-            https://github.com/tamasfe/taplo/releases/download/0.9.0/taplo-full-linux-x86_64.gz
+            https://github.com/tamasfe/taplo/releases/download/0.8.1/taplo-full-linux-x86_64.gz
           gunzip --decompress taplo.gz
           chmod +x taplo
           ./taplo fmt --check
