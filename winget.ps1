@@ -92,6 +92,7 @@ foreach ($package in @(
 "Microsoft.WindowsTerminal"
 "MikeFarah.yq"
 #"mvdan.shfmt"
+"OO-Software.ShutUp10"
 "OpenJS.NodeJS"
 "sharkdp.bat"
 "Starship.Starship"
