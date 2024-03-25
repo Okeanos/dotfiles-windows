@@ -37,16 +37,18 @@ wsl --install --distribution Ubuntu-22.04
 
 ### Getting Started
 
+Before you begin have a look at the [code signing](code-signing.md) instructions.
+
 1. Manually download [`winget.ps1`](https://raw.githubusercontent.com/Okeanos/dotfiles-windows/main/winget.ps1) and all
   other `winget_*` files into the same location
-2. Update the `winget.ps1` to only install software you actually want
+2. Update the `winget.ps1` to only install software you actually want and sign it
 3. Go through the `winget_*` files and modify them as necessary because they will be used to source the installation
   options for e.g. Git to allow unattended installation.
 4. Execute `winget.ps1` from your PowerShell (needs elevated/administrator permissions)
 5. You can now clone the repository wherever you want (I like to keep it in `%UserProfile%\Workspace\dotfiles`)
-6. You can now `bootstrap.ps1` your system (needs elevated/administrator permissions)
+6. You can now `bootstrap.ps1` your system (needs elevated/administrator permissions) after signing it
 7. **Optionally** and **after a careful review** you can now run `windows.ps1` (needs elevated/administrator
-  permissions)
+  permissions and signing obviously)
 
 If you decide not to run the `windows.ps1` script please make sure to set the following `User Environment Variables` in
 Windows:
@@ -215,3 +217,5 @@ Please read [SSH Setup](./ssh-setup.md) for details and options concerning SSH o
 - [Rohan Cragg](https://rohancragg.co.uk) and his [Bash Shell on Windows](https://rohancragg.co.uk/misc/git-bash/) guide
 - [Maarten Billemont's Bash Guide](http://mywiki.wooledge.org/BashGuide)
 - [Mateusz Łoskot](http://mateusz.loskot.net) and his [wsl-config](https://github.com/mloskot/wsl-config)
+- [June Castillote](https://adamtheautomator.com/how-to-sign-powershell-script/) for providing additional insights into
+  PowerShell script signing
