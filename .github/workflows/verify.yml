@@ -23,7 +23,7 @@ jobs:
           pip install yamllint
           yamllint .
       - uses: ludeeus/action-shellcheck@2.0.0
-      - uses: DavidAnson/markdownlint-cli2-action@v15
+      - uses: DavidAnson/markdownlint-cli2-action@v16
       - name: PSScriptAnalyzer
         shell: pwsh
         run: |
