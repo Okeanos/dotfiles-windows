@@ -14,7 +14,7 @@ jobs:
       - name: Run EditorConfig Checker
         run: |
           curl --fail --silent --show-error --location --output ec.tar.gz \
-          https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.0.0/ec-linux-amd64.tar.gz
+          https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.0.1/ec-linux-amd64.tar.gz
           tar -xzf ec.tar.gz
           chmod +x ./bin/ec-linux-amd64
           ./bin/ec-linux-amd64 --exclude .git
