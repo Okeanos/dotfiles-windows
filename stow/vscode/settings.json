@@ -33,5 +33,7 @@
 			"icon": "terminal-bash"
 		}
 	},
-	"explorer.confirmDragAndDrop": false
+	"explorer.confirmDragAndDrop": false,
+	"telemetry.telemetryLevel": "off",
+	"gitlens.telemetry.enabled": false
 }
