@@ -8,5 +8,9 @@ new_path=""
 new_path+="${HOME}/bin:"
 new_path+='/c/Windows/System32/OpenSSH:'
 
+if command -v go >/dev/null; then
+	new_path+="$(go env GOPATH)/bin:"
+fi
+
 export PATH="${new_path}${PATH}"
 export MANPATH="${MANPATH}"
