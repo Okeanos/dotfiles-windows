@@ -76,7 +76,9 @@ Function DoIt
 
 	Write-Host "Creating non-XDG target directories"
 	New-Item -Path "$( $ENV:AppData )\Code\User" -ItemType Directory -Force | Out-Null
+	# prevents accidentally syncing sensitive files later on if/when parts of this are put into the dotfiles
 	New-Item -Path "$( $ENV:UserProfile )\.gradle" -ItemType Directory -Force | Out-Null
+	# prevents accidentally syncing sensitive files later on if/when parts of this are put into the dotfiles
 	New-Item -Path "$( $ENV:UserProfile )\.m2" -ItemType Directory -Force | Out-Null
 	New-Item -Path "$( $ENV:UserProfile )\.ssh\config.d" -ItemType Directory -Force | Out-Null
 
