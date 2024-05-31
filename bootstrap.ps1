@@ -66,6 +66,9 @@ Function DoIt
 		"$( $ENV:UserProfile )\.local\share",
 		"$( $ENV:UserProfile )\.local\state",`
 		-ItemType Directory -Force | Out-Null
+	New-Item -Path "$( $ENV:UserProfile )\.local\.share\bash-completion",
+		"$( $ENV:UserProfile )\.local\.share\bash-completion\completions"`
+		-ItemType Directory -Force | Out-Null
 	New-Item -Path "$( $ENV:UserProfile )\.local\share\node",
 		"$( $ENV:UserProfile )\.local\share\vim\bundle",`
 		-ItemType Directory -Force | Out-Null
