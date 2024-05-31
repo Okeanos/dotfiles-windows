@@ -54,6 +54,7 @@ foreach ($extension in @(
 "EditorConfig.EditorConfig"
 "github.vscode-github-actions"
 #"jetmartin.bats"
+"mkhl.shfmt"
 "ms-azuretools.vscode-docker"
 "ms-vscode.powershell"
 "redhat.vscode-yaml"
