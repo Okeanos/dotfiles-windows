@@ -27,4 +27,4 @@
 # bat expands tabs to 4 spaces by itself, not relying on the pager. To change
 # this, simply add the --tabs argument with the number of spaces you want to be
 # displayed.
-#--tabs=4
+--tabs=2
