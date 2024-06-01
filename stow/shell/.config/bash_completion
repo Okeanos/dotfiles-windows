@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+# the shebang statement above is only here to allow linting this file
+
+# Completion location
+completions_location="${XDG_DATA_HOME:-$HOME/.local/share}/bash-completion/completions"
+mkdir -p "${completions_location}"
+
+generate_locally=(
+	"delta:--generate-completion bash"
+	"docker:completion bash"
+	"gh:completion --shell bash"
+	"gitleaks:completion bash"
+	"kubectl:completion bash"
+	"node:--completion-bash"
+	"starship:completions bash"
+	"yq:shell-completion bash"
+)
+
+download_remote=(
+	"bat https://raw.githubusercontent.com/sharkdp/bat/master/assets/completions/bat.bash.in"
+	"git https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash"
+	"gradle https://raw.githubusercontent.com/gradle/gradle-completion/master/gradle-completion.bash"
+	"kubectx https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/kubectx.bash"
+	"kubens https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/kubens.bash"
+	"kubetail https://raw.githubusercontent.com/johanhaleby/kubetail/master/completion/kubetail.bash"
+	"maven https://raw.githubusercontent.com/juven/maven-bash-completion/master/bash_completion.bash"
+)
+
+# Ensure we are decently up to date and have completions regenerated every -mtime days
+for comp in "${completions_location}/"*; do
+	# TODO is [[ $() ]] syntax necessary?
+	if [[ $(find "${completions_location}/${comp}" -mtime +92 -print) ]]; then
+		rm "${completions_location}/${comp}"
+	fi
+done
+unset comp
+
+# Add tab completion for installed commands that can generate theirs locally on demand
+for item in "${generate_locally[@]}"; do
+	cmd=$(echo "${item}" | cut -d ':' -f1)
+	mapfile -t params < <(echo "${item}" | cut -d ':' -f2)
+	if command -v "${cmd}" &>/dev/null; then
+		if [[ ! -f "${completions_location}/${cmd}" ]]; then
+			"${cmd}" "${params[@]}" >"${completions_location}/${cmd}"
+		fi
+	fi
+done
+unset cmd item
+
+# Add tab completion for installed commands that have to be downloaded from remote.
+# Files are downloaded regardless of whether the command is actually installed. The list has to be manually synced with `winget.ps1` anyway.
+for item in "${download_remote[@]}"; do
+	cmd=$(echo "${item}" | cut -d ' ' -f1)
+	location=$(echo "${item}" | cut -d ' ' -f2)
+	if [[ ! -f "${completions_location}/${cmd}" ]]; then
+		curl -fs -o "${completions_location}/${cmd}" "${location}"
+	fi
+done
+unset cmd item
+
+# Source existing completions
+for COMPLETION in "${completions_location}/"*; do
+	if [[ -r "${COMPLETION}" ]]; then
+		source "${COMPLETION}"
+	fi
+done
+
+# Enable tab completion for `g` by marking it as an alias for `git`
+if type __git_complete &>/dev/null; then
+	__git_complete g __git_main
+fi
+
+# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
+if [[ -r "${HOME}/.ssh/config" ]] && [[ -f "${HOME}/.ssh/config" ]]; then
+	complete -o "default" -o "nospace" -W "$(grep -R "^Host " "${HOME}/.ssh" | cut -d " " -f2- | tr ' ' '\n' | grep -v "[!?*]" | sort | uniq | tr '\n' ' ')" scp sftp ssh
+fi
