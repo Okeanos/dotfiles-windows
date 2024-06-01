@@ -28,9 +28,8 @@ download_remote=(
 
 # Ensure we are decently up to date and have completions regenerated every -mtime days
 for comp in "${completions_location}/"*; do
-	# TODO is [[ $() ]] syntax necessary?
-	if [[ $(find "${completions_location}/${comp}" -mtime +92 -print) ]]; then
-		rm "${completions_location}/${comp}"
+	if [[ -f "${comp}" ]] && [[ $(find "${comp}" -mtime +92 -print) ]]; then
+		rm "${comp}"
 	fi
 done
 unset comp
@@ -38,10 +37,11 @@ unset comp
 # Add tab completion for installed commands that can generate theirs locally on demand
 for item in "${generate_locally[@]}"; do
 	cmd=$(echo "${item}" | cut -d ':' -f1)
-	mapfile -t params < <(echo "${item}" | cut -d ':' -f2)
 	if command -v "${cmd}" &>/dev/null; then
 		if [[ ! -f "${completions_location}/${cmd}" ]]; then
-			"${cmd}" "${params[@]}" >"${completions_location}/${cmd}"
+			mapfile -t params < <(echo "${item}" | cut -d ':' -f2)
+			# shellcheck disable=SC2068
+			"${cmd}" ${params[@]} >"${completions_location}/${cmd}"
 		fi
 	fi
 done
@@ -59,11 +59,12 @@ done
 unset cmd item
 
 # Source existing completions
-for COMPLETION in "${completions_location}/"*; do
-	if [[ -r "${COMPLETION}" ]]; then
-		source "${COMPLETION}"
+for comp in "${completions_location}/"*; do
+	if [[ -r "${comp}" ]]; then
+		source "${comp}"
 	fi
 done
+unset comp
 
 # Enable tab completion for `g` by marking it as an alias for `git`
 if type __git_complete &>/dev/null; then
