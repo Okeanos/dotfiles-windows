@@ -87,14 +87,13 @@ Function DoIt
 	New-Item -Path "$( $ENV:UserProfile )\.ssh\config.d" -ItemType Directory -Force | Out-Null
 
 	Write-Host "Linking files"
+	LinkFiles "$( $PSScriptRoot )\stow\bat\" "$( $ENV:AppData )\bat\"
 	LinkFiles "$( $PSScriptRoot )\stow\git\" "$( $ENV:UserProfile )\"
 	LinkFiles "$( $PSScriptRoot )\stow\maven\.m2\" "$( $ENV:UserProfile )\.m2\"
 	LinkFiles "$( $PSScriptRoot )\stow\misc\" "$( $ENV:UserProfile )\"
 	LinkFiles "$( $PSScriptRoot )\stow\shell\" "$( $ENV:UserProfile )\"
 	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\" "$( $ENV:UserProfile )\.config\"
 	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\bash\" "$( $ENV:UserProfile )\.config\bash\"
-	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\bat\" "$( $ENV:UserProfile )\.config\bat\"
-	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\bat\themes\" "$( $ENV:UserProfile )\.config\bat\themes\"
 	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\gh\" "$( $ENV:UserProfile )\.config\gh\"
 	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\git\" "$( $ENV:UserProfile )\.config\git\"
 	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\tmux\" "$( $ENV:UserProfile )\.config\tmux\"
@@ -103,7 +102,6 @@ Function DoIt
 	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\vim\syntax\" "$( $ENV:UserProfile )\.config\vim\syntax\"
 	LinkFiles "$( $PSScriptRoot )\stow\ssh\.ssh\" "$( $ENV:UserProfile )\.ssh\"
 	LinkFiles "$( $PSScriptRoot )\stow\ssh\.ssh\config.d\" "$( $ENV:UserProfile )\.ssh\config.d\"
-	LinkFiles "$( $PSScriptRoot )\stow\bat\" "$( $ENV:AppData )\bat\"
 	LinkFiles "$( $PSScriptRoot )\stow\vscode\" "$( $ENV:AppData )\Code\User\"
 }
 
