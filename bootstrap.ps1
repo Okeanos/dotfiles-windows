@@ -77,7 +77,7 @@ Function DoIt
 
 	Write-Host "Creating non-XDG target directories"
 	New-Item -Path "$( $ENV:AppData )\bat",
-		"$( $ENV:AppData )bat\themes" `
+		"$( $ENV:AppData )\bat\themes" `
 		-ItemType Directory -Force | Out-Null
 	New-Item -Path "$( $ENV:AppData )\Code\User" -ItemType Directory -Force | Out-Null
 	# prevents accidentally syncing sensitive files later on if/when parts of this are put into the dotfiles
