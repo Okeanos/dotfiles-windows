@@ -64,17 +64,17 @@ Function DoIt
 		-ItemType Directory -Force | Out-Null
 	New-Item -Path "$( $ENV:UserProfile )\.local",
 		"$( $ENV:UserProfile )\.local\share",
-		"$( $ENV:UserProfile )\.local\state",`
+		"$( $ENV:UserProfile )\.local\state" `
 		-ItemType Directory -Force | Out-Null
-	New-Item -Path "$( $ENV:UserProfile )\.local\.share\bash-completion",
-		"$( $ENV:UserProfile )\.local\.share\bash-completion\completions"`
+	New-Item -Path "$( $ENV:UserProfile )\.local\share\bash-completion",
+		"$( $ENV:UserProfile )\.local\share\bash-completion\completions" `
 		-ItemType Directory -Force | Out-Null
 	New-Item -Path "$( $ENV:UserProfile )\.local\share\node",
-		"$( $ENV:UserProfile )\.local\share\vim\bundle",`
+		"$( $ENV:UserProfile )\.local\share\vim\bundle" `
 		-ItemType Directory -Force | Out-Null
 	New-Item -Path "$( $ENV:UserProfile )\.local\state\vim",
 		"$( $ENV:UserProfile )\.local\state\vim\backup",
-		"$( $ENV:UserProfile )\.local\state\vim\undo",`
+		"$( $ENV:UserProfile )\.local\state\vim\undo" `
 		-ItemType Directory -Force | Out-Null
 
 	Write-Host "Creating non-XDG target directories"
