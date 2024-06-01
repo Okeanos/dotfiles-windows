@@ -54,8 +54,6 @@ Function DoIt
 		-ItemType Directory -Force | Out-Null
 	New-Item -Path "$( $ENV:UserProfile )\.config",
 		"$( $ENV:UserProfile )\.config\bash",
-		"$( $ENV:UserProfile )\.config\bat",
-		"$( $ENV:UserProfile )\.config\bat\themes",
 		"$( $ENV:UserProfile )\.config\gh",
 		"$( $ENV:UserProfile )\.config\git",
 		"$( $ENV:UserProfile )\.config\tmux",
@@ -78,6 +76,9 @@ Function DoIt
 		-ItemType Directory -Force | Out-Null
 
 	Write-Host "Creating non-XDG target directories"
+	New-Item -Path "$( $ENV:AppData )\bat",
+		"$( $ENV:AppData )bat\themes" `
+		-ItemType Directory -Force | Out-Null
 	New-Item -Path "$( $ENV:AppData )\Code\User" -ItemType Directory -Force | Out-Null
 	# prevents accidentally syncing sensitive files later on if/when parts of this are put into the dotfiles
 	New-Item -Path "$( $ENV:UserProfile )\.gradle" -ItemType Directory -Force | Out-Null
@@ -102,6 +103,7 @@ Function DoIt
 	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\vim\syntax\" "$( $ENV:UserProfile )\.config\vim\syntax\"
 	LinkFiles "$( $PSScriptRoot )\stow\ssh\.ssh\" "$( $ENV:UserProfile )\.ssh\"
 	LinkFiles "$( $PSScriptRoot )\stow\ssh\.ssh\config.d\" "$( $ENV:UserProfile )\.ssh\config.d\"
+	LinkFiles "$( $PSScriptRoot )\stow\bat\" "$( $ENV:AppData )\bat\"
 	LinkFiles "$( $PSScriptRoot )\stow\vscode\" "$( $ENV:AppData )\Code\User\"
 }
 
