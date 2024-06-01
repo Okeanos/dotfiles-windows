@@ -88,7 +88,6 @@ Function DoIt
 
 	Write-Host "Linking files"
 	LinkFiles "$( $PSScriptRoot )\stow\bat\" "$( $ENV:AppData )\bat\"
-	LinkFiles "$( $PSScriptRoot )\stow\git\" "$( $ENV:UserProfile )\"
 	LinkFiles "$( $PSScriptRoot )\stow\maven\.m2\" "$( $ENV:UserProfile )\.m2\"
 	LinkFiles "$( $PSScriptRoot )\stow\misc\" "$( $ENV:UserProfile )\"
 	LinkFiles "$( $PSScriptRoot )\stow\shell\" "$( $ENV:UserProfile )\"
