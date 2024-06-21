@@ -76,6 +76,11 @@
 	# Show most recently changed branches first.
 	sort = -committerdate
 
+[checkout]
+
+	# In case of multiple remotes, prefer origin (e.g. during git switch/checkout operations)
+	defaultRemote = origin
+
 [core]
 
 	# Use custom `.gitignore` and `.gitattributes`.
