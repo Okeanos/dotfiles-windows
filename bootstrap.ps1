@@ -50,7 +50,7 @@ Function DoIt
 	Write-Host "Creating expected XDG target directories"
 	New-Item -Path "$( $ENV:UserProfile )\.cache",
 		"$( $ENV:UserProfile )\.cache\bash",
-		"$( $ENV:UserProfile )\.config\vim\swap" `
+		"$( $ENV:UserProfile )\.cache\vim\swap" `
 		-ItemType Directory -Force | Out-Null
 	New-Item -Path "$( $ENV:UserProfile )\.config",
 		"$( $ENV:UserProfile )\.config\bash",
