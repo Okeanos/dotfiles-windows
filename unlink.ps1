@@ -41,13 +41,19 @@ Function DoIt
 	UnlinkFiles "$( $PSScriptRoot )\stow\shell\.config\bat\" "$( $ENV:UserProfile )\.config\bat\"
 	UnlinkFiles "$( $PSScriptRoot )\stow\shell\.config\bat\themes\" "$( $ENV:UserProfile )\.config\bat\themes\"
 	UnlinkFiles "$( $PSScriptRoot )\stow\shell\.config\gh\" "$( $ENV:UserProfile )\.config\gh\"
-	UnlinkFiles "$( $PSScriptRoot )\stow\shell\.config\git\" "$( $ENV:UserProfile )\.config\git\"
 	UnlinkFiles "$( $PSScriptRoot )\stow\shell\.config\tmux\" "$( $ENV:UserProfile )\.config\tmux\"
 	UnlinkFiles "$( $PSScriptRoot )\stow\shell\.config\vim\" "$( $ENV:UserProfile )\.config\vim\"
 	UnlinkFiles "$( $PSScriptRoot )\stow\shell\.config\vim\colors\" "$( $ENV:UserProfile )\.config\vim\colors\"
 	UnlinkFiles "$( $PSScriptRoot )\stow\shell\.config\vim\syntax\" "$( $ENV:UserProfile )\.config\vim\syntax\"
 	UnlinkFiles "$( $PSScriptRoot )\stow\ssh\.ssh\" "$( $ENV:UserProfile )\.ssh\"
 	UnlinkFiles "$( $PSScriptRoot )\stow\ssh\.ssh\config.d\" "$( $ENV:UserProfile )\.ssh\config.d\"
+
+	Write-Host "Unlinking 'bat' from '$( $ENV:AppData )\bat'"
+	UnlinkFiles "$( $PSScriptRoot )\stow\bat\" "$( $ENV:AppData )\bat\"
+	UnlinkFiles "$( $PSScriptRoot )\stow\bat\themes" "$( $ENV:AppData )\bat\themes"
+
+	Write-Host "Unlinking 'git' from '$( $ENV:AppData )\Git'"
+	UnlinkFiles "$( $PSScriptRoot )\stow\git\" "$( $ENV:AppData )\Git\"
 
 	Write-Host "Unlinking 'powershell' from '$( $ENV:UserProfile )\Documents\WindowsPowerShell'"
 	UnlinkFiles "$( $PSScriptRoot )\stow\powershell\" "$( $ENV:UserProfile )\Documents\WindowsPowerShell\"
