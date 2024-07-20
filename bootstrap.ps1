@@ -1,4 +1,4 @@
-﻿#Requires -RunAsAdministrator
+#Requires -RunAsAdministrator
 
 Param
 (
@@ -84,7 +84,10 @@ Function DoIt
 	New-Item -Path "$( $ENV:UserProfile )\.gradle" -ItemType Directory -Force | Out-Null
 	# prevents accidentally syncing sensitive files later on if/when parts of this are put into the dotfiles
 	New-Item -Path "$( $ENV:UserProfile )\.m2" -ItemType Directory -Force | Out-Null
-	New-Item -Path "$( $ENV:UserProfile )\.ssh\config.d" -ItemType Directory -Force | Out-Null
+	# prevents accidentally syncing sensitive files later on if/when parts of this are put into the dotfiles
+	New-Item -Path "$( $ENV:UserProfile )\.ssh",
+		"$( $ENV:UserProfile )\.ssh\config.d" `
+		-ItemType Directory -Force | Out-Null
 
 	Write-Host "Linking files"
 	LinkFiles "$( $PSScriptRoot )\stow\bat\" "$( $ENV:AppData )\bat\"
