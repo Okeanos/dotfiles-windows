@@ -1,4 +1,4 @@
-#Requires -RunAsAdministrator
+﻿#Requires -RunAsAdministrator
 
 Param
 (
@@ -55,7 +55,6 @@ Function DoIt
 	New-Item -Path "$( $ENV:UserProfile )\.config",
 		"$( $ENV:UserProfile )\.config\bash",
 		"$( $ENV:UserProfile )\.config\gh",
-		"$( $ENV:UserProfile )\.config\git",
 		"$( $ENV:UserProfile )\.config\tmux",
 		"$( $ENV:UserProfile )\.config\vim\colors",
 		"$( $ENV:UserProfile )\.config\vim\syntax" `
@@ -79,6 +78,7 @@ Function DoIt
 	New-Item -Path "$( $ENV:AppData )\bat",
 		"$( $ENV:AppData )\bat\themes" `
 		-ItemType Directory -Force | Out-Null
+	New-Item -Path "$( $ENV:AppData )\Git" -ItemType Directory -Force | Out-Null
 	New-Item -Path "$( $ENV:AppData )\Code\User" -ItemType Directory -Force | Out-Null
 	# prevents accidentally syncing sensitive files later on if/when parts of this are put into the dotfiles
 	New-Item -Path "$( $ENV:UserProfile )\.gradle" -ItemType Directory -Force | Out-Null
@@ -92,13 +92,13 @@ Function DoIt
 	Write-Host "Linking files"
 	LinkFiles "$( $PSScriptRoot )\stow\bat\" "$( $ENV:AppData )\bat\"
 	LinkFiles "$( $PSScriptRoot )\stow\bat\themes\" "$( $ENV:AppData )\bat\themes\"
+	LinkFiles "$( $PSScriptRoot )\stow\git\" "$( $ENV:AppData )\Git\"
 	LinkFiles "$( $PSScriptRoot )\stow\maven\.m2\" "$( $ENV:UserProfile )\.m2\"
 	LinkFiles "$( $PSScriptRoot )\stow\misc\" "$( $ENV:UserProfile )\"
 	LinkFiles "$( $PSScriptRoot )\stow\shell\" "$( $ENV:UserProfile )\"
 	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\" "$( $ENV:UserProfile )\.config\"
 	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\bash\" "$( $ENV:UserProfile )\.config\bash\"
 	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\gh\" "$( $ENV:UserProfile )\.config\gh\"
-	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\git\" "$( $ENV:UserProfile )\.config\git\"
 	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\tmux\" "$( $ENV:UserProfile )\.config\tmux\"
 	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\vim\" "$( $ENV:UserProfile )\.config\vim\"
 	LinkFiles "$( $PSScriptRoot )\stow\shell\.config\vim\colors\" "$( $ENV:UserProfile )\.config\vim\colors\"
