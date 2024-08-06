@@ -35,7 +35,7 @@ style = "green"
 symbol = ""
 
 [[kubernetes.contexts]]
-context_pattern = ".*prod.*"
+context_pattern = "\\W*prod\\W*"
 style = "bold red"
 symbol = "🚨 "
 context_alias = "prod"
