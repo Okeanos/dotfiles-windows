@@ -40,6 +40,12 @@ style = "bold red"
 symbol = "🚨 "
 context_alias = "prod"
 
+[[kubernetes.contexts]]
+context_pattern = "docker-context"
+style = "bold blue"
+symbol = "🐋 "
+context_alias = "Docker"
+
 [time]
 disabled = false
 style = "bold red"
