@@ -41,7 +41,7 @@ symbol = "🚨 "
 context_alias = "prod"
 
 [[kubernetes.contexts]]
-context_pattern = "docker-context"
+context_pattern = "docker-desktop"
 style = "bold blue"
 symbol = "🐋 "
 context_alias = "Docker"
