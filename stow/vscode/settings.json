@@ -13,6 +13,7 @@
 	"explorer.confirmDelete": false,
 	"files.trimTrailingWhitespace": true,
 	"powershell.codeFormatting.pipelineIndentationStyle": "IncreaseIndentationForFirstPipeline",
+	"powershell.promptToUpdatePowerShell": false,
 	"redhat.telemetry.enabled": false,
 	"terminal.integrated.defaultProfile.windows": "Git Bash",
 	"terminal.integrated.profiles.windows": {
