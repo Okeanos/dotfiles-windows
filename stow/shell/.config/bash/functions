@@ -180,3 +180,78 @@ function git-fetch {
 	find "${path}" -maxdepth 2 -mindepth 2 -type d -name '.git' -print0 | \
 		xargs -P 8 -0 -I % bash -c 'git -C %/.. fetch --all --prune --prune-tags --quiet || echo "Failed updating: %"'
 }
+
+# `handle-secrets` is a wrapper function around `gitleaks` and allows you to
+# interactively go through any finding gitleaks detects in the supplied folder
+# and put them into a `.gitleaksignore` file with appropriate comments
+function handle-secrets {
+	local target_directory report_directory report_file git_name git_email git_user ignore_file_contents current_time description rule file fingerprint commit secret comment documented_as
+
+	target_directory=$(realpath --canonicalize-missing "${1}")
+	report_directory=$(mktemp --directory --quiet)
+	report_file=$(realpath --canonicalize-missing "${report_directory}/report.json")
+	git_name=$(git config --get user.name)
+	git_email=$(git config --get user.email)
+	git_user="${git_name} <${git_email}>"
+	ignore_file_contents=""
+	current_time=$(date +"%Y-%m-%dT%H:%M")
+
+	if ! command -v gitleaks >/dev/null; then
+		echo "gitleaks not installed, cannot scan for secrets"
+		return 1
+	fi
+
+	if [[ ! -d "${target_directory}" ]]; then
+		echo "The given directory at '${path}' does not exist"
+		return 1
+	fi
+
+	echo "Scanning: ${target_directory}"
+	pushd "${target_directory}" >/dev/null
+	if [[ -f .gitleaksignore ]]; then
+		ignore_file_contents=$(cat .gitleaksignore)
+	fi
+	gitleaks detect --verbose --report-format=json --report-path="${report_file}" --exit-code=0 &>/dev/null
+	popd >/dev/null
+
+	if [[ -f ${report_file} ]]; then
+		if [[ $(jq length "${report_file}") == 0 ]]; then
+			echo "No secrets detected"
+			return 0
+		fi
+		readarray -t findings < <(jq --compact-output '.[]' "${report_file}")
+
+		for finding in "${findings[@]}"; do
+			description=$(echo -n "${finding}" | jq ".Description")
+			rule=$(echo -n "${finding}" | jq ".RuleID")
+			file=$(echo -n "${finding}" | jq ".File")
+			fingerprint=$(echo -n "${finding}" | jq --raw-output ".Fingerprint")
+			commit=$(echo -n "${finding}" | jq ".Commit")
+			secret=$(echo -n "${finding}" | jq ".Secret")
+			comment=""
+			documented_as=""
+			echo "Secret detected: ${rule}"
+			echo "Description: ${description}"
+			echo "File: ${file}"
+			echo "Commit: ${commit}"
+			echo "Secret: ${secret}"
+			select finding_type in "False Positive" "Valid" "Other"; do
+				documented_as="${finding_type}"
+				break
+			done
+			read -rp "Enter an additional comment to document the ignore entry: " comment
+			ignore_file_contents+="# Finding acknowledged by ${git_user} on ${current_time} as '${documented_as}'\n"
+			if [[ -n ${comment} ]]; then
+				ignore_file_contents+="# ${comment}\n"
+			fi
+			ignore_file_contents+="${fingerprint}\n"
+		done
+
+		if [[ -n "${ignore_file_contents}" ]]; then
+			echo -e "${ignore_file_contents}" >"${target_directory}/.gitleaksignore"
+			echo "All secrets handled and written to: '${target_directory}/.gitleaksignore'"
+		fi
+	else
+		echo "gitleaks did not generate a report as expected, something may have gone wrong"
+	fi
+}
