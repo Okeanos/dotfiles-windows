@@ -22,10 +22,10 @@ You have to manually install the [Windows Subsystem for Linux](https://docs.micr
 **Note**: Enabling WSL 2 means that software such as [VirtualBox](https://www.virtualbox.org)
 or [VMWare Workstation](https://www.vmware.com/products/workstation-pro.html) no longer works as expected. Windows only
 allows a single hypervisor at a time and WSL 2 is Hyper-V based and prevents running VirtualBox/VMWare Workstation.
-Workarounds for [VirtualBox](https://www.virtualbox.org/manual/UserManual.html#hyperv-support)
-and [VMWare](https://blogs.vmware.com/workstation/2020/05/vmware-workstation-now-supports-hyper-v-mode.html) exist,
-however, suffer
-from [extreme](https://communities.vmware.com/t5/VMware-Workstation-Pro/Huge-performance-drop-after-upgrading-to-VMware-Workstation-Pro/td-p/2888831) [performance](https://communities.vmware.com/t5/VMware-Workstation-Player/Huge-performance-drop-of-VMWare-Player-guest-running-on-Windows/td-p/2808460) [penalties](https://www.virtualbox.org/manual/UserManual.html#hyperv-support). <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->
+Workarounds for [VirtualBox](https://www.virtualbox.org/manual/UserManual.html#hyperv-support) and [VMWare](https://blogs.vmware.com/workstation/2020/05/vmware-workstation-now-supports-hyper-v-mode.html)
+exist, however, may suffer from [extreme](https://communities.vmware.com/t5/VMware-Workstation-Pro/Huge-performance-drop-after-upgrading-to-VMware-Workstation-Pro/td-p/2888831)
+[performance](https://communities.vmware.com/t5/VMware-Workstation-Player/Huge-performance-drop-of-VMWare-Player-guest-running-on-Windows/td-p/2808460)
+[penalties](https://www.virtualbox.org/manual/UserManual.html#hyperv-support).
 
 If you want a custom WSL 2 instance (different from the Docker backend) check the available distributions and install
 one:
@@ -74,9 +74,9 @@ important tools manually. Good examples of these are Windows Terminal and Git Ba
 ##### Lightweight Editor
 
 The aforementioned `winget.ps1` includes [Visual Studio Code](https://code.visualstudio.com) ("VSCode"), i.e. the
-nonfree, proprietary Microsoft product that includes telemetry etc., as a lightweight GUI editor. Either disable
-telemetry manually if you are bothered by it (e.g. as described in
-[this gist](https://gist.github.com/hyperupcall/99e355405611be6c4e0a38b6e3e8aad0)) or switch to another editor, e.g.:
+non-free, proprietary Microsoft product that includes telemetry etc., as a lightweight GUI editor. Either disable
+telemetry manually if you are bothered by it (e.g. as described in [this gist](https://gist.github.com/hyperupcall/99e355405611be6c4e0a38b6e3e8aad0))
+or switch to another editor, e.g.:
 
 - [VSCodium](https://vscodium.com)
 - [NotePad++](https://notepad-plus-plus.org)
@@ -104,13 +104,13 @@ take note of the caveats below:
       OpenSSH in parallel)
   - [KeePassXC](https://keepass.info) (built in SSH Agent Support, different from KeeAgent; only supports Windows native
     OpenSSH)
-    - [Chrome/Chromium Extension](https://chrome.google.com/webstore/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk) <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->
+    - [Chrome/Chromium Extension](https://chrome.google.com/webstore/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk)
     - [Firefox Extension](https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/)
   - [1Password](https://1password.com)
     - [SSH Agent Setup](https://developer.1password.com/docs/ssh/agent/)
 
 Once you installed all of this and configured the software to your liking you can now clone the repository wherever you
-want (I like to keep it in `%UserProfile%/Workspace/dotfiles`). Afterwards you can run the bootstrapper from your
+want (I like to keep it in `%UserProfile%/Workspace/dotfiles`). After that you can run the bootstrapper from your
 PowerShell as described below.
 
 ### The bootstrap script (`bootstrap.ps1`)
@@ -130,9 +130,9 @@ cd "$( $ENV:UserProfile )\Workspace\dotfiles"; .\bootstrap.ps1
 
 #### Java Installation
 
-The [Maven Toolchains](https://maven.apache.org/guides/mini/guide-using-toolchains.html) file assumes that
-the [Adoptium](https://adoptium.net) Java versions are used. Additionally, the target folder has to be modified during
-the installation to remove any patch and minor version information, i.e.:
+The [Maven Toolchains](https://maven.apache.org/guides/mini/guide-using-toolchains.html) file assumes that the [Adoptium](https://adoptium.net)
+Java versions are used. Additionally, the target folder has to be modified during the installation to remove any patch
+and minor version information, i.e.:
 
 `C:\Program Files\Eclipse Adoptium\jdk-17.0.1.12-hotspot` becomes `C:\Program Files\Eclipse Adoptium\temurin-17.jdk` (in
 line with macOS and Linux naming schemes)
@@ -160,7 +160,7 @@ Please note that the standard dotfiles already modify your Git Bash path in two 
   easily accessible
 
 If `~/.path` exists, it will be sourced along with the other files, before any feature testing (such as
-[detecting which version of `ls` is being used](https://github.com/mathiasbynens/dotfiles/blob/aff769fd75225d8f2e481185a71d5e05b76002dc/.aliases#L21-L26)) <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->
+[detecting which version of `ls` is being used](https://github.com/mathiasbynens/dotfiles/blob/aff769fd75225d8f2e481185a71d5e05b76002dc/.aliases#L21-L26))
 takes place.
 
 Here’s an example `~/.path` file that adds `/usr/local/bin` to the `$PATH`:

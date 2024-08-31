@@ -1,0 +1,7 @@
+# yamllint disable-line rule:line-length
+# yaml-language-server: $schema=https://raw.githubusercontent.com/DavidAnson/markdownlint-cli2/main/schema/markdownlint-cli2-config-schema.json
+
+# Configures how the linter (markdownlint-cli2) behaves when linting
+
+# Ignore files that are part of the gitignore
+gitignore: true

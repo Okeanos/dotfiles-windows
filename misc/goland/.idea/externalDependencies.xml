@@ -33,6 +33,7 @@
 		<plugin id="org.editorconfig.editorconfigjetbrains"/>
 		<plugin id="org.intellij.intelliLang"/>
 		<plugin id="org.intellij.plugins.markdown"/>
+		<plugin id="org.intellij.plugins.hcl" />
 		<plugin id="org.jetbrains.plugins.go-template"/>
 		<plugin id="org.jetbrains.plugins.sass"/>
 		<plugin id="org.jetbrains.plugins.textmate"/>

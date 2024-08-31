@@ -18,25 +18,20 @@ experimental and has other drawbacks such as no official browser support via the
 own SSH agent. However, [KeeAgent](https://github.com/dlech/KeeAgent) is able to talk to both Windows OpenSSH and the
 Git Bash bundled OpenSSH version after configuring the `SSH_AUTH_SOCK`.
 
-<!-- markdownlint-disable MD007 MD029 -->
 1. Install [KeePass](https://keepass.info) and the [KeeAgent](https://github.com/dlech/KeeAgent) plugin.
 2. In KeePass > Tools > Options configure the KeeAgent plugin:
-
-  - Enable agent for Windows OpenSSH (experimental)
-  - Create a Cygwin compatible socket file with the path `%UserProfile%\.ssh\cygwin.socket`
-  - Create a msysGit compatible socket file with the path `%UserProfile%\.ssh\msysgit.socket`
-
+    - Enable agent for Windows OpenSSH (experimental)
+    - Create a Cygwin compatible socket file with the path `%UserProfile%\.ssh\cygwin.socket`
+    - Create a msysGit compatible socket file with the path `%UserProfile%\.ssh\msysgit.socket`
 3. In `%UserProfile%/.exports` toggle the `SSH_AUTH_SOCK` variable (Cygwin should be fine), i.e.
   add `export SSH_AUTH_SOCK=~/.ssh/cygwin.socket` to your `%UserProfile%\.bashrc` or `%UserProfile%\.bash_profile` file
-<!-- markdownlint-enable MD007 MD029 -->
 
 Optionally, remove the `/c/Windows/System32/OpenSSH`-prefix from `%UserProfile%/.path` to use Windows OpenSSH in
 PowerShell and Git Bash bundled OpenSSH in Git Bash.
 
 ### KeePassXC with external SSH Agent
 
-Windows ships its own OpenSSH binaries starting with Windows 10. See the
-[official documentation](https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement#user-key-generation) <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->
+Windows ships its own OpenSSH binaries starting with Windows 10. See the [official documentation](https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement#user-key-generation)
 for more details.
 
 For this to work in Git Bash as expected as well, the `$PATH` has to be prefixed with the Windows OpenSSH binaries or
@@ -84,9 +79,8 @@ bordering on unusable in some instances:
 
 That means that while KeePassXC may be generally preferable because of its superior Browser integration (or other
 subjective reasons) the SSH integration on Windows is subpar and likely going to frustrate you at times. There is an
-open KeePassXC issue asking to
-[support MSYS2 ssh-agent sockets on Windows](https://github.com/keepassxreboot/keepassxc/issues/4681) (unresolved by
-2023-02-13) that would improve the situation.
+open KeePassXC issue asking to [support MSYS2 ssh-agent sockets on Windows](https://github.com/keepassxreboot/keepassxc/issues/4681)
+(unresolved by 2023-02-13) that would improve the situation.
 
 The [OmniSSHAgent](https://github.com/masahide/OmniSSHAgent) project appears to solve some of the cross provider and
 consumer issues by providing the required interfaces to interact with Git Bash provided SSH (`cygwin`/`MSYS2`) and
@@ -97,8 +91,8 @@ Windows OpenSSH as well as the ability to provide SSH keys via KeePassXC. I have
 A commercial software alternative is [1Password](https://1password.com) that has built in SSH support starting with
 version 8.
 
-Please check the [official documentation](https://developer.1password.com/docs/ssh/agent/) for details. At this time (
-2023-02-13) this requires [Windows Hello](https://support.1password.com/windows-hello/):
+Please check the [official documentation](https://developer.1password.com/docs/ssh/agent/) for details. At this time
+(2023-02-13) this requires [Windows Hello](https://support.1password.com/windows-hello/):
 
 > **Requirements**
 > …
@@ -114,10 +108,9 @@ never used this, though.
 
 ## BitWarden
 
-[BitWarden](https://bitwarden.com) is a freemium solution similar to 1Password
-but [does not](https://community.bitwarden.com/t/implement-ssh-agent-protocol/833) offer SSH Agent integration at this
-time (2023-02-13) on its own. There are some workarounds for that such
-as [Bitwarden SSH Agent](https://github.com/joaojacome/bitwarden-ssh-agent), though. I have no experience with this,
+[BitWarden](https://bitwarden.com) is a freemium solution similar to 1Password but [does not](https://community.bitwarden.com/t/implement-ssh-agent-protocol/833)
+offer SSH Agent integration at this time (2023-02-13) on its own. There are some workarounds for that such as
+[Bitwarden SSH Agent](https://github.com/joaojacome/bitwarden-ssh-agent), though. I have no experience with this,
 either.
 
 ## Windows OpenSSH in WSL and WSL 2
@@ -132,9 +125,8 @@ scripts, explore on your own.
 You may run into weird issues, though, because generally OpenSSH and OpenSSH Agent versions have to match and the WSL (1
 and 2) OpenSSH binaries are updated and maintained separately from Windows.
 
-You may want to take a look at [wsl-agent-bridge](https://github.com/reynoldsbd/wsl-agent-bridge)
-and [wsl-ssh-pageant](https://github.com/benpye/wsl-ssh-pageant) or
-[Sharing SSH keys between Windows and WSL 2](https://devblogs.microsoft.com/commandline/sharing-ssh-keys-between-windows-and-wsl-2/). <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->
+You may want to take a look at [wsl-agent-bridge](https://github.com/reynoldsbd/wsl-agent-bridge) and [wsl-ssh-pageant](https://github.com/benpye/wsl-ssh-pageant)
+or [Sharing SSH keys between Windows and WSL 2](https://devblogs.microsoft.com/commandline/sharing-ssh-keys-between-windows-and-wsl-2/).
 
 ### npiperelay for WLS 2
 
@@ -151,4 +143,4 @@ into WSL 1.
 Really? Well, that works, too. Whatever floats your boat: Manual (or semi-manual) setup it is.
 
 Please read what GitHub has to say on the matter in
-[their documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/working-with-ssh-key-passphrases#auto-launching-ssh-agent-on-git-for-windows). <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->
+[their documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/working-with-ssh-key-passphrases#auto-launching-ssh-agent-on-git-for-windows).

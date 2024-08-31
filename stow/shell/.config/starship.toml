@@ -8,51 +8,51 @@ $character"""
 command_timeout = 1000
 
 [character]
-error_symbol = "\\$"
-success_symbol = "\\$"
+	error_symbol = "\\$"
+	success_symbol = "\\$"
 
 [directory]
-style = "green"
-truncate_to_repo = false
-truncation_length = 10
-truncation_symbol = "…/"
+	style = "green"
+	truncate_to_repo = false
+	truncation_length = 10
+	truncation_symbol = "…/"
 
 [git_branch]
-symbol = ""
+	symbol = ""
 
 [git_status]
-deleted = "x"
-style = "blue"
+	deleted = "x"
+	style = "blue"
 
 [hostname]
-ssh_only = false
-style = "yellow"
+	ssh_only = false
+	style = "yellow"
 
 [kubernetes]
-disabled = false
-format = "using [$symbol$context/$namespace]($style)"
-style = "green"
-symbol = ""
+	disabled = false
+	format = "using [$symbol$context/$namespace]($style)"
+	style = "green"
+	symbol = ""
 
-[[kubernetes.contexts]]
-context_pattern = "\\W*prod\\W*"
-style = "bold red"
-symbol = "🚨 "
-context_alias = "prod"
+	[[kubernetes.contexts]]
+		context_pattern = "\\W*prod\\W*"
+		style = "bold red"
+		symbol = "🚨 "
+		context_alias = "prod"
 
-[[kubernetes.contexts]]
-context_pattern = "docker-desktop"
-style = "bold blue"
-symbol = "🐋 "
-context_alias = "Docker"
+	[[kubernetes.contexts]]
+		context_pattern = "docker-desktop"
+		style = "bold blue"
+		symbol = "🐋 "
+		context_alias = "Docker"
 
 [time]
-disabled = false
-style = "bold red"
-time_format = "%F %T"
+	disabled = false
+	style = "bold red"
+	time_format = "%F %T"
 
 [username]
-format = "[$user]($style) at "
-show_always = true
-style_root = "red"
-style_user = "bold red"
+	format = "[$user]($style) at "
+	show_always = true
+	style_root = "red"
+	style_user = "bold red"

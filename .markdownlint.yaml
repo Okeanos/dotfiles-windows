@@ -1,5 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/DavidAnson/markdownlint-cli2/main/schema/markdownlint-config-schema.json
 # https://github.com/DavidAnson/markdownlint/blob/main/schema/.markdownlint.yaml
 
+# Configures how markdown files are linted
+
 MD013:
-  # Number of characters
   line_length: 120
+  tables: false
+
+MD024:
+  siblings_only: true

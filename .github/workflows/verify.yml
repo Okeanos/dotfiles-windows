@@ -1,38 +1,134 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+# https://docs.github.com/en/actions/writing-workflows
 name: Verify
 
 # yamllint disable-line rule:truthy
-on: [ push, pull_request, workflow_dispatch ]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      editorconfig:
+        description: Run EditorConfig linter
+        default: true
+        type: boolean
+      gitleaks:
+        description: Run Gitleaks (Secret scanner)
+        default: true
+        type: boolean
+      hadolint:
+        description: Run hadolint (Dockerfile linter)
+        default: false
+        type: boolean
+      markdownlint:
+        description: Run Markdown linter
+        default: true
+        type: boolean
+      opentofu:
+        description: Run OpenTofu (Terraform/HCL/OpenTofu linter)
+        default: true
+        type: boolean
+      shellcheck:
+        description: Run shellcheck (shell script linter)
+        default: true
+        type: boolean
+      taplo:
+        description: Run taplo (TOML linter)
+        default: false
+        type: boolean
+      yamllint:
+        description: Run yamllint (YAML linter)
+        default: true
+        type: boolean
 
+# https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication#permissions-for-the-github_token
 permissions:
   contents: read
 
 jobs:
-  verify:
+  editorconfig:
     runs-on: ubuntu-latest
+    if: ${{ inputs.editorconfig || true }}
     steps:
       - uses: actions/checkout@v4
       - name: Run EditorConfig Checker
+        env:
+          EDITORCONFIG_VERSION: "3.0.3"
+          EDITORCONFIG_SHASUM: "fc698b0bf5bca0d42e28dd59d72e25487a51f645ca242c5f74bae975369f16aa"
         run: |
-          curl --fail --silent --show-error --location --output ec.tar.gz \
-          https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.0.3/ec-linux-amd64.tar.gz
-          tar -xzf ec.tar.gz
-          chmod +x ./bin/ec-linux-amd64
+          curl --fail --silent --show-error --location --output editorconfig.tar.gz \
+            https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v${EDITORCONFIG_VERSION}/ec-linux-amd64.tar.gz
+          echo "${EDITORCONFIG_SHASUM} editorconfig.tar.gz" | sha256sum --check
+          tar -xzf editorconfig.tar.gz bin/ec-linux-amd64
           ./bin/ec-linux-amd64 --exclude .git
+  gitleaks:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.gitleaks || true }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Gitleaks
+        env:
+          GITLEAKS_VERSION: "8.18.4"
+          GITLEAKS_SHASUM: "ba6dbb656933921c775ee5a2d1c13a91046e7952e9d919f9bac4cec61d628e7d"
+        run: |
+          curl --fail --silent --show-error --location --output gitleaks.tar.gz \
+            https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz
+          echo "${GITLEAKS_SHASUM} gitleaks.tar.gz" | sha256sum --check
+          tar -xzf gitleaks.tar.gz gitleaks
+          ./gitleaks detect --verbose --redact --no-git .
+  hadolint:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.hadolint || false }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lint Dockerfile
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: "Dockerfile"
+  markdownlint:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.markdownlint || true }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DavidAnson/markdownlint-cli2-action@v16
+  opentofu:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.opentofu || true }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: opentofu/setup-opentofu@v1
+      - name: OpenTofu fmt
+        id: fmt
+        run: tofu fmt -check
+  taplo:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.taplo || true }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Taplo
+        env:
+          TAPLO_VERSION: "0.9.3"
+          TAPLO_SHASUM: "71d655dc3f69ce30454cfade92fdbe846c0ba4aa3afa68f3ff0d216966d0d3c2"
+        run: |
+          curl --fail --silent --show-error --location --output taplo.gz \
+            https://github.com/tamasfe/taplo/releases/download/${TAPLO_VERSION}/taplo-full-linux-x86_64.gz
+          echo "${TAPLO_SHASUM} taplo.gz" | sha256sum --check
+          gunzip --decompress taplo.gz
+          chmod +x ./taplo
+          ./taplo format --check --diff
+          ./taplo check --default-schema-catalogs
+  shellcheck:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.shellcheck || true }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ludeeus/action-shellcheck@2.0.0
+  yamllint:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.yamllint || true }}
+    steps:
+      - uses: actions/checkout@v4
       - name: Run yamllint
         run: |
           pip install yamllint
           yamllint .
-      - uses: ludeeus/action-shellcheck@2.0.0
-      - uses: DavidAnson/markdownlint-cli2-action@v16
-      - name: PSScriptAnalyzer
-        shell: pwsh
-        run: |
-          Invoke-ScriptAnalyzer -Path .\ -Settings PSGallery -Recurse
-      - name: Run Taplo
-        run: |
-          curl --fail --silent --show-error --location --output taplo.gz \
-            https://github.com/tamasfe/taplo/releases/download/0.8.1/taplo-full-linux-x86_64.gz
-          gunzip --decompress taplo.gz
-          chmod +x taplo
-          ./taplo fmt --check
-          ./taplo check --default-schema-catalogs

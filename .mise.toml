@@ -1,0 +1,12 @@
+#:schema https://mise.jdx.dev/schema/mise.json
+
+# See https://github.com/mise-plugins/registry for what is officially available
+# Everything else is just declared as a reference to keep track of it.
+[tools]
+	editorconfig-checker = "3.0.3"
+	gitleaks = "8.18.4"
+	markdownlint-cli2 = "0.13.0"
+	shellcheck = "0.10.0"
+	shfmt = "3.9.0"
+	taplo = "0.9.3"
+	yamllint = "1.35.1"

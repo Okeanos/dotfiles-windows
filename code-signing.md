@@ -1,6 +1,6 @@
 # PowerShell Code Signing
 
-Before you begin you need to either disable a lot of security settings in Windows related to [PowerShell execution policies](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies) <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->
+Before you begin you need to either disable a lot of security settings in Windows related to [PowerShell execution policies](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies)
 or ensure that you can locally sign the files you want to run. This is especially important on Windows 11 where the
 defaults are even stricter than before.
 
@@ -9,7 +9,7 @@ defaults are even stricter than before.
 > If you want to go that way, you can skip the document contents below and use the `Unblock-File` cmdlet instead.
 
 Script signing is fairly straightforward unless you want to sign the scripts on a different machine than you want to run
-them on. As described by [Microsoft](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_signing) <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->
+them on. As described by [Microsoft](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_signing)
 you can self-sign scripts to run them locally.
 
 ## Creating the Signing Certificate
@@ -76,5 +76,5 @@ being able to share signed certificates have a look at the following resources:
 - [How to Sign PowerShell Script](https://adamtheautomator.com/how-to-sign-powershell-script/)
 - [sigstore](https://docs.sigstore.dev/)
 - [SignPath](https://about.signpath.io/)
-- [A guide to code signing certificates for the Microsoft app store and a question for the experts](https://old.reddit.com/r/electronjs/comments/17sizjf/a_guide_to_code_signing_certificates_for_the/) <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->
-- [Manage code signing certificates](https://learn.microsoft.com/en-us/windows-hardware/drivers/dashboard/code-signing-cert-manage) <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->
+- [A guide to code signing certificates for the Microsoft app store and a question for the experts](https://old.reddit.com/r/electronjs/comments/17sizjf/a_guide_to_code_signing_certificates_for_the/)
+- [Manage code signing certificates](https://learn.microsoft.com/en-us/windows-hardware/drivers/dashboard/code-signing-cert-manage)

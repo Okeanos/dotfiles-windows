@@ -1,10 +1,7 @@
+# https://taplo.tamasfe.dev/configuration/file.html
 include = ["**/*.toml"]
 
 [formatting]
-indent_string = "	"
-
-[[rule]]
-include = ["**/starship.toml"]
-
-[rule.schema]
-path = "https://starship.rs/config-schema.json"
+	indent_tables = true
+	indent_entries = true
+	indent_string = "	"

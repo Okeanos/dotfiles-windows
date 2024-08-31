@@ -1,12 +1,8 @@
 {
 	"recommendations": [
-		"ban.spellright",
 		"dotjoshjohnson.xml",
 		"editorconfig.editorconfig",
-		"hashicorp.terraform",
 		"mkhl.shfmt",
-		"ms-azuretools.vscode-docker",
-		"ms-vscode.powershell",
 		"redhat.vscode-xml",
 		"redhat.vscode-yaml",
 		"tamasfe.even-better-toml",

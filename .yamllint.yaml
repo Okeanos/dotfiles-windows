@@ -1,7 +1,10 @@
+# yaml-language-server: $schema=https://json.schemastore.org/yamllint.json
 # https://yamllint.readthedocs.io/en/stable/configuration.html#default-configuration
 ---
 
 extends: default
+
+ignore-from-file: .gitignore
 
 rules:
   braces:
@@ -16,4 +19,5 @@ rules:
   line-length:
     max: 140
     level: warning
+    # prevent e.g. URLs from triggering this warning
     allow-non-breakable-inline-mappings: true

@@ -71,6 +71,7 @@
 		<plugin id="org.editorconfig.editorconfigjetbrains"/>
 		<plugin id="org.intellij.groovy"/>
 		<plugin id="org.intellij.intelliLang"/>
+		<plugin id="org.intellij.plugins.hcl" />
 		<plugin id="org.intellij.plugins.markdown"/>
 		<plugin id="org.intellij.plugins.postcss"/>
 		<plugin id="org.jetbrains.debugger.streams"/>

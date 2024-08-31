@@ -12,17 +12,35 @@ indent_style = tab # https://old.reddit.com/r/javascript/comments/c8drjo/nobody_
 indent_size = tab
 trim_trailing_whitespace = true
 
-[*.{md,vim,yaml,yml}]
+[*.{tf,md,yaml,yml}]
 indent_style = space
 indent_size = 2
 
 [*.md]
-max_line_length = 120
+# For Markdown additional rules _could_ be enforced here (see below), however,
+# that is done using markdown-cli2 where violations can be handled more fine-granular
+#max_line_length = 120
 trim_trailing_whitespace = false # Allow '  ' token for Markdown to create new lines
+
+# For YAML additional rules _could_ be enforced here (see below), however,
+# that is done using yamllint where violations can be handled more fine-granular
+#[*.{yaml,yml}]
+#max_line_length = 140
+
+# Add custom rules below
+
+[**/git/ignore]
+# required because it contains both \r and \lf
+end_of_line = unset
+
+[*.vim]
+indent_style = space
+indent_size = 2
 
 [vimrc]
 indent_style = space
 indent_size = 4
 
+# Windows specific files
 [*.{ini,ps1}]
 end_of_line = crlf
