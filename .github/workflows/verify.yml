@@ -26,6 +26,10 @@ on:
         type: boolean
       opentofu:
         description: Run OpenTofu (Terraform/HCL/OpenTofu linter)
+        default: false
+        type: boolean
+      powershell:
+        description: Run PowerShell linter
         default: true
         type: boolean
       shellcheck:
@@ -93,36 +97,44 @@ jobs:
       - uses: DavidAnson/markdownlint-cli2-action@v16
   opentofu:
     runs-on: ubuntu-latest
-    if: ${{ inputs.opentofu || true }}
+    if: ${{ inputs.opentofu || false }}
     steps:
       - uses: actions/checkout@v4
       - uses: opentofu/setup-opentofu@v1
       - name: OpenTofu fmt
         id: fmt
-        run: tofu fmt -check
-  taplo:
+        run: tofu fmt -check -diff -recursive
+  powershell:
     runs-on: ubuntu-latest
-    if: ${{ inputs.taplo || true }}
+    if: ${{ inputs.powershell || true }}
     steps:
-      - uses: actions/checkout@v4
-      - name: Run Taplo
-        env:
-          TAPLO_VERSION: "0.9.3"
-          TAPLO_SHASUM: "71d655dc3f69ce30454cfade92fdbe846c0ba4aa3afa68f3ff0d216966d0d3c2"
+      - name: PSScriptAnalyzer
+        shell: pwsh
         run: |
-          curl --fail --silent --show-error --location --output taplo.gz \
-            https://github.com/tamasfe/taplo/releases/download/${TAPLO_VERSION}/taplo-full-linux-x86_64.gz
-          echo "${TAPLO_SHASUM} taplo.gz" | sha256sum --check
-          gunzip --decompress taplo.gz
-          chmod +x ./taplo
-          ./taplo format --check --diff
-          ./taplo check --default-schema-catalogs
+          Invoke-ScriptAnalyzer -Path .\ -Settings PSGallery -Recurse
   shellcheck:
     runs-on: ubuntu-latest
     if: ${{ inputs.shellcheck || true }}
     steps:
       - uses: actions/checkout@v4
       - uses: ludeeus/action-shellcheck@2.0.0
+      taplo:
+        runs-on: ubuntu-latest
+        if: ${{ inputs.taplo || true }}
+        steps:
+          - uses: actions/checkout@v4
+          - name: Run Taplo
+            env:
+              TAPLO_VERSION: "0.9.3"
+              TAPLO_SHASUM: "71d655dc3f69ce30454cfade92fdbe846c0ba4aa3afa68f3ff0d216966d0d3c2"
+            run: |
+              curl --fail --silent --show-error --location --output taplo.gz \
+                https://github.com/tamasfe/taplo/releases/download/${TAPLO_VERSION}/taplo-full-linux-x86_64.gz
+              echo "${TAPLO_SHASUM} taplo.gz" | sha256sum --check
+              gunzip --decompress taplo.gz
+              chmod +x ./taplo
+              ./taplo format --check --diff
+              ./taplo check --default-schema-catalogs
   yamllint:
     runs-on: ubuntu-latest
     if: ${{ inputs.yamllint || true }}
