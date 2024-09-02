@@ -53,6 +53,8 @@ export GOMODCACHE="${XDG_CACHE_HOME}/go/mod"
 # Make wget XDG aware
 export WGETRC="${XDG_CONFIG_HOME}/wgetrc"
 
+# Make ripgrep XDF aware
+export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}/ripgreprc"
 
 # Override the SSH Auth Socket for KeePass + KeeAgent compatibility with either of these; Cygwin usually works
 #export SSH_AUTH_SOCK=~/.ssh/cygwin.socket

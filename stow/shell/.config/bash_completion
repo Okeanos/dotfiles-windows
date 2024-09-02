@@ -12,6 +12,7 @@ generate_locally=(
 	"gitleaks:completion bash"
 	"kubectl:completion bash"
 	"node:--completion-bash"
+	"rg:--generate complete-bash"
 	"starship:completions bash"
 	"yq:shell-completion bash"
 )
