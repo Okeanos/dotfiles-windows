@@ -88,6 +88,7 @@ foreach ($package in @(
 #"hadolint.hadolint"
 "IrfanSkiljan.IrfanView"
 "JetBrains.Toolbox"
+"jftuga.less" # See https://github.com/sharkdp/bat?tab=readme-ov-file#paging for why this is included
 "jqlang.jq"
 #"johanhaleby.kubetail"
 "KeePassXCTeam.KeePassXC"
