@@ -94,7 +94,7 @@ jobs:
     if: ${{ inputs.markdownlint || true }}
     steps:
       - uses: actions/checkout@v4
-      - uses: DavidAnson/markdownlint-cli2-action@v16
+      - uses: DavidAnson/markdownlint-cli2-action@v17
   opentofu:
     runs-on: ubuntu-latest
     if: ${{ inputs.opentofu || false }}
