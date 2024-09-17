@@ -1,5 +1,8 @@
 #:schema https://mise.jdx.dev/schema/mise.json
 
+[plugins]
+	taplo = "https://github.com/Okeanos/asdf-taplo"
+
 # See https://github.com/mise-plugins/registry for what is officially available
 # Everything else is just declared as a reference to keep track of it.
 [tools]
