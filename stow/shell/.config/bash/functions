@@ -211,7 +211,7 @@ function handle-secrets {
 	if [[ -f .gitleaksignore ]]; then
 		ignore_file_contents=$(cat .gitleaksignore)
 	fi
-	gitleaks detect --verbose --report-format=json --report-path="${report_file}" --exit-code=0 &>/dev/null
+	gitleaks git --verbose --report-format=json --report-path="${report_file}" --exit-code=0 &>/dev/null
 	popd >/dev/null
 
 	if [[ -f ${report_file} ]]; then
