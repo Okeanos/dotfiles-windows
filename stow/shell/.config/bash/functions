@@ -207,12 +207,10 @@ function handle-secrets {
 	fi
 
 	echo "Scanning: ${target_directory}"
-	pushd "${target_directory}" >/dev/null
-	if [[ -f .gitleaksignore ]]; then
-		ignore_file_contents=$(cat .gitleaksignore)
+	if [[ -f "${target_directory}/.gitleaksignore" ]]; then
+		ignore_file_contents=$(< "${target_directory}/.gitleaksignore")
 	fi
-	gitleaks git --verbose --report-format=json --report-path="${report_file}" --exit-code=0 &>/dev/null
-	popd >/dev/null
+	gitleaks git --verbose --report-format=json --report-path="${report_file}" --exit-code=0 "${target_directory}" &>/dev/null
 
 	if [[ -f ${report_file} ]]; then
 		if [[ $(jq length "${report_file}") == 0 ]]; then
@@ -236,6 +234,7 @@ function handle-secrets {
 			echo "Commit: ${commit}"
 			echo "Secret: ${secret}"
 			select finding_type in "False Positive" "Valid" "Other"; do
+				[[ -n "${finding_type}" ]] || { echo "Please select a valid option." >&2; continue; }
 				documented_as="${finding_type}"
 				break
 			done
