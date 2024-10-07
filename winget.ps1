@@ -107,7 +107,7 @@ foreach ($package in @(
 "YS-L.csvlens"
 ))
 {
-	winget install --id $package --silent
+	winget install --id $package --silent --exact
 }
 
 # MS Store Apps
