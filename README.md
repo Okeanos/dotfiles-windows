@@ -219,3 +219,5 @@ Please read [SSH Setup](./ssh-setup.md) for details and options concerning SSH o
 - [Mateusz Łoskot](http://mateusz.loskot.net) and his [wsl-config](https://github.com/mloskot/wsl-config)
 - [June Castillote](https://adamtheautomator.com/how-to-sign-powershell-script/) for providing additional insights into
   PowerShell script signing
+- [Matt Hamende's Windots](https://github.com/Matalus/dotfiles)
+- [Anduin Xue's guide to configure a ready-to-use Windows environment](https://github.com/Anduin2017/Reimage-Windows)
