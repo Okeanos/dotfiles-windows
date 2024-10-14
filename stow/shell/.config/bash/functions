@@ -210,6 +210,8 @@ function handle-secrets {
 	if [[ -f "${target_directory}/.gitleaksignore" ]]; then
 		ignore_file_contents=$(< "${target_directory}/.gitleaksignore")
 		ignore_file_contents+="\n"
+	else
+		ignore_file_contents="# https://github.com/gitleaks/gitleaks\n\n"
 	fi
 	gitleaks git --verbose --report-format=json --report-path="${report_file}" --max-decode-depth 1 --exit-code=0 "${target_directory}" &>/dev/null
 
