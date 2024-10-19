@@ -24,10 +24,6 @@ on:
         description: Run Markdown linter
         default: true
         type: boolean
-      opentofu:
-        description: Run OpenTofu (Terraform/HCL/OpenTofu linter)
-        default: false
-        type: boolean
       powershell:
         description: Run PowerShell linter
         default: true
@@ -72,14 +68,14 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install Gitleaks
         env:
-          GITLEAKS_VERSION: "8.18.4"
-          GITLEAKS_SHASUM: "ba6dbb656933921c775ee5a2d1c13a91046e7952e9d919f9bac4cec61d628e7d"
+          GITLEAKS_VERSION: "8.21.1"
+          GITLEAKS_SHASUM: "b1e20dfbd81fa5eeefc91ace3371d4db75d2250c0d426cb6acf1e51722726779"
         run: |
           curl --fail --silent --show-error --location --output gitleaks.tar.gz \
             https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz
           echo "${GITLEAKS_SHASUM} gitleaks.tar.gz" | sha256sum --check
           tar -xzf gitleaks.tar.gz gitleaks
-          ./gitleaks detect --verbose --redact --no-git .
+          ./gitleaks dir --verbose --redact .
   hadolint:
     runs-on: ubuntu-latest
     if: ${{ inputs.hadolint || false }}
@@ -95,15 +91,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: DavidAnson/markdownlint-cli2-action@v17
-  opentofu:
-    runs-on: ubuntu-latest
-    if: ${{ inputs.opentofu || false }}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: opentofu/setup-opentofu@v1
-      - name: OpenTofu fmt
-        id: fmt
-        run: tofu fmt -check -diff -recursive
   powershell:
     runs-on: ubuntu-latest
     if: ${{ inputs.powershell || true }}
