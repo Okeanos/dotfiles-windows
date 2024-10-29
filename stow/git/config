@@ -113,6 +113,11 @@
 	# More info: <https://github.com/dandavison/delta>
 	pager = delta
 
+	# Tell Git that long paths are fine, this does, however, require telling Windows as well
+	# See `windows.ps1` and the `LongPathsEnabled` setting described here:
+	# https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=powershell#enable-long-paths-in-windows-10-version-1607-and-later
+	longPaths = true
+
 [color]
 
 	# Use colors in Git commands that are capable of colored output when
