@@ -1,3 +1,4 @@
+# https://www.shellcheck.net/wiki/Directive
 # https://www.shellcheck.net/wiki/Ignore
 
 disable=SC1090,SC1091

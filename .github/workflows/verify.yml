@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+# yaml-language-server:$schema=https://json.schemastore.org/github-workflow.json
 # https://docs.github.com/en/actions/writing-workflows
 name: Verify
 
@@ -16,10 +16,6 @@ on:
         description: Run Gitleaks (Secret scanner)
         default: true
         type: boolean
-      hadolint:
-        description: Run hadolint (Dockerfile linter)
-        default: false
-        type: boolean
       markdownlint:
         description: Run Markdown linter
         default: true
@@ -34,7 +30,7 @@ on:
         type: boolean
       taplo:
         description: Run taplo (TOML linter)
-        default: false
+        default: true
         type: boolean
       yamllint:
         description: Run yamllint (YAML linter)
@@ -51,10 +47,17 @@ jobs:
     if: ${{ inputs.editorconfig || true }}
     steps:
       - uses: actions/checkout@v4
+      - name: Extract Tool Versions
+        id: tool-versions
+        run: |
+          ec_version=$(grep -F 'editorconfig-checker' .mise.toml | cut -d '=' -f2 | cut -d '#' -f1 | xargs)
+          ec_shasum=$(grep -F 'editorconfig-checker' .mise.toml | cut -d '=' -f3 | xargs)
+          echo "ec_version=${ec_version}" >> "$GITHUB_OUTPUT"
+          echo "ec_shasum=${ec_shasum}" >> "$GITHUB_OUTPUT"
       - name: Run EditorConfig Checker
         env:
-          EDITORCONFIG_VERSION: "3.0.3"
-          EDITORCONFIG_SHASUM: "fc698b0bf5bca0d42e28dd59d72e25487a51f645ca242c5f74bae975369f16aa"
+          EDITORCONFIG_VERSION: ${{ steps.tool-versions.outputs.ec_version }}
+          EDITORCONFIG_SHASUM: ${{ steps.tool-versions.outputs.ec_shasum }}
         run: |
           curl --fail --silent --show-error --location --output editorconfig.tar.gz \
             https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v${EDITORCONFIG_VERSION}/ec-linux-amd64.tar.gz
@@ -66,25 +69,23 @@ jobs:
     if: ${{ inputs.gitleaks || true }}
     steps:
       - uses: actions/checkout@v4
+      - name: Extract Tool Versions
+        id: tool-versions
+        run: |
+          gitleaks_version=$(grep -F 'gitleaks' .mise.toml | cut -d '=' -f2 | cut -d '#' -f1 | xargs)
+          gitleaks_shasum=$(grep -F 'gitleaks' .mise.toml | cut -d '=' -f3 | xargs)
+          echo "gitleaks_version=${gitleaks_version}" >> "$GITHUB_OUTPUT"
+          echo "gitleaks_shasum=${gitleaks_shasum}" >> "$GITHUB_OUTPUT"
       - name: Install Gitleaks
         env:
-          GITLEAKS_VERSION: "8.21.1"
-          GITLEAKS_SHASUM: "b1e20dfbd81fa5eeefc91ace3371d4db75d2250c0d426cb6acf1e51722726779"
+          GITLEAKS_VERSION: ${{ steps.tool-versions.outputs.gitleaks_version }}
+          GITLEAKS_SHASUM: ${{ steps.tool-versions.outputs.gitleaks_shasum }}
         run: |
           curl --fail --silent --show-error --location --output gitleaks.tar.gz \
             https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz
           echo "${GITLEAKS_SHASUM} gitleaks.tar.gz" | sha256sum --check
           tar -xzf gitleaks.tar.gz gitleaks
           ./gitleaks dir --verbose --redact .
-  hadolint:
-    runs-on: ubuntu-latest
-    if: ${{ inputs.hadolint || false }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: Lint Dockerfile
-        uses: hadolint/hadolint-action@v3.1.0
-        with:
-          dockerfile: "Dockerfile"
   markdownlint:
     runs-on: ubuntu-latest
     if: ${{ inputs.markdownlint || true }}
@@ -104,16 +105,30 @@ jobs:
     if: ${{ inputs.shellcheck || true }}
     steps:
       - uses: actions/checkout@v4
+      - name: Extract Tool Versions
+        id: tool-versions
+        run: |
+          shellcheck_version=$(grep -F 'shellcheck' .mise.toml | cut -d '=' -f2 | cut -d '#' -f1 | xargs)
+          echo "shellcheck_version=${shellcheck_version}" >> "$GITHUB_OUTPUT"
       - uses: ludeeus/action-shellcheck@2.0.0
+        with:
+          version: v${{ steps.tool-versions.outputs.shellcheck_version }}
   taplo:
     runs-on: ubuntu-latest
     if: ${{ inputs.taplo || true }}
     steps:
       - uses: actions/checkout@v4
+      - name: Extract Tool Versions
+        id: tool-versions
+        run: |
+          taplo_version=$(grep -F 'taplo' .mise.toml | grep -v 'asdf' | cut -d '=' -f2 | cut -d '#' -f1 | xargs)
+          taplo_shasum=$(grep -F 'taplo' .mise.toml | cut -d '=' -f3 | xargs)
+          echo "taplo_version=${taplo_version}" >> "$GITHUB_OUTPUT"
+          echo "taplo_shasum=${taplo_shasum}" >> "$GITHUB_OUTPUT"
       - name: Run Taplo
         env:
-          TAPLO_VERSION: "0.9.3"
-          TAPLO_SHASUM: "71d655dc3f69ce30454cfade92fdbe846c0ba4aa3afa68f3ff0d216966d0d3c2"
+          TAPLO_VERSION: ${{ steps.tool-versions.outputs.taplo_version }}
+          TAPLO_SHASUM: ${{ steps.tool-versions.outputs.taplo_shasum }}
         run: |
           curl --fail --silent --show-error --location --output taplo.gz \
             https://github.com/tamasfe/taplo/releases/download/${TAPLO_VERSION}/taplo-full-linux-x86_64.gz

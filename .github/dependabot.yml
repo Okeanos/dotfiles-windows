@@ -1,9 +1,11 @@
+# yaml-language-server:$schema=https://json.schemastore.org/dependabot-2.0.json
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
 version: 2
 updates:
-  - package-ecosystem: github-actions
+  - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
       time: "03:00"
-      timezone: Europe/Berlin
+      timezone: "Europe/Berlin"
     open-pull-requests-limit: 99

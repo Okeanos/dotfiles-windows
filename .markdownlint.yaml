@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/DavidAnson/markdownlint-cli2/main/schema/markdownlint-config-schema.json
+# yaml-language-server:$schema=https://raw.githubusercontent.com/DavidAnson/markdownlint-cli2/main/schema/markdownlint-config-schema.json
 # https://github.com/DavidAnson/markdownlint/blob/main/schema/.markdownlint.yaml
 
 # Configures how markdown files are linted
