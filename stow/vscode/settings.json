@@ -36,5 +36,15 @@
 	},
 	"explorer.confirmDragAndDrop": false,
 	"telemetry.telemetryLevel": "off",
-	"gitlens.telemetry.enabled": false
+	"gitlens.telemetry.enabled": false,
+	"spellright.language": [
+		"en",
+		"de"
+	],
+	"spellright.documentTypes": [
+		"markdown",
+		"latex",
+		"plaintext"
+	],
+	"spellright.notificationClass": "warning"
 }
