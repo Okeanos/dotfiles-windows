@@ -181,6 +181,18 @@ function git-fetch() {
 		xargs -P 8 -0 -I % bash -c 'git -C %/.. fetch --all --prune --prune-tags --quiet || echo "Failed updating: %"'
 }
 
+# `uuidgen` is not provided by Windows or Git for Windows but a common and neat
+# utility to generate UUID values
+# Sadly, the PowerShell function does not support anything else but v4 UUIDs so
+# other parameters supported by Linux/macOS uuidgen are not supported
+# See https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/new-guid?view=powershell-7.4
+function uuidgen() {
+	if [[ $# -ne 0 ]]; then
+		echo "uuidgen called with arguments, this is not supported" && exit 1
+	fi
+	powershell -Command "[guid]::NewGuid().ToString()"
+}
+
 # `handle-secrets` is a wrapper function around `gitleaks` and allows you to
 # interactively go through any finding gitleaks detects in the supplied folder
 # and put them into a `.gitleaksignore` file with appropriate comments
