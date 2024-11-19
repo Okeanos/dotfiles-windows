@@ -91,7 +91,7 @@ jobs:
     if: ${{ inputs.markdownlint || true }}
     steps:
       - uses: actions/checkout@v4
-      - uses: DavidAnson/markdownlint-cli2-action@v17
+      - uses: DavidAnson/markdownlint-cli2-action@v18
   powershell:
     runs-on: ubuntu-latest
     if: ${{ inputs.powershell || true }}
