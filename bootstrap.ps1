@@ -56,6 +56,7 @@ Function DoIt
 		"$( $ENV:UserProfile )\.config\bash",
 		"$( $ENV:UserProfile )\.config\gh",
 		"$( $ENV:UserProfile )\.config\tmux",
+		"$( $ENV:UserProfile )\.config\vim\autoload",
 		"$( $ENV:UserProfile )\.config\vim\colors",
 		"$( $ENV:UserProfile )\.config\vim\syntax" `
 		-ItemType Directory -Force | Out-Null
@@ -67,7 +68,8 @@ Function DoIt
 		"$( $ENV:UserProfile )\.local\share\bash-completion\completions" `
 		-ItemType Directory -Force | Out-Null
 	New-Item -Path "$( $ENV:UserProfile )\.local\share\node",
-		"$( $ENV:UserProfile )\.local\share\vim\bundle" `
+		"$( $ENV:UserProfile )\.local\share\vim\bundle",
+		"$( $ENV:UserProfile )\.local\share\vim\plugged" `
 		-ItemType Directory -Force | Out-Null
 	New-Item -Path "$( $ENV:UserProfile )\.local\state\vim",
 		"$( $ENV:UserProfile )\.local\state\vim\backup",

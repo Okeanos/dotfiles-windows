@@ -8,6 +8,8 @@ set undodir=$XDG_STATE_HOME/vim/undo,~/,/tmp
 set viminfo+=n$XDG_STATE_HOME/vim/viminfo
 set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
 let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc"
+let autoload="$XDG_CONFIG_HOME/vim/autoload"
+let vimplug="$XDG_DATA_HOME/vim/plugged"
 
 " Use the Selenized Light theme
 " https://github.com/jan-warchol/selenized/blob/master/editors/vim/README.md
@@ -113,3 +115,17 @@ if has("autocmd")
     " Treat .md files as Markdown
     autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
 endif
+
+" Install vim-plug if not found
+if empty(glob(autoload . '/plug.vim'))
+    silent execute '!curl -fLo ' . autoload . '/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+endif
+
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+    \| PlugInstall --sync | source $MYVIMRC
+\| endif
+
+call plug#begin(vimplug)
+    Plug 'editorconfig/editorconfig-vim'
+call plug#end()
