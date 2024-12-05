@@ -35,10 +35,9 @@ command_timeout = 1000
 	symbol = ""
 
 	[[kubernetes.contexts]]
-		context_pattern = "\\W*prod\\W*"
+		context_pattern = ".*prod.*"
 		style = "bold red"
 		symbol = "🚨 "
-		context_alias = "prod"
 
 	[[kubernetes.contexts]]
 		context_pattern = "docker-desktop"
