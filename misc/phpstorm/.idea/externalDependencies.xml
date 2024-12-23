@@ -12,6 +12,7 @@
 		<plugin id="Refactor-X"/>
 		<plugin id="XPathView"/>
 		<plugin id="com.deadlock.scsyntax"/>
+		<plugin id="com.github.copilot"/>
 		<plugin id="com.github.leomillon.uuidgenerator"/>
 		<plugin id="com.intellij.apacheConfig"/>
 		<plugin id="com.intellij.completion.ml.ranking"/>

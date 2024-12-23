@@ -15,6 +15,7 @@
 		<plugin id="Pythonid"/>
 		<plugin id="Refactor-X"/>
 		<plugin id="XPathView"/>
+		<plugin id="com.github.copilot"/>
 		<plugin id="com.github.leomillon.uuidgenerator"/>
 		<plugin id="com.haulmont.jpab"/>
 		<plugin id="com.intellij.LineProfiler"/>

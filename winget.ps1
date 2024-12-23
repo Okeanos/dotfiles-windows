@@ -52,6 +52,8 @@ foreach ($extension in @(
 "ban.spellright"
 "DotJoshJohnson.xml"
 "EditorConfig.EditorConfig"
+"github.copilot"
+"github.copilot-chat"
 "github.vscode-github-actions"
 "hashicorp.terraform"
 #"jetmartin.bats"

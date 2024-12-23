@@ -9,6 +9,7 @@
 		<plugin id="JavaScriptDebugger"/>
 		<plugin id="Refactor-X"/>
 		<plugin id="XPathView"/>
+		<plugin id="com.github.copilot"/>
 		<plugin id="com.github.leomillon.uuidgenerator"/>
 		<plugin id="com.intellij.completion.ml.ranking"/>
 		<plugin id="com.intellij.css"/>

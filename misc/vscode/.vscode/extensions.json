@@ -3,6 +3,8 @@
 		"ban.spellright",
 		"dotjoshjohnson.xml",
 		"editorconfig.editorconfig",
+		"github.copilot",
+		"github.copilot-chat",
 		"hashicorp.terraform",
 		"mkhl.shfmt",
 		"ms-azuretools.vscode-docker",
