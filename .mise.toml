@@ -7,7 +7,7 @@
 # Everything else is just declared as a reference to keep track of it.
 [tools]
 	editorconfig-checker = "3.0.3" # GitHub Actions sha256sum=fc698b0bf5bca0d42e28dd59d72e25487a51f645ca242c5f74bae975369f16aa
-	gitleaks = "8.22.0"            # GitHub Actions sha256sum=5bc41815076e6ed6ef8fbecc9d9b75bcae31f39029ceb55da08086315316e3ba
+	gitleaks = "8.22.0"            # GitHub Actions sha256sum=ad66410e1e0bf262f864b6837b09cfa585f6b5816164023ee64847d3f7415eed
 	markdownlint-cli2 = "0.16.0"
 	shellcheck = "0.10.0"
 	shfmt = "3.10.0"
