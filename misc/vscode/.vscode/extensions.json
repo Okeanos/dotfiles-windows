@@ -1,10 +1,12 @@
 {
 	"recommendations": [
+		"asciidoctor.asciidoctor-vscode",
 		"ban.spellright",
 		"dotjoshjohnson.xml",
 		"editorconfig.editorconfig",
 		"github.copilot",
 		"github.copilot-chat",
+		"github.vscode-github-actions",
 		"hashicorp.terraform",
 		"mkhl.shfmt",
 		"ms-azuretools.vscode-docker",
