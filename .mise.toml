@@ -8,7 +8,7 @@
 [tools]
 	editorconfig-checker = "3.0.3" # GitHub Actions sha256sum=fc698b0bf5bca0d42e28dd59d72e25487a51f645ca242c5f74bae975369f16aa
 	gitleaks = "8.22.0"            # GitHub Actions sha256sum=ad66410e1e0bf262f864b6837b09cfa585f6b5816164023ee64847d3f7415eed
-	markdownlint-cli2 = "0.16.0"
+	markdownlint-cli2 = "0.17.0"
 	shellcheck = "0.10.0"
 	shfmt = "3.10.0"
 	taplo = "0.9.3"                # GitHub Actions sha256sum=71d655dc3f69ce30454cfade92fdbe846c0ba4aa3afa68f3ff0d216966d0d3c2
