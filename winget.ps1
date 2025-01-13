@@ -83,7 +83,7 @@ foreach ($package in @(
 "BurntSushi.ripgrep.MSVC"
 "dandavison.delta"
 "Docker.DockerDesktop"
-#"Editorconfig-Checker.Editorconfig-Checker"
+#"EditorConfig-Checker.EditorConfig-Checker"
 "GitHub.cli"
 "Gitleaks.Gitleaks"
 "GoLang.Go"
