@@ -22,11 +22,28 @@ export NODE_REPL_MODE='sloppy'
 export PYTHONIOENCODING='UTF-8'
 
 # Increase Bash history size. Allow 32³ entries; the default is 500.
+# See also
+# - https://www.gnu.org/software/bash/manual/html_node/Using-History-Interactively.html
+# - https://www.gnu.org/software/bash/manual/html_node/Commands-For-History.html
+# - https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
+# The maximum number of commands to remember on the history list.
 export HISTSIZE='32768'
+# The name of the file to which the command history is saved. The default value is ~/.bash_history.
 export HISTFILE="${XDG_CACHE_HOME}/bash/history"
+# The maximum number of lines contained in the history file.
 export HISTFILESIZE="${HISTSIZE}"
-# Omit duplicates and commands that begin with a space from history. Also delete duplicates from the history.
+# A colon-separated list of values controlling how commands are saved on the history list.
+# - Omit consecutive duplicates and commands that begin with a space from history.
 export HISTCONTROL='ignoreboth:erasedups'
+# A colon-separated list of patterns used to decide which command lines should be saved on the history list.
+export HISTIGNORE=''
+# See https://github.com/git-for-windows/git/discussions/4071 for details
+# TL;DR: This will allow Git Bash to remember the history within Windows Terminal and Visual Studio Code
+export PROMPT_COMMAND="history -a"
+# See also shopt settings in ~/.bash_profile, specifically
+# shopt -s cmdhist
+# shopt -s histappend
+# See https://www.gnu.org/software/bash/manual/html_node/The-Shopt-Builtin.html
 
 # Prefer US English and use UTF-8.
 export LANG='en_US.UTF-8'
@@ -59,7 +76,3 @@ export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}/ripgreprc"
 # Override the SSH Auth Socket for KeePass + KeeAgent compatibility with either of these; Cygwin usually works
 #export SSH_AUTH_SOCK=~/.ssh/cygwin.socket
 #export SSH_AUTH_SOCK=~/.ssh/msysgit.socket
-
-# See https://github.com/git-for-windows/git/discussions/4071 for details
-# TL;DR: This will allow Git Bash to remember the history within Windows Terminal and Visual Studio Code
-export PROMPT_COMMAND="history -a"
