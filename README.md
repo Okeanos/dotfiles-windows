@@ -221,3 +221,8 @@ Please read [SSH Setup](./ssh-setup.md) for details and options concerning SSH o
   PowerShell script signing
 - [Matt Hamende's Windots](https://github.com/Matalus/dotfiles)
 - [Anduin Xue's guide to configure a ready-to-use Windows environment](https://github.com/Anduin2017/Reimage-Windows)
+
+## Useful Links
+
+- [Vim Cheat Sheet](https://vim.rtorr.com)
+- [Welcome to Linux command line for you and me!](https://lym.readthedocs.io/en/latest/index.html)
