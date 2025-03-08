@@ -41,6 +41,12 @@ on:
 permissions:
   contents: read
 
+# Cancel duplicate runs for this workflow if they happen for the same commit
+# Thus should help with duplicate runs caused by PRs, e.g. because of Renovate
+concurrency:
+  group: ${{ github.workflow }}-${{ github.sha }}
+  cancel-in-progress: true
+
 jobs:
   editorconfig:
     runs-on: ubuntu-latest
