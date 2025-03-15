@@ -10,6 +10,6 @@
 	gitleaks = "8.24.0"            # GitHub Actions sha256sum=cb49b7de5ee986510fe8666ca0273a6cc15eb82571f2f14832c9e8920751f3a4
 	markdownlint-cli2 = "0.17.2"
 	shellcheck = "0.10.0"
-	shfmt = "3.10.0"
+	shfmt = "3.11.0"
 	taplo = "0.9.3"                # GitHub Actions sha256sum=71d655dc3f69ce30454cfade92fdbe846c0ba4aa3afa68f3ff0d216966d0d3c2
-	yamllint = "1.35.1"
+	yamllint = "1.36.0"
