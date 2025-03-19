@@ -32,7 +32,7 @@ if ("Enabled" -ne (Get-WindowsOptionalFeature -FeatureName Microsoft-Windows-Sub
 # Requires `--location` support via `InstallerSwitches.InstallLocation: INSTALLDIR="<INSTALLPATH>"` in the manifest
 winget install --id "EclipseAdoptium.Temurin.17.JDK" --silent --location "C:\Program Files\Eclipse Adoptium\temurin-17.jdk"
 winget install --id "EclipseAdoptium.Temurin.21.JDK" --silent --location "C:\Program Files\Eclipse Adoptium\temurin-21.jdk"
-# https://github.com/git-for-windows/git/wiki/Silent-or-Unattended-Installation
+# https://gitforwindows.org/silent-or-unattended-installation
 winget install --id "Git.Git" --silent --override "/VERYSILENT /NOCANCEL /LOADINF=$PSScriptRoot\winget_git.ini"
 winget install --id "Google.Chrome" --silent --override "/quiet"
 # https://support.mozilla.org/en-US/kb/deploy-firefox-msi-installers
