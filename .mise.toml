@@ -6,10 +6,10 @@
 # See https://github.com/jdx/mise/blob/main/registry.toml for what is officially available
 # Everything else is just declared as a reference to keep track of it.
 [tools]
-	editorconfig-checker = "3.2.0" # GitHub Actions sha256sum=5e6a63097904be33c8d18e960f54fd8f60ada5464fe0056cd3dbbd0678584d15
-	gitleaks = "8.24.0"            # GitHub Actions sha256sum=cb49b7de5ee986510fe8666ca0273a6cc15eb82571f2f14832c9e8920751f3a4
+	editorconfig-checker = "3.2.1" # GitHub Actions sha256sum=e6c4e61733d3f76c308468da5121bf27b3d43b0d18b7b478b5a80e4199bc91be
+	gitleaks = "8.24.2"            # GitHub Actions sha256sum=fa0500f6b7e41d28791ebc680f5dd9899cd42b58629218a5f041efa899151a8e
 	markdownlint-cli2 = "0.17.2"
 	shellcheck = "0.10.0"
 	shfmt = "3.11.0"
 	taplo = "0.9.3"                # GitHub Actions sha256sum=71d655dc3f69ce30454cfade92fdbe846c0ba4aa3afa68f3ff0d216966d0d3c2
-	yamllint = "1.36.0"
+	yamllint = "1.37.0"
