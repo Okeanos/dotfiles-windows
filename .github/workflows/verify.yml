@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ inputs.editorconfig || true }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Extract Tool Versions
         id: tool-versions
         run: |
@@ -74,7 +74,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ inputs.gitleaks || true }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Extract Tool Versions
         id: tool-versions
         run: |
@@ -96,8 +96,8 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ inputs.markdownlint || true }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: DavidAnson/markdownlint-cli2-action@v19
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - uses: DavidAnson/markdownlint-cli2-action@05f32210e84442804257b2a6f20b273450ec8265 # v19
   powershell:
     runs-on: ubuntu-latest
     if: ${{ inputs.powershell || true }}
@@ -110,20 +110,20 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ inputs.shellcheck || true }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Extract Tool Versions
         id: tool-versions
         run: |
           shellcheck_version=$(grep -F 'shellcheck' .mise.toml | cut -d '=' -f2 | cut -d '#' -f1 | xargs)
           echo "shellcheck_version=${shellcheck_version}" >> "$GITHUB_OUTPUT"
-      - uses: ludeeus/action-shellcheck@2.0.0
+      - uses: ludeeus/action-shellcheck@00cae500b08a931fb5698e11e79bfbd38e612a38 # 2.0.0
         with:
           version: v${{ steps.tool-versions.outputs.shellcheck_version }}
   taplo:
     runs-on: ubuntu-latest
     if: ${{ inputs.taplo || true }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Extract Tool Versions
         id: tool-versions
         run: |
@@ -147,7 +147,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ inputs.yamllint || true }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Run yamllint
         run: |
           pip install yamllint
