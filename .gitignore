@@ -146,9 +146,6 @@ $RECYCLE.BIN/
 
 ### Custom Additions
 
-### Homebrew lockfile
-Brewfile.lock.json
-
 
 ### Node template (used by bats)
 # Logs

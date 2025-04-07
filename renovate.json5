@@ -3,6 +3,6 @@
 	"extends": [
 		// path as described in https://docs.renovatebot.com/config-presets/#preset-file-naming
 		// at this time the format is location>Owner/repo//filename.ext with // as repo-file separator
-		"github>Okeanos/renovate-config//default.json5"
-	]
+		"github>Okeanos/renovate-config//default.json5",
+	],
 }

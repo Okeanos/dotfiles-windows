@@ -12,7 +12,7 @@ indent_style = tab # https://old.reddit.com/r/javascript/comments/c8drjo/nobody_
 indent_size = tab
 trim_trailing_whitespace = true
 
-[*.{md,yaml,yml}]
+[*.{md,tf,yaml,yml}]
 indent_style = space
 indent_size = 2
 
