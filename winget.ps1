@@ -40,12 +40,12 @@ winget install --id "Mozilla.Firefox" --silent --override "OPTIONAL_EXTENSIONS=f
 # PowerToys doesn't appear to have a way to define setup options and will by default launch after installation :/
 # See e.g. https://github.com/microsoft/PowerToys/issues/24000
 #winget install Microsoft.PowerToys --silent
-# https://code.visualstudio.com/docs/setup/windows#_what-commandline-arguments-are-supported-by-the-windows-setup
-winget install --id "Microsoft.VisualStudioCode" --silent --override "/VERYSILENT /NOCANCEL /MERGETASKS=!runcode /LOADINF=$PSScriptRoot\winget_vscode.ini"
 # See https://confluence.atlassian.com/sourcetreekb/sourcetree-silent-installation-windows-732267345.html
 # See https://confluence.atlassian.com/sourcetreekb/sourcetree-enterprise-and-msi-installation-947848769.html
 # Cannot make installation truly silent; will pop-up same as PowerToys
 #winget install --id "Atlassian.Sourcetree" --silent
+# https://code.visualstudio.com/docs/setup/windows#_what-commandline-arguments-are-supported-by-the-windows-setup
+winget install --id "Microsoft.VisualStudioCode" --silent --override "/VERYSILENT /NOCANCEL /MERGETASKS=!runcode /LOADINF=$PSScriptRoot\winget_vscode.ini"
 # Install basic Visual Studio Code extensions
 foreach ($extension in @(
 "asciidoctor.asciidoctor-vscode"
@@ -64,6 +64,7 @@ foreach ($extension in @(
 "redhat.vscode-yaml"
 "tamasfe.even-better-toml"
 "timonwong.shellcheck"
+"yzane.markdown-pdf"
 "yzhang.markdown-all-in-one"
 ))
 {
@@ -76,6 +77,7 @@ foreach ($extension in @(
 foreach ($package in @(
 "7zip.7zip"
 "Adobe.Acrobat.Reader.64-bit"
+"AquaSecurity.Trivy"
 #"adrienverge.yamllint"
 "ahmetb.kubectx"
 "ahmetb.kubens"
@@ -96,16 +98,20 @@ foreach ($package in @(
 "KeePassXCTeam.KeePassXC"
 #"koalaman.shellcheck"
 "Kubernetes.kubectl"
+#"lycheeverse.lychee"
 "Microsoft.WindowsTerminal"
 "MikeFarah.yq"
 #"mvdan.shfmt"
 "OO-Software.ShutUp10"
 "OpenJS.NodeJS"
+"OpenTofu.Tofu"
+#"pnpm.pnpm"
 "sharkdp.bat"
 "Starship.Starship"
 #"Thoughtworks.Talisman"
+#"tamasfe.taplo"
 "wagoodman.dive"
-"Yarn.Yarn"
+#"Yarn.Yarn"
 "YS-L.csvlens"
 ))
 {
