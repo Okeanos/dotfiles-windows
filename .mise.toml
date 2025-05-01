@@ -7,7 +7,7 @@
 # Everything else is just declared as a reference to keep track of it.
 [tools]
 	editorconfig-checker = "3.2.1" # GitHub Actions sha256sum=e6c4e61733d3f76c308468da5121bf27b3d43b0d18b7b478b5a80e4199bc91be
-	gitleaks = "8.24.3"            # GitHub Actions sha256sum=9991e0b2903da4c8f6122b5c3186448b927a5da4deef1fe45271c3793f4ee29c
+	gitleaks = "8.25.1"            # GitHub Actions sha256sum=3000d057342489827ee127310771873000b658f2987be7bbd21968ab7443913a
 	lychee = "0.18.1"
 	markdownlint-cli2 = "0.17.2"
 	shellcheck = "0.10.0"
