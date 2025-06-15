@@ -166,7 +166,7 @@ jobs:
           TAPLO_SHASUM: ${{ steps.tool-versions.outputs.taplo_shasum }}
         run: |
           curl --fail --silent --show-error --location --output taplo.gz \
-            https://github.com/tamasfe/taplo/releases/download/${TAPLO_VERSION}/taplo-full-linux-x86_64.gz
+            https://github.com/tamasfe/taplo/releases/download/${TAPLO_VERSION}/taplo-linux-x86_64.gz
           echo "${TAPLO_SHASUM} taplo.gz" | sha256sum --check
           gunzip --decompress taplo.gz
           chmod +x ./taplo
