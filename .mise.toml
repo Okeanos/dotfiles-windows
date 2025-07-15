@@ -11,6 +11,6 @@
 	lychee = "0.18.1"
 	markdownlint-cli2 = "0.18.1"
 	shellcheck = "0.10.0"
-	shfmt = "3.11.0"
+	shfmt = "3.12.0"
 	taplo = "0.10.0"               # GitHub Actions sha256sum=8fe196b894ccf9072f98d4e1013a180306e17d244830b03986ee5e8eabeb6156
 	yamllint = "1.37.1"
