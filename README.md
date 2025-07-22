@@ -221,6 +221,7 @@ Please read [SSH Setup](./ssh-setup.md) for details and options concerning SSH o
   PowerShell script signing
 - [Matt Hamende's Windots](https://github.com/Matalus/dotfiles)
 - [Anduin Xue's guide to configure a ready-to-use Windows environment](https://github.com/Anduin2017/Reimage-Windows)
+- [Atc.Winget.Configurations](https://github.com/atc-net/atc-winget-configurations)
 
 ## Useful Links
 
