@@ -50,6 +50,7 @@ winget install --id "Microsoft.VisualStudioCode" --silent --override "/VERYSILEN
 foreach ($extension in @(
 "asciidoctor.asciidoctor-vscode"
 "ban.spellright"
+"docker.docker"
 "DotJoshJohnson.xml"
 "EditorConfig.EditorConfig"
 "github.copilot"
@@ -58,6 +59,7 @@ foreach ($extension in @(
 "hashicorp.terraform"
 #"jetmartin.bats"
 "mkhl.shfmt"
+"ms-azuretools.vscode-containers"
 "ms-azuretools.vscode-docker"
 "ms-vscode.powershell"
 "redhat.vscode-xml"
