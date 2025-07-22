@@ -1,7 +1,7 @@
 ﻿#Requires -RunAsAdministrator
 
 ###############################################################################
-# Base Environment                                                           #
+# Base Environment                                                            #
 ###############################################################################
 
 Write-Host "Base Environment"
@@ -32,9 +32,9 @@ New-ItemProperty "HKCU:\Control Panel\Desktop" -Name JPEGImportQuality -Value 0x
 #Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name SystemUsesLightTheme -Value 0
 #Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name AppsUseLightTheme -Value 0
 
-##############################################################################
-# Security & Privacy                                                         #
-##############################################################################
+###############################################################################
+# Security & Privacy                                                          #
+###############################################################################
 
 Write-Host "Security & Privacy"
 
