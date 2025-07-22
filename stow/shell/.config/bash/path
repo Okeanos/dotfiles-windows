@@ -12,5 +12,7 @@ if command -v go >/dev/null; then
 	new_path+="$(go env GOPATH)/bin:"
 fi
 
+new_path+="${HOME}/.local/bin:"
+
 export PATH="${new_path}${PATH:-}"
 export MANPATH="${MANPATH:-}"
