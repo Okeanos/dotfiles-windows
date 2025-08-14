@@ -222,6 +222,13 @@
 
 	autoStash = true
 
+# Git Credential Manager (GCM)
+# More info: https://github.com/git-ecosystem/git-credential-manager
+[credential]
+	# For $(prefix)-syntax see https://git-scm.com/docs/git-config#Documentation/git-config.txt-pathname
+	# Git Credential Manager & Git are available in the same location as GCM is part of Git for Windows
+	helper = %(prefix)/git-credential-manager.exe
+
 # URL shorthands
 
 [url "git@github.com:"]
