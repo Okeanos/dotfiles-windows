@@ -56,7 +56,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ inputs.editorconfig || true }}
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Extract Tool Versions
         id: tool-versions
         run: |
@@ -78,7 +78,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ inputs.gitleaks || true }}
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Extract Tool Versions
         id: tool-versions
         run: |
@@ -100,7 +100,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ inputs.lychee || true }}
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Extract Tool Versions
         id: tool-versions
         run: |
@@ -124,13 +124,13 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ inputs.markdownlint || true }}
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - uses: DavidAnson/markdownlint-cli2-action@992badcdf24e3b8eb7e87ff9287fe931bcb00c6e # v20.0.0
   powershell:
     runs-on: ubuntu-latest
     if: ${{ inputs.powershell || true }}
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: PSScriptAnalyzer
         shell: pwsh
         run: |
@@ -139,7 +139,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ inputs.shellcheck || true }}
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Extract Tool Versions
         id: tool-versions
         run: |
@@ -152,7 +152,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ inputs.taplo || true }}
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Extract Tool Versions
         id: tool-versions
         run: |
@@ -176,7 +176,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ inputs.yamllint || true }}
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Run yamllint
         run: |
           pip install yamllint
