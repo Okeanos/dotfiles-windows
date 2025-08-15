@@ -56,7 +56,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ inputs.editorconfig || true }}
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
       - name: Extract Tool Versions
         id: tool-versions
         run: |
@@ -78,7 +78,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ inputs.gitleaks || true }}
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
       - name: Extract Tool Versions
         id: tool-versions
         run: |
@@ -100,19 +100,19 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ inputs.lychee || true }}
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
       - name: Extract Tool Versions
         id: tool-versions
         run: |
           lychee_version=$(grep -F 'lychee' .mise.toml | cut -d '=' -f2 | cut -d '#' -f1 | xargs)
           echo "lychee_version=${lychee_version}" >> "$GITHUB_OUTPUT"
       - name: Restore lychee cache
-        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
         with:
           path: .lycheecache
           key: cache-lychee-${{ github.sha }}
           restore-keys: cache-lychee-
-      - uses: lycheeverse/lychee-action@82202e5e9c2f4ef1a55a3d02563e1cb6041e5332 # v2.4.1
+      - uses: lycheeverse/lychee-action@5c4ee84814c983aa7164eaee476f014e53ff3963 # v2.5.0
         with:
           fail: false
           failIfEmpty: false
@@ -124,13 +124,13 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ inputs.markdownlint || true }}
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
       - uses: DavidAnson/markdownlint-cli2-action@992badcdf24e3b8eb7e87ff9287fe931bcb00c6e # v20.0.0
   powershell:
     runs-on: ubuntu-latest
     if: ${{ inputs.powershell || true }}
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
       - name: PSScriptAnalyzer
         shell: pwsh
         run: |
@@ -139,7 +139,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ inputs.shellcheck || true }}
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
       - name: Extract Tool Versions
         id: tool-versions
         run: |
@@ -152,7 +152,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ inputs.taplo || true }}
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
       - name: Extract Tool Versions
         id: tool-versions
         run: |
@@ -176,7 +176,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ inputs.yamllint || true }}
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
       - name: Run yamllint
         run: |
           pip install yamllint
