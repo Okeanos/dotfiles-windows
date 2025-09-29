@@ -26,7 +26,7 @@ Git Bash bundled OpenSSH version after configuring the `SSH_AUTH_SOCK`.
 3. In `%UserProfile%/.exports` toggle the `SSH_AUTH_SOCK` variable (Cygwin should be fine), i.e.
   add `export SSH_AUTH_SOCK=~/.ssh/cygwin.socket` to your `%UserProfile%\.bashrc` or `%UserProfile%\.bash_profile` file
 
-Optionally, remove the `/c/Windows/System32/OpenSSH`-prefix from `%UserProfile%/.path` to use Windows OpenSSH in
+Optionally, remove the `/c/Windows/System32/OpenSSH`-prefix from `%UserProfile%/.config/bash/path` to use Windows OpenSSH in
 PowerShell and Git Bash bundled OpenSSH in Git Bash.
 
 ### KeePassXC with external SSH Agent
@@ -36,7 +36,7 @@ for more details.
 
 For this to work in Git Bash as expected as well, the `$PATH` has to be prefixed with the Windows OpenSSH binaries or
 else Git Bash will prefer its bundled OpenSSH version that is incapable of talking to the Windows OpenSSH agent. These
-dotfiles supply a `$PATH` already containing the correct path modifications (see `%UserProfile%/.path`).
+dotfiles supply a `$PATH` already containing the correct path modifications (see `%UserProfile%/.config/bash/path`).
 
 The Windows OpenSSH client makes using [KeePassXC](https://keepassxc.org) to manage SSH keys on Windows within the Git
 Bash possible.
@@ -108,10 +108,8 @@ never used this, though.
 
 ## BitWarden
 
-[BitWarden](https://bitwarden.com) is a freemium solution similar to 1Password but [does not](https://community.bitwarden.com/t/implement-ssh-agent-protocol/833)
-offer SSH Agent integration at this time (2023-02-13) on its own. There are some workarounds for that such as
-[Bitwarden SSH Agent](https://github.com/joaojacome/bitwarden-ssh-agent), though. I have no experience with this,
-either.
+[BitWarden](https://bitwarden.com) is a freemium solution similar to 1Password and [does](https://bitwarden.com/help/ssh-agent/)
+offer SSH Agent integration as well (version 2025.1.2 or newer).
 
 ## Windows OpenSSH in WSL and WSL 2
 
