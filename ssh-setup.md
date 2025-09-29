@@ -26,8 +26,8 @@ Git Bash bundled OpenSSH version after configuring the `SSH_AUTH_SOCK`.
 3. In `%UserProfile%/.exports` toggle the `SSH_AUTH_SOCK` variable (Cygwin should be fine), i.e.
   add `export SSH_AUTH_SOCK=~/.ssh/cygwin.socket` to your `%UserProfile%\.bashrc` or `%UserProfile%\.bash_profile` file
 
-Optionally, remove the `/c/Windows/System32/OpenSSH`-prefix from `%UserProfile%/.config/bash/path` to use Windows OpenSSH in
-PowerShell and Git Bash bundled OpenSSH in Git Bash.
+Optionally, remove the `/c/Windows/System32/OpenSSH`-prefix from `%UserProfile%/.config/bash/path` to use Windows
+OpenSSH in PowerShell and Git Bash bundled OpenSSH in Git Bash.
 
 ### KeePassXC with external SSH Agent
 
