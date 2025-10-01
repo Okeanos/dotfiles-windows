@@ -101,10 +101,14 @@ Please check the [official documentation](https://developer.1password.com/docs/s
 
 ## PuTTY and Pageant
 
-A long-time favorite and previous de facto solution on Windows for enabling SSH
-is [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/) with Pageant. KeePass with KeeAgent and KeePassXC both
+A long-time favorite and previous de facto solution on Windows for enabling SSH is
+[PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/) with Pageant. KeePass with KeeAgent and KeePassXC both
 support Pageant and Git-Bash may also be able to consume SSH keys offered via Pageant managed in KeePass(XC). I have
 never used this, though.
+
+### PuttY and Pageant with Git Commit Signing
+
+Ensure the integration is set up as expected using [ssh-pageant](https://gitforwindows.org/openssh-integration-with-pageant.html).
 
 ## BitWarden
 
