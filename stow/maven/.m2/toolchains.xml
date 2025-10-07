@@ -42,4 +42,14 @@
 			<jdkHome>C:\Program Files\Eclipse Adoptium\temurin-21.jdk</jdkHome>
 		</configuration>
 	</toolchain>
+	<toolchain>
+		<type>jdk</type>
+		<provides>
+			<version>25</version>
+			<vendor>Adoptium</vendor>
+		</provides>
+		<configuration>
+			<jdkHome>C:\Program Files\Eclipse Adoptium\temurin-25.jdk</jdkHome>
+		</configuration>
+	</toolchain>
 </toolchains>
