@@ -181,6 +181,28 @@ function git-fetch() {
 		xargs -P 8 -0 -I % bash -c 'git -C %/.. fetch --all --prune --prune-tags --quiet || echo "Failed updating: %"'
 }
 
+# URL-encode strings
+function urlencode() {
+	local input=${1:-$(</dev/stdin)}
+	if ! command -v trurl >/dev/null; then
+		echo "trurl not installed, cannot URL-encode the data"
+		return 1
+	fi
+
+	trurl --url https://example.org --set fragment="${input}" --get '{fragment}' --urlencode
+}
+
+# URL-decode strings
+function urldecode() {
+	local input=${1:-$(</dev/stdin)}
+	if ! command -v trurl >/dev/null; then
+		echo "trurl not installed, cannot URL-decode the data"
+		return 1
+	fi
+
+	trurl --url https://example.org --set fragment:="${input}" --get '{fragment}'
+}
+
 # `uuidgen` is not provided by Windows or Git for Windows but a common and neat
 # utility to generate UUID values
 # Sadly, the PowerShell function does not support anything else but v4 UUIDs so

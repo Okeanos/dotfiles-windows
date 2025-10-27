@@ -59,11 +59,6 @@ alias c="tr -d '\n' | clip"
 # Recursively delete `.DS_Store` files
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
-# URL-encode strings
-alias urlencode='python3 -c "from urllib.parse import quote_plus; import sys; print(quote_plus(sys.argv[1]));"'
-# URL-decode strings
-alias urldecode='python3 -c "from urllib.parse import unquote_plus; import sys; print(unquote_plus(sys.argv[1]));"'
-
 # Intuitive map function
 # For example, to list all directories that contain a certain file:
 # find . -name .gitattributes | map dirname

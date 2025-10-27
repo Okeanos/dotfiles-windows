@@ -86,6 +86,7 @@ foreach ($package in @(
 "ahmetb.kubens"
 #"Apache.Maven"
 "BurntSushi.ripgrep.MSVC"
+"cURL.trurl"
 "dandavison.delta"
 "Docker.DockerDesktop"
 #"EditorConfig-Checker.EditorConfig-Checker"
