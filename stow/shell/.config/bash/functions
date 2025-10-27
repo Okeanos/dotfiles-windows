@@ -225,7 +225,9 @@ function handle-secrets() {
 	else
 		ignore_file_contents="# https://github.com/gitleaks/gitleaks\n\n"
 	fi
-	gitleaks git --verbose --report-format=json --report-path="${report_file}" --max-decode-depth 1 --exit-code=0 "${target_directory}" &>/dev/null
+	gitleaks git --verbose --report-format=json --report-path="${report_file}" \
+		--max-decode-depth 3 --max-archive-depth 3 \
+		--exit-code=0 "${target_directory}" &>/dev/null
 
 	if [[ -f ${report_file} ]]; then
 		if [[ $(jq length "${report_file}") == 0 ]]; then
