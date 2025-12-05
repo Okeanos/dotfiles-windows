@@ -8,7 +8,7 @@
 [tools]
 	editorconfig-checker = "3.6.0" # GitHub Actions sha256sum=a2e6d2b9242c325007d66db1842fc83f387e389ed9af3cebfaeee06d19a4a88a
 	gitleaks = "8.30.0"            # GitHub Actions sha256sum=79a3ab579b53f71efd634f3aaf7e04a0fa0cf206b7ed434638d1547a2470a66e
-	lychee = "0.21.0"
+	lychee = "0.22.0"
 	markdownlint-cli2 = "0.19.1"
 	shellcheck = "0.11.0"
 	shfmt = "3.12.0"
