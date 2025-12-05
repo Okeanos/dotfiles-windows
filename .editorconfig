@@ -33,7 +33,7 @@ trim_trailing_whitespace = false # Allow '  ' token for Markdown to create new l
 # required because it contains both \r and \lf
 end_of_line = unset
 
-[*.vim]
+[*.{vim,winget}]
 indent_style = space
 indent_size = 2
 
@@ -44,3 +44,6 @@ indent_size = 4
 # Windows specific files
 [*.{ini,ps1}]
 end_of_line = crlf
+
+[*.ps1]
+charset = utf-8-bom
