@@ -47,14 +47,16 @@ permissions:
 
 # Cancel duplicate runs for this workflow if they happen for the same commit
 # Thus should help with duplicate runs caused by PRs, e.g. because of Renovate
+# See https://github.com/orgs/community/discussions/181292 for limitations
+# See https://github.com/orgs/community/discussions/57827 for workarounds for PR/Branch-Push duplication workarounds
 concurrency:
   group: ${{ github.workflow }}-${{ github.sha }}
   cancel-in-progress: true
 
 jobs:
   editorconfig:
-    runs-on: ubuntu-latest
-    if: ${{ inputs.editorconfig || true }}
+    runs-on: ubuntu-slim
+    if: ${{ inputs.editorconfig || true }} && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name)
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Extract Tool Versions
@@ -75,8 +77,8 @@ jobs:
           tar -xzf editorconfig.tar.gz bin/ec-linux-amd64
           ./bin/ec-linux-amd64 -f github-actions
   gitleaks:
-    runs-on: ubuntu-latest
-    if: ${{ inputs.gitleaks || true }}
+    runs-on: ubuntu-slim
+    if: ${{ inputs.gitleaks || true }} && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name)
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Extract Tool Versions
@@ -97,8 +99,8 @@ jobs:
           tar -xzf gitleaks.tar.gz gitleaks
           ./gitleaks dir --verbose --redact .
   lychee:
-    runs-on: ubuntu-latest
-    if: ${{ inputs.lychee || true }}
+    runs-on: ubuntu-slim
+    if: ${{ inputs.lychee || true }} && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name)
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Extract Tool Versions
@@ -107,7 +109,7 @@ jobs:
           lychee_version=$(grep -F 'lychee' .mise.toml | cut -d '=' -f2 | cut -d '#' -f1 | xargs)
           echo "lychee_version=${lychee_version}" >> "$GITHUB_OUTPUT"
       - name: Restore lychee cache
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
         with:
           path: .lycheecache
           key: cache-lychee-${{ github.sha }}
@@ -121,11 +123,11 @@ jobs:
           lycheeVersion: v${{ steps.tool-versions.outputs.lychee_version }}
           args: "--base . --cache --max-cache-age 21d ."
   markdownlint:
-    runs-on: ubuntu-latest
-    if: ${{ inputs.markdownlint || true }}
+    runs-on: ubuntu-slim
+    if: ${{ inputs.markdownlint || true }} && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name)
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-      - uses: DavidAnson/markdownlint-cli2-action@30a0e04f1870d58f8d717450cc6134995f993c63 # v21.0.0
+      - uses: DavidAnson/markdownlint-cli2-action@07035fd053f7be764496c0f8d8f9f41f98305101 # v22.0.0
   powershell:
     runs-on: ubuntu-latest
     if: ${{ inputs.powershell || true }}
@@ -136,8 +138,8 @@ jobs:
         run: |
           Invoke-ScriptAnalyzer -Path .\ -Settings PSGallery -Recurse
   shellcheck:
-    runs-on: ubuntu-latest
-    if: ${{ inputs.shellcheck || true }}
+    runs-on: ubuntu-slim
+    if: ${{ inputs.shellcheck || true }} && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name)
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Extract Tool Versions
@@ -149,8 +151,8 @@ jobs:
         with:
           version: v${{ steps.tool-versions.outputs.shellcheck_version }}
   taplo:
-    runs-on: ubuntu-latest
-    if: ${{ inputs.taplo || true }}
+    runs-on: ubuntu-slim
+    if: ${{ inputs.taplo || true }} && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name)
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Extract Tool Versions
@@ -173,8 +175,8 @@ jobs:
           ./taplo format --check --diff
           ./taplo check --default-schema-catalogs
   yamllint:
-    runs-on: ubuntu-latest
-    if: ${{ inputs.yamllint || true }}
+    runs-on: ubuntu-slim
+    if: ${{ inputs.yamllint || true }} && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name)
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Run yamllint
