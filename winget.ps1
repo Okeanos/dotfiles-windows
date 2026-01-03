@@ -80,7 +80,7 @@ foreach ($extension in @(
 foreach ($package in @(
 "7zip.7zip"
 "Adobe.Acrobat.Reader.64-bit"
-"AquaSecurity.Trivy"
+#"AquaSecurity.Trivy"
 #"adrienverge.yamllint"
 "ahmetb.kubectx"
 "ahmetb.kubens"
@@ -105,17 +105,14 @@ foreach ($package in @(
 #"lycheeverse.lychee"
 "Microsoft.WindowsTerminal"
 "MikeFarah.yq"
-#"mvdan.shfmt"
+"mvdan.shfmt"
 "OO-Software.ShutUp10"
 "OpenJS.NodeJS"
 "OpenTofu.Tofu"
-#"pnpm.pnpm"
 "sharkdp.bat"
 "Starship.Starship"
-#"Thoughtworks.Talisman"
 #"tamasfe.taplo"
 "wagoodman.dive"
-#"Yarn.Yarn"
 "YS-L.csvlens"
 ))
 {
