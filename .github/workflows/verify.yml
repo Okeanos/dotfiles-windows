@@ -48,15 +48,51 @@ permissions:
 # Cancel duplicate runs for this workflow if they happen for the same commit
 # Thus should help with duplicate runs caused by PRs, e.g. because of Renovate
 # See https://github.com/orgs/community/discussions/181292 for limitations
-# See https://github.com/orgs/community/discussions/57827 for workarounds for PR/Branch-Push duplication workarounds
+# See https://github.com/orgs/community/discussions/57827 for workarounds for PR/Branch-Push duplication workarounds with external PRs
 concurrency:
   group: ${{ github.workflow }}-${{ github.sha }}
   cancel-in-progress: true
 
 jobs:
-  editorconfig:
+  is-valid-run:
     runs-on: ubuntu-slim
-    if: ${{ inputs.editorconfig || true }} && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name)
+    outputs:
+      check: ${{ steps.check-result.outputs.output }}
+    steps:
+      - name: Check for duplicate runs
+        id: check-result
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          HEAD_NAME: ${{ github.event.pull_request.head.repo.full_name }}
+          BASE_NAME: ${{ github.event.pull_request.base.repo.full_name }}
+          PR_ACTION: ${{ github.event.pull_request.action }}
+        run: |
+          # assume this is a duplicate run
+          result=false
+          # run if not a pull-request
+          if [[ "${EVENT_NAME}" != 'pull_request' ]]; then
+            result=true
+          elif [[ "${EVENT_NAME}" == 'pull_request' ]]; then
+            # run if this PR was triggered from an external repo
+            if [[ "${HEAD_NAME}" != "${BASE_NAME}" ]]; then
+              result=true
+            # run if this is a PR and marked as:
+            elif [[ "${PR_ACTION}" == "ready_for_review" ]] || \
+                  [[ "${PR_ACTION}" =~ ^(un)?labeled$ ]] || \
+                  [[ "${PR_ACTION}" == "reopened" ]]; \
+            then
+              result=true
+            fi
+          fi
+          echo "output=${result}" >> "$GITHUB_OUTPUT"
+      - name: Test result
+        run: |
+          echo "result: '${{ steps.check-result.outputs.output }}'"
+
+  editorconfig:
+    needs: is-valid-run
+    if: ${{ ((inputs.editorconfig || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
+    runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Extract Tool Versions
@@ -77,8 +113,9 @@ jobs:
           tar -xzf editorconfig.tar.gz bin/ec-linux-amd64
           ./bin/ec-linux-amd64 -f github-actions
   gitleaks:
+    needs: is-valid-run
+    if: ${{ ((inputs.gitleaks || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-slim
-    if: ${{ inputs.gitleaks || true }} && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name)
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Extract Tool Versions
@@ -99,8 +136,9 @@ jobs:
           tar -xzf gitleaks.tar.gz gitleaks
           ./gitleaks dir --verbose --redact .
   lychee:
+    needs: is-valid-run
+    if: ${{ ((inputs.lychee || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-slim
-    if: ${{ inputs.lychee || true }} && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name)
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Extract Tool Versions
@@ -123,14 +161,16 @@ jobs:
           lycheeVersion: v${{ steps.tool-versions.outputs.lychee_version }}
           args: "--base . --cache --max-cache-age 21d ."
   markdownlint:
+    needs: is-valid-run
+    if: ${{ ((inputs.markdownlint || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-slim
-    if: ${{ inputs.markdownlint || true }} && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name)
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - uses: DavidAnson/markdownlint-cli2-action@07035fd053f7be764496c0f8d8f9f41f98305101 # v22.0.0
   powershell:
-    runs-on: ubuntu-latest
-    if: ${{ inputs.powershell || true }}
+    needs: is-valid-run
+    if: ${{ ((inputs.powershell || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
+    runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: PSScriptAnalyzer
@@ -138,8 +178,9 @@ jobs:
         run: |
           Invoke-ScriptAnalyzer -Path .\ -Settings PSGallery -Recurse
   shellcheck:
+    needs: is-valid-run
+    if: ${{ ((inputs.shellcheck || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-slim
-    if: ${{ inputs.shellcheck || true }} && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name)
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Extract Tool Versions
@@ -151,15 +192,16 @@ jobs:
         with:
           version: v${{ steps.tool-versions.outputs.shellcheck_version }}
   taplo:
+    needs: is-valid-run
+    if: ${{ ((inputs.taplo || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-slim
-    if: ${{ inputs.taplo || true }} && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name)
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Extract Tool Versions
         id: tool-versions
         run: |
-          taplo_version=$(grep -F 'taplo' .mise.toml | grep -v 'asdf' | cut -d '=' -f2 | cut -d '#' -f1 | xargs)
-          taplo_shasum=$(grep -F 'taplo' .mise.toml | cut -d '=' -f3 | xargs)
+          taplo_version=$(grep -F 'taplo' .mise.toml | cut -d '=' -f3 | cut -d '}' -f1 | xargs)
+          taplo_shasum=$(grep -F 'taplo' .mise.toml | cut -d '=' -f4 | xargs)
           echo "taplo_version=${taplo_version}" >> "$GITHUB_OUTPUT"
           echo "taplo_shasum=${taplo_shasum}" >> "$GITHUB_OUTPUT"
       - name: Run Taplo
@@ -175,8 +217,9 @@ jobs:
           ./taplo format --check --diff
           ./taplo check --default-schema-catalogs
   yamllint:
+    needs: is-valid-run
+    if: ${{ ((inputs.yamllint || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-slim
-    if: ${{ inputs.yamllint || true }} && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name)
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Run yamllint
