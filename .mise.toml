@@ -11,4 +11,4 @@
 	shfmt = "3.12.0"
 	# TODO Should be using https://mise.jdx.dev/dev-tools/backends/github.html#platform-specific-checksums and other advanced syntax here
 	"github:tamasfe/taplo" = { version = "0.10.0" } # GitHub Actions sha256sum=8fe196b894ccf9072f98d4e1013a180306e17d244830b03986ee5e8eabeb6156
-	yamllint = "1.37.1"
+	yamllint = "1.38.0"
