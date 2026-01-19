@@ -147,7 +147,7 @@ jobs:
           lychee_version=$(grep -F 'lychee' .mise.toml | cut -d '=' -f2 | cut -d '#' -f1 | xargs)
           echo "lychee_version=${lychee_version}" >> "$GITHUB_OUTPUT"
       - name: Restore lychee cache
-        uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
+        uses: actions/cache@8b402f58fbc84540c8b491a91e594a4576fec3d7 # v5.0.2
         with:
           path: .lycheecache
           key: cache-lychee-${{ github.sha }}
