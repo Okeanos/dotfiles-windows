@@ -94,7 +94,7 @@ jobs:
     if: ${{ ((inputs.editorconfig || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-slim
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Extract Tool Versions
         id: tool-versions
         run: |
@@ -117,7 +117,7 @@ jobs:
     if: ${{ ((inputs.gitleaks || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-slim
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Extract Tool Versions
         id: tool-versions
         run: |
@@ -140,7 +140,7 @@ jobs:
     if: ${{ ((inputs.lychee || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-slim
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Extract Tool Versions
         id: tool-versions
         run: |
@@ -165,14 +165,14 @@ jobs:
     if: ${{ ((inputs.markdownlint || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-slim
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - uses: DavidAnson/markdownlint-cli2-action@07035fd053f7be764496c0f8d8f9f41f98305101 # v22.0.0
   powershell:
     needs: is-valid-run
     if: ${{ ((inputs.powershell || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: PSScriptAnalyzer
         shell: pwsh
         run: |
@@ -182,7 +182,7 @@ jobs:
     if: ${{ ((inputs.shellcheck || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-slim
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Extract Tool Versions
         id: tool-versions
         run: |
@@ -196,7 +196,7 @@ jobs:
     if: ${{ ((inputs.taplo || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-slim
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Extract Tool Versions
         id: tool-versions
         run: |
@@ -221,7 +221,7 @@ jobs:
     if: ${{ ((inputs.yamllint || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-slim
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Run yamllint
         run: |
           pip install yamllint
