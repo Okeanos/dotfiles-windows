@@ -74,5 +74,5 @@ fi
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 if [[ -r "${HOME}/.ssh/config" ]] && [[ -f "${HOME}/.ssh/config" ]]; then
-	complete -o "default" -o "nospace" -W "$(grep -R "^Host " "${HOME}/.ssh" | cut -d " " -f2- | tr ' ' '\n' | grep -v "[!?*]" | sort | uniq | tr '\n' ' ')" scp sftp ssh
+	complete -o "default" -o "nospace" -W "$(grep -R "^Host " --exclude-dir=agent "${HOME}/.ssh" | cut -d " " -f2- | tr ' ' '\n' | grep -v "[!?*]" | sort | uniq | tr '\n' ' ')" scp sftp ssh
 fi
