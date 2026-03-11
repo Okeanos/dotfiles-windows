@@ -106,6 +106,13 @@
 	# More info: https://git-scm.com/docs/git-update-index#_untracked_cache
 	untrackedCache = true
 
+	# A lot of issue tracking tools use #<id> as reference to issues, tasks, etc.
+	# Likewise, people writing commit messages in the form of "#1337 implement feature X" are not uncommon. However, This may play havoc
+	# with Git & the chosen editor as Git may interpret the line starting with '#' as a comment and not actually use it as part of the
+	# commit message. As a result we change the comment character to "'".
+	# This issue is specifically a CLI editor problem. IDEs and GUIs usually handle this differently and circumvent the issue altogether.
+	commentchar = '
+
 	# Don't manipulate line endings automatically (CRLF to LF conversion or vice versa).
 	autocrlf = input
 
@@ -152,7 +159,7 @@
 	# Add a generic, globally configured template for the Commit Message
 	# This can either be a path relative to the current repository
 	# or an absolute path such as "~/.config/git/commit.template"
-	# template = ""
+	template = "~/AppData/Roaming/Git/commit.template"
 
 [delta]
 
@@ -226,6 +233,9 @@
 # More info: https://github.com/git-ecosystem/git-credential-manager
 [credential]
 	# For $(prefix)-syntax see https://git-scm.com/docs/git-config#Documentation/git-config.txt-pathname
+	# This does not/may not work as expected, though. See also:
+	# - https://github.com/git-ecosystem/git-credential-manager/issues/2010
+	# - https://github.com/git-ecosystem/git-credential-manager/issues/1696
 	# Git Credential Manager & Git are available in the same location as GCM is part of Git for Windows
 	helper = %(prefix)/git-credential-manager.exe
 
