@@ -265,4 +265,19 @@ foreach ($capability in @(
 	Remove-WindowsCapability -Online -Name $capability | Out-Null
 }
 
+###############################################################################
+# Git Credential Manager                                                      #
+###############################################################################
+
+Write-Host "Configuring Git Credential Manager."
+
+# See
+# - https://github.com/git-ecosystem/git-credential-manager/blob/main/docs/enterprise-config.md#macos
+# - https://github.com/git-ecosystem/git-credential-manager/blob/main/docs/configuration.md
+# New-ItemProperty "HKLM:\SOFTWARE\GitCredentialManager\Configuration" "..." "..."
+
+###############################################################################
+# Finalize                                                                    #
+###############################################################################
+
 Write-Host -NoNewline "Done. Note that some of these changes require a restart to take effect."
