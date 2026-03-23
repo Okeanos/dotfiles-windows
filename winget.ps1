@@ -82,7 +82,6 @@ foreach ($extension in @(
 foreach ($package in @(
 "7zip.7zip"
 "Adobe.Acrobat.Reader.64-bit"
-#"AquaSecurity.Trivy"
 #"adrienverge.yamllint"
 "ahmetb.kubectx"
 "ahmetb.kubens"
