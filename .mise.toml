@@ -4,9 +4,9 @@
 # Everything else is just declared as a reference to keep track of it.
 [tools]
 	editorconfig-checker = "3.6.1" # GitHub Actions sha256sum=cd32084fce5f3d49ba49697f362ac3a114989715c98819303247dd54c1f368b0
-	gitleaks = "8.30.0"            # GitHub Actions sha256sum=79a3ab579b53f71efd634f3aaf7e04a0fa0cf206b7ed434638d1547a2470a66e
+	gitleaks = "8.30.1"            # GitHub Actions sha256sum=551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb
 	lychee = "0.23.0"
-	markdownlint-cli2 = "0.21.0"
+	markdownlint-cli2 = "0.22.0"
 	shellcheck = "0.11.0"
 	shfmt = "3.13.0"
 	# TODO Should be using https://mise.jdx.dev/dev-tools/backends/github.html#platform-specific-checksums and other advanced syntax here
