@@ -119,6 +119,7 @@ foreach ($package in @(
 "Starship.Starship"
 #"tamasfe.taplo"
 "wagoodman.dive"
+#"Wilfred.difftastic"
 "YS-L.csvlens"
 ))
 {
