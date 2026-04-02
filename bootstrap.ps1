@@ -1,4 +1,5 @@
 ﻿#Requires -RunAsAdministrator
+#Requires -Modules Microsoft.PowerShell.ConsoleGuiTools
 
 Param
 (
@@ -117,42 +118,64 @@ Function SetGitUser
 	$username = Read-Host 'Enter your Git Username'
 	$email = Read-Host 'Enter your Git E-Mail address'
 
-	@"
+	$signing_enabled = "false"
+	$signing_format = ""
+	$sign_selection = ""
+	$signing_key = ""
+
+	Write-Host "Will set up Git commit signing, check the following links for more information:"
+	Write-Host "- Git User Signing Key documentation: https://git-scm.com/docs/git-config#Documentation/git-config.txt-usersigningKey"
+	Write-Host "- Git Signing Formats: https://git-scm.com/docs/git-config#Documentation/git-config.txt-gpgformat"
+	Write-Host ""
+	Write-Host "The Git user config '$( $ENV:UserProfile )\.config\git\user' can be updated later on if you want to set up commit signing later on."
+	Write-Host ""
+
+	$signing_options = ("GPG" "SSH" "SMIME" "Set up Later") | Out-ConsoleGridView - Title "Please select how you want to sign your Git commits." -OutputMode Single
+
+	switch ( $signing_options ) {
+		GPG {
+			$signing_format = "opengpg"
+		}
+		SSH {
+			New-Item -Path "$( $ENV:UserProfile )\.ssh\allowed_signers" -ItemType File | Out-Null
+			$signing_format = "ssh"
+		}
+		SMIME {
+			$signing_format = "x509"
+		}
+		default {}
+	}
+
+	if (!([string]::IsNullOrWhitespace($signing_format)))
+	{
+		$signing_key = Read-Host 'Enter your GPG, SSH, or SMIME Signing Key ID'
+		$signing_enabled = "true"
+	}
+
+	"@
 [user]
 
 	name = $username
 	email = $email
-"@ | Out-File -Encoding "utf8" -FilePath "$( $ENV:UserProfile )\.config\git\user"
+	signingKey = $signing_key
 
-	$reply = Read-Host 'Use GPG Commit Signing? (y/n)'
-	if ($reply -match "[yY]")
-	{
-		$signWithSSH = ""
-		$reply = Read-Host 'Sign with SSH? (y/n)'
-		if ($reply -match "[yY]")
-		{
-			New-Item -Path "$( $ENV:UserProfile )\.ssh\allowed_signers" -ItemType File | Out-Null
-			$signWithSSH = @"
 [gpg]
 
-	format = ssh
+	format = $signing_format
 
 [gpg "ssh"]
 
 	allowedSignersFile = ~/.ssh/allowed_signers
-"@
-		}
-		$signingKey = Read-Host 'Enter your GPG or SSH Signing Key ID'
-		Add-Content -Path "$( $ENV:UserProfile )\.config\git\user" -Value @"
-	signingkey = $signingKey
+
+[gpg "x509"]
+
+	program = smimesign
 
 [commit]
 
-	gpgsign = true
+	gpgsign = $signing_enabled
 
-$signWithSSH
-"@
-	}
+"@ | Out-File -Encoding "utf8" -FilePath "$( $ENV:UserProfile )\.config\git\user"
 }
 
 if ($Force)

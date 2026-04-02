@@ -95,6 +95,7 @@ foreach ($package in @(
 "FiloSottile.age"
 "GitHub.cli"
 "GitHub.git-sizer"
+#"GitHub.smimesign"
 "Gitleaks.Gitleaks"
 "GoLang.Go"
 #"hadolint.hadolint"
