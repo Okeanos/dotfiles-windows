@@ -1,6 +1,10 @@
 {
-	"workbench.colorTheme": "Default Light+",
+	"workbench.colorTheme": "Light+",
 	"workbench.editor.enablePreview": false,
+	"workbench.preferredDarkColorTheme": "Dark+",
+	"workbench.preferredHighContrastColorTheme": "Default High Contrast Light",
+	"workbench.preferredLightColorTheme": "Light+",
+	"window.autoDetectColorScheme": true,
 	"editor.inlineSuggest.enabled": true,
 	"editor.renderWhitespace": "all",
 	"editor.rulers": [
