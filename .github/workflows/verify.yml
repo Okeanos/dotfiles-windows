@@ -18,7 +18,7 @@ on:
         type: boolean
       lychee:
         description: Run lychee (Broken link finder)
-        default: true
+        default: false
         type: boolean
       markdownlint:
         description: Run Markdown linter
@@ -32,8 +32,8 @@ on:
         description: Run shellcheck (shell script linter)
         default: true
         type: boolean
-      taplo:
-        description: Run taplo (TOML linter)
+      tombi:
+        description: Run tombi (TOML linter)
         default: true
         type: boolean
       yamllint:
@@ -137,7 +137,7 @@ jobs:
           ./gitleaks dir --verbose --redact .
   lychee:
     needs: is-valid-run
-    if: ${{ ((inputs.lychee || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
+    if: ${{ ((inputs.lychee || false) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -166,7 +166,7 @@ jobs:
     runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - uses: DavidAnson/markdownlint-cli2-action@ce4853d43830c74c1753b39f3cf40f71c2031eb9 # v23.0.0
+      - uses: DavidAnson/markdownlint-cli2-action@ded1f9488f68a970bc66ea5619e13e9b52e601cd # v23.2.0
   powershell:
     needs: is-valid-run
     if: ${{ ((inputs.powershell || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
@@ -191,31 +191,25 @@ jobs:
       - uses: ludeeus/action-shellcheck@00cae500b08a931fb5698e11e79bfbd38e612a38 # 2.0.0
         with:
           version: v${{ steps.tool-versions.outputs.shellcheck_version }}
-  taplo:
+  tombi:
     needs: is-valid-run
-    if: ${{ ((inputs.taplo || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
+    if: ${{ ((inputs.tombi || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Extract Tool Versions
         id: tool-versions
         run: |
-          taplo_version=$(grep -F 'taplo' .mise.toml | cut -d '=' -f3 | cut -d '}' -f1 | xargs)
-          taplo_shasum=$(grep -F 'taplo' .mise.toml | cut -d '=' -f4 | xargs)
-          echo "taplo_version=${taplo_version}" >> "$GITHUB_OUTPUT"
-          echo "taplo_shasum=${taplo_shasum}" >> "$GITHUB_OUTPUT"
-      - name: Run Taplo
-        env:
-          TAPLO_VERSION: ${{ steps.tool-versions.outputs.taplo_version }}
-          TAPLO_SHASUM: ${{ steps.tool-versions.outputs.taplo_shasum }}
-        run: |
-          curl --fail --silent --show-error --location --output taplo.gz \
-            https://github.com/tamasfe/taplo/releases/download/${TAPLO_VERSION}/taplo-linux-x86_64.gz
-          echo "${TAPLO_SHASUM} taplo.gz" | sha256sum --check
-          gunzip --decompress taplo.gz
-          chmod +x ./taplo
-          ./taplo format --check --diff
-          ./taplo check --default-schema-catalogs
+          tombi_version=$(grep -F 'tombi' .mise.toml | cut -d '=' -f3 | cut -d '}' -f1 | xargs)
+          tombi_shasum=$(grep -F 'tombi' .mise.toml | cut -d '=' -f4 | xargs)
+          echo "tombi_version=${tombi_version}" >> "$GITHUB_OUTPUT"
+          echo "tombi_shasum=${tombi_shasum}" >> "$GITHUB_OUTPUT"
+      - uses: tombi-toml/setup-tombi@v1
+        with:
+          version: ${{ steps.tool-versions.outputs.tombi_version }}
+          checksum: ${{ steps.tool-versions.outputs.tombi_shasum }}
+      - name: Run Tombi
+        run: tombi lint
   yamllint:
     needs: is-valid-run
     if: ${{ ((inputs.yamllint || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}

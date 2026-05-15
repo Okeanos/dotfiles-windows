@@ -1,0 +1,7 @@
+# https://tombi-toml.github.io/tombi/docs/configuration
+
+[format]
+	[format.rules]
+		indent-style = "tab"
+		indent-sub-tables = true
+		indent-table-key-value-pairs = true

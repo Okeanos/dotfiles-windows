@@ -67,8 +67,8 @@ foreach ($extension in @(
 "ms-vscode.powershell"
 "redhat.vscode-xml"
 "redhat.vscode-yaml"
-"tamasfe.even-better-toml"
 "timonwong.shellcheck"
+"tombi-toml.tombi"
 "yzane.markdown-pdf"
 "yzhang.markdown-all-in-one"
 ))
@@ -118,7 +118,7 @@ foreach ($package in @(
 "SecretsOPerationS.SOPS"
 "sharkdp.bat"
 "Starship.Starship"
-#"tamasfe.taplo"
+#"tombi-toml.tombi"
 "wagoodman.dive"
 #"Wilfred.difftastic"
 "YS-L.csvlens"

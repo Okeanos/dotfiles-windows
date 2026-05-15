@@ -1,7 +1,0 @@
-# https://taplo.tamasfe.dev/configuration/file.html
-include = ["**/*.toml"]
-
-[formatting]
-	indent_tables = true
-	indent_entries = true
-	indent_string = "	"
