@@ -10,5 +10,5 @@
 	shellcheck = "0.11.0"
 	shfmt = "3.13.1"
 	# TODO Should be using https://mise.jdx.dev/dev-tools/backends/github.html#platform-specific-checksums and other advanced syntax here
-	tombi = { version = "0.11.7" }  # GitHub Actions sha256sum=a5bbf2e8bb96bb0390e041d39d66300508501e5a7eb4449e0bee1b47ad367c29
+	tombi = { version = "1.1.1" }  # GitHub Actions sha256sum=0e08ca5db51dd51b674ccc22978f01a66010bd6bcde827b414a13f648439bb7b
 	yamllint = "1.38.0"
