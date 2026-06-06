@@ -1,0 +1,10 @@
+# See https://github.com/betterleaks/betterleaks
+#
+# Before adding finding in this file consider adapting the config via
+# `.betterleaks.toml` and ensuring that false positives are not reported in the
+# first place.
+#
+# Additionally: revoke/rotate true positives (valid findings) before adding them
+# to this file. Otherwise you'll just be helping attackers by listing
+# potentially valid findings here for them to find instantly.
+#

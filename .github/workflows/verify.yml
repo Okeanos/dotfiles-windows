@@ -8,12 +8,12 @@ on:
   pull_request:
   workflow_dispatch:
     inputs:
-      editorconfig:
-        description: Run EditorConfig linter
+      betterleaks:
+        description: Run Betterleaks (Secret scanner)
         default: true
         type: boolean
-      gitleaks:
-        description: Run Gitleaks (Secret scanner)
+      editorconfig:
+        description: Run EditorConfig linter
         default: true
         type: boolean
       lychee:
@@ -89,17 +89,40 @@ jobs:
         run: |
           echo "result: '${{ steps.check-result.outputs.output }}'"
 
+  betterleaks:
+    needs: is-valid-run
+    if: ${{ ((inputs.betterleaks || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
+    runs-on: ubuntu-slim
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      - name: Extract Tool Versions
+        id: tool-versions
+        run: |
+          betterleaks_version=$(yq '.tools.betterleaks.version' .mise.toml)
+          betterleaks_shasum=$(yq '.tools.betterleaks.platforms.linux-x64.checksum' .mise.toml | cut -d ':' -f2)
+          echo "betterleaks_version=${betterleaks_version}" >> "$GITHUB_OUTPUT"
+          echo "betterleaks_shasum=${betterleaks_shasum}" >> "$GITHUB_OUTPUT"
+      - name: Install Betterleaks
+        env:
+          BETTERLEAKS_VERSION: ${{ steps.tool-versions.outputs.betterleaks_version }}
+          BETTERLEAKS_SHASUM: ${{ steps.tool-versions.outputs.betterleaks_shasum }}
+        run: |
+          curl --fail --silent --show-error --location --output betterleaks.tar.gz \
+            https://github.com/betterleaks/betterleaks/releases/download/v${BETTERLEAKS_VERSION}/betterleaks_${BETTERLEAKS_VERSION}_linux_x64.tar.gz
+          echo "${BETTERLEAKS_SHASUM} betterleaks.tar.gz" | sha256sum --check
+          tar -xzf betterleaks.tar.gz betterleaks
+          ./betterleaks dir --verbose --redact .
   editorconfig:
     needs: is-valid-run
     if: ${{ ((inputs.editorconfig || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-slim
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
       - name: Extract Tool Versions
         id: tool-versions
         run: |
-          ec_version=$(grep -F 'editorconfig-checker' .mise.toml | cut -d '=' -f2 | cut -d '#' -f1 | xargs)
-          ec_shasum=$(grep -F 'editorconfig-checker' .mise.toml | cut -d '=' -f3 | xargs)
+          ec_version=$(yq '.tools.editorconfig-checker.version' .mise.toml)
+          ec_shasum=$(yq '.tools.editorconfig-checker.platforms.linux-x64.checksum' .mise.toml | cut -d ':' -f2)
           echo "ec_version=${ec_version}" >> "$GITHUB_OUTPUT"
           echo "ec_shasum=${ec_shasum}" >> "$GITHUB_OUTPUT"
       - name: Run EditorConfig Checker
@@ -112,39 +135,16 @@ jobs:
           echo "${EDITORCONFIG_CHECKER_SHASUM} editorconfig.tar.gz" | sha256sum --check
           tar -xzf editorconfig.tar.gz bin/ec-linux-amd64
           ./bin/ec-linux-amd64 -f github-actions
-  gitleaks:
-    needs: is-valid-run
-    if: ${{ ((inputs.gitleaks || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
-    runs-on: ubuntu-slim
-    steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - name: Extract Tool Versions
-        id: tool-versions
-        run: |
-          gitleaks_version=$(grep -F 'gitleaks' .mise.toml | cut -d '=' -f2 | cut -d '#' -f1 | xargs)
-          gitleaks_shasum=$(grep -F 'gitleaks' .mise.toml | cut -d '=' -f3 | xargs)
-          echo "gitleaks_version=${gitleaks_version}" >> "$GITHUB_OUTPUT"
-          echo "gitleaks_shasum=${gitleaks_shasum}" >> "$GITHUB_OUTPUT"
-      - name: Install Gitleaks
-        env:
-          GITLEAKS_VERSION: ${{ steps.tool-versions.outputs.gitleaks_version }}
-          GITLEAKS_SHASUM: ${{ steps.tool-versions.outputs.gitleaks_shasum }}
-        run: |
-          curl --fail --silent --show-error --location --output gitleaks.tar.gz \
-            https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz
-          echo "${GITLEAKS_SHASUM} gitleaks.tar.gz" | sha256sum --check
-          tar -xzf gitleaks.tar.gz gitleaks
-          ./gitleaks dir --verbose --redact .
   lychee:
     needs: is-valid-run
     if: ${{ ((inputs.lychee || false) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-slim
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
       - name: Extract Tool Versions
         id: tool-versions
         run: |
-          lychee_version=$(grep -F 'lychee' .mise.toml | cut -d '=' -f2 | cut -d '#' -f1 | xargs)
+          lychee_version=$(yq '.tools.lychee.version' .mise.toml)
           echo "lychee_version=${lychee_version}" >> "$GITHUB_OUTPUT"
       - name: Restore lychee cache
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
@@ -165,14 +165,14 @@ jobs:
     if: ${{ ((inputs.markdownlint || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-slim
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
       - uses: DavidAnson/markdownlint-cli2-action@ded1f9488f68a970bc66ea5619e13e9b52e601cd # v23.2.0
   powershell:
     needs: is-valid-run
     if: ${{ ((inputs.powershell || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
       - name: PSScriptAnalyzer
         shell: pwsh
         run: |
@@ -182,11 +182,11 @@ jobs:
     if: ${{ ((inputs.shellcheck || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-slim
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
       - name: Extract Tool Versions
         id: tool-versions
         run: |
-          shellcheck_version=$(grep -F 'shellcheck' .mise.toml | cut -d '=' -f2 | cut -d '#' -f1 | xargs)
+          shellcheck_version=$(yq '.tools.shellcheck.version' .mise.toml)
           echo "shellcheck_version=${shellcheck_version}" >> "$GITHUB_OUTPUT"
       - uses: ludeeus/action-shellcheck@00cae500b08a931fb5698e11e79bfbd38e612a38 # 2.0.0
         with:
@@ -196,27 +196,38 @@ jobs:
     if: ${{ ((inputs.tombi || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-slim
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
       - name: Extract Tool Versions
         id: tool-versions
         run: |
-          tombi_version=$(grep -F 'tombi' .mise.toml | cut -d '=' -f3 | cut -d '}' -f1 | xargs)
-          tombi_shasum=$(grep -F 'tombi' .mise.toml | cut -d '=' -f4 | xargs)
+          tombi_version=$(yq '.tools.tombi.version' .mise.toml)
+          tombi_shasum=$(yq '.tools.tombi.platforms.linux-x64.checksum' .mise.toml | cut -d ':' -f2)
           echo "tombi_version=${tombi_version}" >> "$GITHUB_OUTPUT"
           echo "tombi_shasum=${tombi_shasum}" >> "$GITHUB_OUTPUT"
-      - uses: tombi-toml/setup-tombi@74c3f4f31e7915e27c3397831e4c628463e3e0da # v1.1.1
-        with:
-          version: ${{ steps.tool-versions.outputs.tombi_version }}
-          checksum: ${{ steps.tool-versions.outputs.tombi_shasum }}
-      - name: Run Tombi
-        run: tombi lint
+      - name: Install Tombi
+        env:
+          TOMBI_VERSION: ${{ steps.tool-versions.outputs.tombi_version }}
+          TOMBI_SHASUM: ${{ steps.tool-versions.outputs.tombi_shasum }}
+        run: |
+          curl --fail --silent --show-error --location --output tombi.tar.gz \
+            https://github.com/tombi-toml/tombi/releases/download/v${TOMBI_VERSION}/tombi-cli-${TOMBI_VERSION}-x86_64-unknown-linux-musl.tar.gz
+          echo "${TOMBI_SHASUM} tombi.tar.gz" | sha256sum --check
+          tar -xzf tombi.tar.gz tombi-cli-${TOMBI_VERSION}-x86_64-unknown-linux-musl/tombi
+          ./tombi-cli-${TOMBI_VERSION}-x86_64-unknown-linux-musl/tombi lint
   yamllint:
     needs: is-valid-run
     if: ${{ ((inputs.yamllint || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-slim
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - name: Run yamllint
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      - name: Extract Tool Versions
+        id: tool-versions
         run: |
-          pip install yamllint
+          yamllint_version=$(yq '.tools.yamllint.version' .mise.toml)
+          echo "yamllint_version=${yamllint_version}" >> "$GITHUB_OUTPUT"
+      - name: Run yamllint
+        env:
+          YAMLLINT_VERSION: ${{ steps.tool-versions.outputs.yamllint_version }}
+        run: |
+          pip install yamllint=="${YAMLLINT_VERSION}"
           yamllint .
