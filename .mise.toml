@@ -4,10 +4,10 @@
 # Everything else is just declared as a reference to keep track of it.
 [tools]
 	betterleaks = { version = "1.8.1", platforms = { linux-arm64 = { checksum = "sha256:bbb578b12a2f65d7082ab436abf37724232bc71d8a078e3c41336574420f1b48" }, linux-x64 = { checksum = "sha256:efa407244e1ea8e35f582b8a42becdeac08bdead04f68eb752adda722d583c2a" } } }
-	editorconfig-checker = { version = "3.11.2", platforms = { linux-arm64 = { checksum = "sha256:7c61c94a67658bff62467453c3d7d9a98d57139728d27e545e9d3e3688fc9ca6" }, linux-x64 = { checksum = "sha256:bc815e5b3b1891a0ee9e1242fe3475312655f8b0f4c4a79510be0a009294571a" } } }
+	editorconfig-checker = { version = "3.11.3", platforms = { linux-arm64 = { checksum = "sha256:6d333917ad3c21cf0a23c191ec660549de381e6df56ee5e76ace0c513da2b7b4" }, linux-x64 = { checksum = "sha256:6a73858f8906e466910fb3b3b525c206b27dacdad138910b0b0513f021ab32c4" } } }
 	lychee = { version = "0.24.2" }
 	markdownlint-cli2 = { version = "0.23.2" }
 	shellcheck = { version = "0.11.0" }
-	shfmt = { version = "3.14.0" }
-	tombi = { version = "1.5.0", platforms = { linux-arm64 = { checksum = "sha256:963e8d91a7b5517071837971dc7c60a84f766038ea4467a5c3799a511413ac78" }, linux-x64 = { checksum = "sha256:440381b5d3ea67d325c6b4c4b4d0c681bc4aabd3623f31fce379a30cec6694db" } } }
+	shfmt = { version = "3.14.1" }
+	tombi = { version = "1.5.4", platforms = { linux-arm64 = { checksum = "sha256:c715b9430b18c37e4f719cb5282e1d3352629dc027a8098d3bd116571f9cf034" }, linux-x64 = { checksum = "sha256:072a1d61e61d9137bcea2754568181370f8f3dcde85bef457c2c07529699ee6e" } } }
 	yamllint = { version = "1.38.0" }
