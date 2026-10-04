@@ -131,10 +131,10 @@ jobs:
           EDITORCONFIG_CHECKER_SHASUM: ${{ steps.tool-versions.outputs.ec_shasum }}
         run: |
           curl --fail --silent --show-error --location --output editorconfig.tar.gz \
-            https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v${EDITORCONFIG_CHECKER_VERSION}/ec-linux-amd64.tar.gz
+            https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v${EDITORCONFIG_CHECKER_VERSION}/editorconfig-checker-linux-amd64.tar.gz
           echo "${EDITORCONFIG_CHECKER_SHASUM} editorconfig.tar.gz" | sha256sum --check
-          tar -xzf editorconfig.tar.gz bin/ec-linux-amd64
-          ./bin/ec-linux-amd64 -f github-actions
+          tar -xzf editorconfig.tar.gz editorconfig-checker
+          ./editorconfig-checker -f github-actions
   lychee:
     needs: is-valid-run
     if: ${{ ((inputs.lychee || false) == true) && (needs.is-valid-run.outputs.check == 'true') }}
