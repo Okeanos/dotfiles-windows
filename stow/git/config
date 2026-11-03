@@ -245,12 +245,16 @@
 # Git Credential Manager (GCM)
 # More info: https://github.com/git-ecosystem/git-credential-manager
 [credential]
-	# For $(prefix)-syntax see https://git-scm.com/docs/git-config#Documentation/git-config.txt-pathname
-	# This does not/may not work as expected, though. See also:
+	# See for how/why it is configured this way:
 	# - https://github.com/git-ecosystem/git-credential-manager/issues/2010
 	# - https://github.com/git-ecosystem/git-credential-manager/issues/1696
 	# Git Credential Manager & Git are available in the same location as GCM is part of Git for Windows
-	helper = %(prefix)/git-credential-manager.exe
+	helper =
+	helper = manager
+
+# TODO get rid of this autoinjected config value from GCM
+[credential "https://dev.azure.com"]
+	useHttpPath = true
 
 # URL shorthands
 
